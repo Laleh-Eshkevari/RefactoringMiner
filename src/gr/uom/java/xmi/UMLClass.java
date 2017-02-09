@@ -308,6 +308,7 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     	classDiff.checkForOperationSignatureChanges();
     	classDiff.checkForInlinedOperations();
     	classDiff.checkForExtractedOperations();
+    	classDiff.checkForRenameLocalVariable();
     	//classDiff.checkForAttributeRenames();
     	//classDiff.checkForOperationRenames();
     	return classDiff;
