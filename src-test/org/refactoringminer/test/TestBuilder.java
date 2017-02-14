@@ -244,7 +244,7 @@ public class TestBuilder {
 
 		@Override
 		public void handle(RevCommit curRevision, List<Refactoring> refactorings) {
-			refactorings= filterRefactoring(refactorings);
+			//refactorings= filterRefactoring(refactorings);
 			CommitMatcher matcher;
 			commitsCount++;
 			String commitId = curRevision.getId().getName();

@@ -14,11 +14,11 @@ public class TestAllRefactorings {
 	@Test
 	public void testAllRefactorings() throws Exception {
 		
-		int refactoring= Refactorings.All.getValue();
+		int refactoring= Refactorings.RenameLocalVariable.getValue();
 
-		TestBuilder test = new TestBuilder(new GitHistoryRefactoringMinerImpl(), "tmp1", refactoring);
+		TestBuilder test = new TestBuilder(new GitHistoryRefactoringMinerImpl(), "tmp2", refactoring);
 		
-		RefactoringPopulator.feedRefactoringsInstances(refactoring, Systems.argoUML.getValue(), test);
+		RefactoringPopulator.feedRefactoringsInstances(refactoring, Systems.FSE.getValue(), test);
 
 		test.assertExpectations();
 

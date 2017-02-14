@@ -1,13 +1,16 @@
 package gr.uom.java.xmi.decomposition;
 
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 
 public class VariableDeclaration {
 	private String variableName;
 	private String initializer;
+	private String variableType;
 	
 	public VariableDeclaration(VariableDeclarationFragment fragment) {
-		this.variableName = fragment.getName().getIdentifier();
+		variableType = ((VariableDeclarationStatement)fragment.getParent()).getType().toString();
+			this.variableName = fragment.getName().getIdentifier();
 		this.initializer = fragment.getInitializer() != null ? fragment.getInitializer().toString() : null;
 	}
 

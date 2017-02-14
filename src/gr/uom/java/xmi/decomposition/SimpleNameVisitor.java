@@ -130,7 +130,7 @@ public class SimpleNameVisitor extends ASTVisitor {
 		return this.methodInvocationMap;
 	}
 
-	public List<VariableDeclaration> getVariableDeclarations() {
+	public List<VariableDeclaration>   getVariableDeclarations() {
 		return variableDeclarations;
 	}
 

@@ -659,6 +659,7 @@ public class UMLModelDiff {
       for(UMLClassDiff classDiff : commonClassDiffList) {
          refactorings.addAll(classDiff.getRefactorings());
       }
+
       refactorings.addAll(this.refactorings);
       return refactorings;
    }

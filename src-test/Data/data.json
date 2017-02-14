@@ -9417,4 +9417,168 @@
 	}],
 	"time": "8/6/15 9:21 PM",
 	"id": 1158974
+},{
+	"sha1": "9b22e33fe6781efc0ead46a68d09131ca9a9c3aa",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "bc6e2c53ad744a10c8db5f6d0552a60bd1a0deb2",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "7cc48a047ca4662621ca4dad7d4d464b87e1ca9b",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "6d5572b768fcb347a02c356b837be30b65d64c5c",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "cf495c5560198de4e6f3556d6c40e3ce0dbf3868",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "c8e2ae0a58d0d494a13d7a2bcf9cc6d40bb2fc18",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "042f03f74f32895c84b174dba70c282abda747f8",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "129a34b7f184a46994fa81f0009653593eddbf5b",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "deee9d5918787e571e37a997b8090a67bd3be83c",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "6549c7ee6c56f01bc689dc41fb29a9594b04f0c2",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "031c1d91ccff9cf437af613145b69f91f9c4655b",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "0896eed3a0424a1f0f5f45c9557a066f4a0ece60",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "f8b98bb19e53361741da66d39c9183b3ac9574ff",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "18eae05a6d727b05004752984e76909411ed86af",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
 }]

@@ -30,7 +30,8 @@ public enum RefactoringType {
 	CONVERT_ANONYMOUS_CLASS_TO_TYPE("Convert Anonymous Class to Type", ".+"),
 	INTRODUCE_POLYMORPHISM("Introduce Polymorphism", ".+"),
 	RENAME_PACKAGE("Rename Package", "Rename Package (.+) to (.+)"),
-  CHANGE_METHOD_SIGNATURE("Change Method Signature", "Change Method Signature (.+) to (.+) in class (.+)");
+    CHANGE_METHOD_SIGNATURE("Change Method Signature", "Change Method Signature (.+) to (.+) in class (.+)"),
+    RENAME_LOCAL_VARIABLE("Rename Local Variable", "Rename Local Variable (.+) renamed to (.+) in method (.+) in class (.+)");
 
 	private String displayName;
 	private Pattern regex;

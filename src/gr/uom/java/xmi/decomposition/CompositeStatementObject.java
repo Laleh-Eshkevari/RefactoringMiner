@@ -88,7 +88,7 @@ public class CompositeStatementObject extends AbstractStatement {
 	@Override
 	public List<VariableDeclaration> getVariableDeclarations() {
 		List<VariableDeclaration> variableDeclarations = new ArrayList<VariableDeclaration>();
-		for(AbstractExpression expression : expressionList) {
+		for(AbstractStatement expression : getStatements()) {
 			variableDeclarations.addAll(expression.getVariableDeclarations());
 		}
 		return variableDeclarations;
