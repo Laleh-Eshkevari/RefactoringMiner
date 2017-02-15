@@ -21,8 +21,10 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.revwalk.RevWalkUtils;
 import org.eclipse.jgit.revwalk.filter.RevFilter;
+import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.TrackingRefUpdate;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.refactoringminer.api.GitService;
 import org.slf4j.Logger;
@@ -51,10 +53,13 @@ public class GitServiceImpl implements GitService {
 			
 		} else {
 			logger.info("Cloning {} ...", cloneUrl);
+			CredentialsProvider cp = new UsernamePasswordCredentialsProvider("LalehEshkevari", "kevin2011");
+
 			Git git = Git.cloneRepository()
 					.setDirectory(folder)
 					.setURI(cloneUrl)
 					.setCloneAllBranches(true)
+					.setCredentialsProvider(cp)
 					.call();
 			repository = git.getRepository();
 			//logger.info("Done cloning {}, current branch is {}", cloneUrl, repository.getBranch());
