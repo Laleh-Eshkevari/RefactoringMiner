@@ -455,7 +455,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 
             UMLOperationBodyMapper umlOperationBodyMapper=bodyMapperList.get(index);
             HashMap<String, String> potentialLVDrenamings = new HashMap<>();
-            HashSet<String> occupiedTarget=new HashSet<>();
+            HashMap<String, String> occupiedTarget=new HashMap<>();
             HashSet<String> operationTwoVars= getVariables(umlOperationBodyMapper);
 
 //            System.out.println("class name: "+ umlOperationBodyMapper.getOperation1().getClassName()+"\tmethod1: "+ umlOperationBodyMapper.getOperation1().getName()+ "\tmethod2: "+umlOperationBodyMapper .getOperation2().getName());
@@ -496,10 +496,9 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
                         if (potentialLVDrenamings.containsKey(replacement.getBefore())) {
                             String candidate = potentialLVDrenamings.get( replacement.getBefore());
 
-                            if (candidate == "" && !occupiedTarget.contains(replacement.getAfter()) && getVariable(replacement.getAfter(),variableDeclarationInOperation2)!=null) {
+                            if (candidate == ""   && getVariable(replacement.getAfter(),variableDeclarationInOperation2)!=null) {
                                 potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
-                                occupiedTarget.add(replacement.getAfter());
-                            } else if (!candidate.equals(replacement.getAfter() )||occupiedTarget.contains(replacement.getAfter()))
+                            } else if (!candidate.equals(replacement.getAfter() ) )
                                 potentialLVDrenamings.remove(replacement.getBefore());
                         }
 
