@@ -39,9 +39,9 @@ public class RenameLocalVariable implements Refactoring {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getName()).append("\t");
-        sb.append(originalVariable);
+        sb.append(originalVariable.display());
         sb.append(" renamed to ");
-        sb.append(renamedVariable);
+        sb.append(renamedVariable.display());
         sb.append(" in method ").append(originalVariableOperation);
         sb.append(" in class ").append(originalVariableOperation.getClassName());
         return sb.toString();

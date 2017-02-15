@@ -1,5 +1,6 @@
 package gr.uom.java.xmi.decomposition;
 
+import org.eclipse.jdt.core.dom.VariableDeclarationExpression;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 
@@ -9,9 +10,15 @@ public class VariableDeclaration {
 	private String variableType;
 	
 	public VariableDeclaration(VariableDeclarationFragment fragment) {
-		variableType = ((VariableDeclarationStatement)fragment.getParent()).getType().toString();
+
+		if(fragment.getParent() instanceof VariableDeclarationExpression)
+			variableType=((VariableDeclarationExpression)fragment.getParent()).getType().toString();
+		else
+			variableType = ((VariableDeclarationStatement)fragment.getParent()).getType().toString();
+
 			this.variableName = fragment.getName().getIdentifier();
 		this.initializer = fragment.getInitializer() != null ? fragment.getInitializer().toString() : null;
+
 	}
 
 	public String getVariableName() {
@@ -58,5 +65,14 @@ public class VariableDeclaration {
         	sb.append("=").append(initializer);
         }
         return sb.toString();
+	}
+
+	public String display(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(variableName);
+		sb.append(" : ");
+		sb.append(variableType);
+
+		return sb.toString();
 	}
 }
