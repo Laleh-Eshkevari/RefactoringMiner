@@ -9418,23 +9418,12 @@
 	"time": "8/6/15 9:21 PM",
 	"id": 1158974
 },{
-	"sha1": "9b22e33fe6781efc0ead46a68d09131ca9a9c3aa",
+	"sha1": "6549c7ee6c56f01bc689dc41fb29a9594b04f0c2",
 	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 	"author": "",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
+		"description": "Rename Local Variable c : Class renamed to rrclass : Class in method newRecord(name dnsName, type short, _class short) : static in class dnsRecord"
 	}],
 	"time": "0/0/00 0:00 PM",
 	"id": -1
@@ -9445,40 +9434,10 @@
 	"author": "",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "7cc48a047ca4662621ca4dad7d4d464b87e1ca9b",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
+		"description": "Rename Local Variable i : int renamed to n : int in method getRecords(namestr String, type short, dclass short, cred byte) : public in class dns"
+	},{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "6d5572b768fcb347a02c356b837be30b65d64c5c",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "cf495c5560198de4e6f3556d6c40e3ce0dbf3868",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
+		"description": "Rename Local Variable i : int renamed to n : int in method getRecords(namestr String, type short, dclass short, cred byte) : public in class dns"
 	}],
 	"time": "0/0/00 0:00 PM",
 	"id": -1
@@ -9489,84 +9448,7 @@
 	"author": "",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "042f03f74f32895c84b174dba70c282abda747f8",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "129a34b7f184a46994fa81f0009653593eddbf5b",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "deee9d5918787e571e37a997b8090a67bd3be83c",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "6549c7ee6c56f01bc689dc41fb29a9594b04f0c2",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "031c1d91ccff9cf437af613145b69f91f9c4655b",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "0896eed3a0424a1f0f5f45c9557a066f4a0ece60",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
-	}],
-	"time": "0/0/00 0:00 PM",
-	"id": -1
-},
-{
-	"sha1": "f8b98bb19e53361741da66d39c9183b3ac9574ff",
-	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-	"author": "",
-	"refactorings": [{
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
+		"description": "Rename Local Variable dp : DatagramPacket renamed to outdp : DatagramPacket in method serveUDP(addr InetAddress, port short) : public in class jnamed"
 	}],
 	"time": "0/0/00 0:00 PM",
 	"id": -1
@@ -9577,8 +9459,131 @@
 	"author": "",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable"
+		"description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method rrToWire(out DataByteOutputStream, c Compression) : protected in class TXTRecord"
 	}],
 	"time": "0/0/00 0:00 PM",
 	"id": -1
-}]
+},
+{
+	"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method send(inMessage dnsMessage) : public in class dnsResolver"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "6d5572b768fcb347a02c356b837be30b65d64c5c",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable pos : int renamed to start : int in method parse(in CountedDataInputStream, c dnsCompression) : protected in class dnsNXTRecord"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "129a34b7f184a46994fa81f0009653593eddbf5b",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable address : String renamed to addr : String in method rdataFromString(st Tokenizer, origin Name) : protected in class NSAPRecord"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "031c1d91ccff9cf437af613145b69f91f9c4655b",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable b : byte[] renamed to array : byte[] in method byteArrayFromString(s String) : protected in class Record"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "f8b98bb19e53361741da66d39c9183b3ac9574ff",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable h : hmacSigner renamed to hmac : HMAC in method generate(m Message, b byte[], error int, old TSIGRecord) : public in class TSIG"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "f8b98bb19e53361741da66d39c9183b3ac9574ff",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable h : hmacSigner renamed to hmac : HMAC in method applyStream(m Message, old TSIGRecord, first boolean) : public in class TSIG"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method send(inMessage dnsMessage) : public in class dnsResolver"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "9b22e33fe6781efc0ead46a68d09131ca9a9c3aa",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable cds : CountedDataInputStream renamed to dbs : DataByteInputStream in method newRecord(name Name, type short, dclass short, ttl int, length int, data byte[]) : public in class Record"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "7cc48a047ca4662621ca4dad7d4d464b87e1ca9b",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable rrset : RRset renamed to rrsets : RRset[] in method lookup(name Name, type short, dclass short, cred byte) : private in class dns"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "cf495c5560198de4e6f3556d6c40e3ce0dbf3868",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method addRRset(name Name, response Message, rrset RRset, section byte, flags int) : protected in class jnamed"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+},
+{
+	"sha1": "deee9d5918787e571e37a997b8090a67bd3be83c",
+	"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
+	"author": "",
+	"refactorings": [{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable type : int renamed to typecode : int in method rdataFromString(st Tokenizer, origin Name) : protected in class NSECRecord"
+	}],
+	"time": "0/0/00 0:00 PM",
+	"id": -1
+}
+
+]
