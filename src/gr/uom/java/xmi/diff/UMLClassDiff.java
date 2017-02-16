@@ -448,17 +448,16 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
     public void checkForRenameLocalVariable() {
 
 
-
-        ArrayList<UMLOperationBodyMapper> bodyMapperList = new ArrayList<>( getOperationBodyMapperList());
+        ArrayList<UMLOperationBodyMapper> bodyMapperList = new ArrayList<>(getOperationBodyMapperList());
 
 
         for (int index = 0; index < bodyMapperList.size(); index++) {
 
 
-            UMLOperationBodyMapper umlOperationBodyMapper=bodyMapperList.get(index);
+            UMLOperationBodyMapper umlOperationBodyMapper = bodyMapperList.get(index);
             HashMap<String, String> potentialLVDrenamings = new HashMap<>();
-            HashMap<String, String> occupiedTarget=new HashMap<>();
-            HashSet<String> operationTwoVars= getVariables(umlOperationBodyMapper);
+            HashMap<String, String> occupiedTarget = new HashMap<>();
+            HashSet<String> operationTwoVars = getVariables(umlOperationBodyMapper);
 
 //            System.out.println("class name: "+ umlOperationBodyMapper.getOperation1().getClassName()+"\tmethod1: "+ umlOperationBodyMapper.getOperation1().getName()+ "\tmethod2: "+umlOperationBodyMapper .getOperation2().getName());
 
@@ -466,19 +465,19 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
                 List<AbstractCodeMapping> mappings = umlOperationBodyMapper.getMappings();
 
 
-                Set<VariableDeclaration> variableDeclarationInOperation1= new HashSet<>( umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations());
-                Set<VariableDeclaration> variableDeclarationInOperation2= new HashSet<>( umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations());
+                Set<VariableDeclaration> variableDeclarationInOperation1 = new HashSet<>(umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations());
+                Set<VariableDeclaration> variableDeclarationInOperation2 = new HashSet<>(umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariableDeclarations());
                 //List<VariableDeclaration> variableDeclarationInOperation1 = umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations();
 //                List<VariableDeclaration> variableDeclarationInOperation2 = umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariableDeclarations();
-                ArrayList<Replacement> replacements = new ArrayList<>( umlOperationBodyMapper.getReplacements());
+                ArrayList<Replacement> replacements = new ArrayList<>(umlOperationBodyMapper.getReplacements());
 
 
                 if (replacements.size() == 0 || variableDeclarationInOperation1.size() == 0)
                     continue;
 
-                for (VariableDeclaration variableDeclaration:variableDeclarationInOperation1
-                     ) {
-                    potentialLVDrenamings.put(variableDeclaration.getVariableName(),"");
+                for (VariableDeclaration variableDeclaration : variableDeclarationInOperation1
+                        ) {
+                    potentialLVDrenamings.put(variableDeclaration.getVariableName(), "");
                 }
 
 //                for (int i=0;i<variableDeclarationInOperation1.size();i++)
@@ -492,15 +491,17 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 //                }
 
                 for (int i = 0; i < replacements.size(); i++) {
-                    Replacement replacement=replacements.get(i);
+                    Replacement replacement = replacements.get(i);
 
                     if (replacement instanceof VariableRename) {
                         if (potentialLVDrenamings.containsKey(replacement.getBefore())) {
-                            String candidate = potentialLVDrenamings.get( replacement.getBefore());
+                            String candidate = potentialLVDrenamings.get(replacement.getBefore());
 
-                            if (candidate == ""   && getVariable(replacement.getAfter(),variableDeclarationInOperation2)!=null) {
+                            boolean variableExistInBoth =isVariableExistInBoth(replacement,variableDeclarationInOperation1,variableDeclarationInOperation2);
+
+                            if (candidate == "" && !variableExistInBoth && getVariable(replacement.getAfter(), variableDeclarationInOperation2) != null) {
                                 potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
-                            } else if (!candidate.equals(replacement.getAfter() ) )
+                            } else if (!candidate.equals(replacement.getAfter()) || variableExistInBoth)
                                 potentialLVDrenamings.remove(replacement.getBefore());
                         }
 
@@ -527,10 +528,10 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
                 for (String key :
                         potentialLVDrenamings.keySet()) {
                     //this might be changed to the results of the rename method since the local variable can only happend in the same method and the only way that the method name can be different is method renaming!
-                    if (potentialLVDrenamings.get(key) != ""){
-                        RenameLocalVariable lvr=new RenameLocalVariable(getVariable(key, variableDeclarationInOperation1), getVariable(potentialLVDrenamings.get(key), variableDeclarationInOperation2), umlOperationBodyMapper.getOperation1());
-                        refactorings.add(lvr );
-                        System.out.println("=============== "+lvr);
+                    if (potentialLVDrenamings.get(key) != "") {
+                        RenameLocalVariable lvr = new RenameLocalVariable(getVariable(key, variableDeclarationInOperation1), getVariable(potentialLVDrenamings.get(key), variableDeclarationInOperation2), umlOperationBodyMapper.getOperation1());
+                        refactorings.add(lvr);
+                        System.out.println("=============== " + lvr);
                     }
 
                 }
@@ -541,12 +542,47 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
         }
     }
 
-    private HashSet<String> getVariables(UMLOperationBodyMapper mapper){
-        HashSet<String> vars= new HashSet<>();
+    private boolean isVariableExistInBoth(Replacement replacement,Set<VariableDeclaration> baseVars, Set<VariableDeclaration> refVars){
+        boolean variableExistInBoth = findVariableByName(replacement.getBefore(), refVars);
+
+        if (variableExistInBoth){
+            VariableDeclaration selected= compareCandidates(replacement.getBefore(),replacement.getAfter(),baseVars,refVars);
+            if (selected.getVariableName().equals(replacement.getBefore()))
+                return true;
+            else
+                return false;
+        }
+        return false;
+    }
+
+    //we can get the variable name in the first place
+    private boolean findVariableByName(String name, Set<VariableDeclaration> vars) {
+        for (VariableDeclaration variableDeclaration : vars
+                ) {
+            if (variableDeclaration.getVariableName().equals(name))
+                return true;
+
+        }
+        return false;
+    }
+
+    private VariableDeclaration compareCandidates( String after, String before, Set<VariableDeclaration> baseVars, Set<VariableDeclaration> refVars) {
+        VariableDeclaration first = getVariable(before, refVars);
+        VariableDeclaration second = getVariable(after, refVars);
+        VariableDeclaration base = getVariable(before, baseVars);
+        int firstVarSimilarity = (first.getVariableName().equals(base.getVariableName()) ? 1 : 0) + (first.getVariableType().equals(base.getVariableType()) ? 1 : 0) + (first.getInitializer().replace(" ", "").equals(base.getInitializer().replace(" ", "")) ? 1 : 0);
+        int secondVarSimilarity = (second.getVariableName().equals(base.getVariableName()) ? 1 : 0) + (second.getVariableType().equals(base.getVariableType()) ? 1 : 0) + (second.getInitializer().replace(" ", "").equals(base.getInitializer().replace(" ", "")) ? 1 : 0);
+
+        //we need to take to account the fact that they might be eqaul so we need a more sophosticated approach!
+        return firstVarSimilarity > secondVarSimilarity ? first : second;
+    }
+
+    private HashSet<String> getVariables(UMLOperationBodyMapper mapper) {
+        HashSet<String> vars = new HashSet<>();
 
         for (AbstractCodeMapping mapping :
                 mapper.getMappings()) {
-            vars.addAll( mapping.getFragment2().getVariables());
+            vars.addAll(mapping.getFragment2().getVariables());
         }
 
         return vars;
@@ -560,85 +596,85 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
         }
         return null;
     }
-    
-public void checkForRenameLocalVariable2() {
-		
-		List<UMLOperationBodyMapper> bodyMapperList= getOperationBodyMapperList();
-		// for all mapped operations check their bodies
-		for (UMLOperationBodyMapper umlOperationBodyMapper : bodyMapperList) {
-			HashMap<VariableDeclaration, VariableDeclaration> potentialLVDrenamings=new HashMap<VariableDeclaration, VariableDeclaration>();
-			// check if operation1 and operation2 have local variable declarations
-			if(umlOperationBodyMapper.getOperation1().getBody()!= null && umlOperationBodyMapper.getOperation2().getBody()!= null){
-				List<VariableDeclaration> variableDeclarationInOperation1 = umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations();
-				List<VariableDeclaration> variableDeclarationInOperation2 = umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariableDeclarations();
-				
-				if(variableDeclarationInOperation1.size() > 0 && variableDeclarationInOperation2.size() > 0	){
-					for(VariableDeclaration lvd1 : variableDeclarationInOperation1){
-						List<AbstractCodeMapping> mappings = umlOperationBodyMapper.getMappings();
-						String candidateRenaming = "";
-						boolean found = false;
-						boolean hasConsistentReplacement = true;
-						for (AbstractCodeMapping abstractCodeMapping : mappings) {
-							
-							Set<Replacement> replacements = abstractCodeMapping.getReplacements();
-							for (Replacement replacement : replacements) {
-								if(replacement instanceof VariableRename){
-									if(replacement.getBefore().contentEquals(lvd1.getVariableName())){
-										if(!found){
-											candidateRenaming = replacement.getAfter();
-											found = true;
-											break;
-										}else if(!(candidateRenaming.contentEquals(replacement.getAfter()))){
-											hasConsistentReplacement = false;
-											break;
-										}
-									}
-								}
-							}
-							if(!hasConsistentReplacement){ // we can later check if in most cases it has consistent replacement then it is a renaming
-								break;
-							}
-						}
-						
-						if(hasConsistentReplacement && !candidateRenaming.contentEquals("")){
-							for(VariableDeclaration lvd2 : variableDeclarationInOperation2){
-								if(lvd2.getVariableName().contentEquals(candidateRenaming)){
-									potentialLVDrenamings.put(lvd1, lvd2);
-								}
-							}
-							
-						}
-					}
-					
-					// now we need to check the other way round	
-					Set<VariableDeclaration> keytoRemove=new HashSet<VariableDeclaration>();
-					for(VariableDeclaration lvd1 : potentialLVDrenamings.keySet()){
-						VariableDeclaration lvd2 = potentialLVDrenamings.get(lvd1);
-						List<AbstractCodeMapping> mappings = umlOperationBodyMapper.getMappings();
-						for (AbstractCodeMapping abstractCodeMapping : mappings) {
-							Set<Replacement> replacements = abstractCodeMapping.getReplacements();
-							if(replacements instanceof VariableRename){
-								for (Replacement replacement : replacements) {
-									if(replacement.getAfter().contentEquals(lvd2.getVariableName())){
-										if(!replacement.getBefore().contentEquals(lvd1.getVariableName())){ // if lvd2 is has another "before" then it is not a renaming
-											keytoRemove.add(lvd1);
-										}
-									}
-								}
-							}
-						}
-					}
-					for(VariableDeclaration lv: keytoRemove){
-						potentialLVDrenamings.remove(lv);
-					}
-				}
-			}
-			for(VariableDeclaration lvd: potentialLVDrenamings.keySet()){
-				RenameLocalVariable lvr=new RenameLocalVariable(lvd, potentialLVDrenamings.get(lvd), umlOperationBodyMapper.getOperation1());
-                refactorings.add(lvr );
-                System.out.println("*************** "+lvr);
-			}
-		}
-	}
+
+    public void checkForRenameLocalVariable2() {
+
+        List<UMLOperationBodyMapper> bodyMapperList = getOperationBodyMapperList();
+        // for all mapped operations check their bodies
+        for (UMLOperationBodyMapper umlOperationBodyMapper : bodyMapperList) {
+            HashMap<VariableDeclaration, VariableDeclaration> potentialLVDrenamings = new HashMap<VariableDeclaration, VariableDeclaration>();
+            // check if operation1 and operation2 have local variable declarations
+            if (umlOperationBodyMapper.getOperation1().getBody() != null && umlOperationBodyMapper.getOperation2().getBody() != null) {
+                List<VariableDeclaration> variableDeclarationInOperation1 = umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations();
+                List<VariableDeclaration> variableDeclarationInOperation2 = umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariableDeclarations();
+
+                if (variableDeclarationInOperation1.size() > 0 && variableDeclarationInOperation2.size() > 0) {
+                    for (VariableDeclaration lvd1 : variableDeclarationInOperation1) {
+                        List<AbstractCodeMapping> mappings = umlOperationBodyMapper.getMappings();
+                        String candidateRenaming = "";
+                        boolean found = false;
+                        boolean hasConsistentReplacement = true;
+                        for (AbstractCodeMapping abstractCodeMapping : mappings) {
+
+                            Set<Replacement> replacements = abstractCodeMapping.getReplacements();
+                            for (Replacement replacement : replacements) {
+                                if (replacement instanceof VariableRename) {
+                                    if (replacement.getBefore().contentEquals(lvd1.getVariableName())) {
+                                        if (!found) {
+                                            candidateRenaming = replacement.getAfter();
+                                            found = true;
+                                            break;
+                                        } else if (!(candidateRenaming.contentEquals(replacement.getAfter()))) {
+                                            hasConsistentReplacement = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            if (!hasConsistentReplacement) { // we can later check if in most cases it has consistent replacement then it is a renaming
+                                break;
+                            }
+                        }
+
+                        if (hasConsistentReplacement && !candidateRenaming.contentEquals("")) {
+                            for (VariableDeclaration lvd2 : variableDeclarationInOperation2) {
+                                if (lvd2.getVariableName().contentEquals(candidateRenaming)) {
+                                    potentialLVDrenamings.put(lvd1, lvd2);
+                                }
+                            }
+
+                        }
+                    }
+
+                    // now we need to check the other way round
+                    Set<VariableDeclaration> keytoRemove = new HashSet<VariableDeclaration>();
+                    for (VariableDeclaration lvd1 : potentialLVDrenamings.keySet()) {
+                        VariableDeclaration lvd2 = potentialLVDrenamings.get(lvd1);
+                        List<AbstractCodeMapping> mappings = umlOperationBodyMapper.getMappings();
+                        for (AbstractCodeMapping abstractCodeMapping : mappings) {
+                            Set<Replacement> replacements = abstractCodeMapping.getReplacements();
+                            if (replacements instanceof VariableRename) {
+                                for (Replacement replacement : replacements) {
+                                    if (replacement.getAfter().contentEquals(lvd2.getVariableName())) {
+                                        if (!replacement.getBefore().contentEquals(lvd1.getVariableName())) { // if lvd2 is has another "before" then it is not a renaming
+                                            keytoRemove.add(lvd1);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (VariableDeclaration lv : keytoRemove) {
+                        potentialLVDrenamings.remove(lv);
+                    }
+                }
+            }
+            for (VariableDeclaration lvd : potentialLVDrenamings.keySet()) {
+                RenameLocalVariable lvr = new RenameLocalVariable(lvd, potentialLVDrenamings.get(lvd), umlOperationBodyMapper.getOperation1());
+                refactorings.add(lvr);
+                System.out.println("*************** " + lvr);
+            }
+        }
+    }
 
 }

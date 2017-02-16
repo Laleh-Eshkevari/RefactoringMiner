@@ -25,6 +25,9 @@ public class VariableDeclaration {
 		return variableName;
 	}
 
+	public String getVariableType(){
+		return  variableType;
+	}
 	public String getInitializer() {
 		return initializer;
 	}
