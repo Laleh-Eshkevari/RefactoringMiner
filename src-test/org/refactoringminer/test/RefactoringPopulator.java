@@ -2735,7 +2735,7 @@ public class RefactoringPopulator {
     public static List<Root> getFSERefactorings(int flag) throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
 
-        String jsonFile = System.getProperty("user.dir") + "/src-test/Data/data.json";
+        String jsonFile = System.getProperty("user.dir") + "/src-test/Data/RLV.json";
 
         List<Root> roots = mapper.readValue(new File(jsonFile),
                 mapper.getTypeFactory().constructCollectionType(List.class, Root.class));
@@ -2776,7 +2776,7 @@ public class RefactoringPopulator {
         public int id;
         public String repository;
         public String sha1;
-
+        public String svnVersionMappings;
         public String author;
         public String time;
         public List<Refactoring> refactorings;
@@ -2786,7 +2786,7 @@ public class RefactoringPopulator {
     public static class Refactoring {
         public String type;
         public String description;
-        public String comment;
+        public String validation;
     }
 
 

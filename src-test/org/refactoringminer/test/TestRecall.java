@@ -9,40 +9,40 @@ public class TestRecall {
     @Test
     public void test() throws Exception {
 //    	 RefactoringMiner 
-    	TestBuilder test = new TestBuilder(new GitHistoryRefactoringMinerImpl(), "tmp1");
+        TestBuilder test = new TestBuilder(new GitHistoryRefactoringMinerImpl(), "tmp1");
 
-    	// RefactoringMiner2 
+        // RefactoringMiner2
 //    	TestBuilder test = new TestBuilder(new GitHistoryRefactoringMiner2(), "tmp").withAggregation();
 
-        test.project("https://github.com/MatinMan/RefactoringDatasets.git", "dnsjava")
-        .atCommit("9b22e33fe6781efc0ead46a68d09131ca9a9c3aa")
-        .containsOnly(
-            "Extract Method private extracted(contents List, size int, list List) : void extracted from public getContents(diagram Diagram) : List in class org.argouml.persistence.PgmlUtility",
-            "Extract Method private extracted(col int) : Class<?> extracted from public getColumnClass(col int) : Class<?> in class org.argouml.ui.cmd.SettingsTabShortcuts.ShortcutTableModel",
-            "Extract Method private extracted(multiplicity StringBuilder, name String, properties List<String>, stereotype StringBuilder, type String, value StringBuilder, visibility String) : void extracted from protected parseAttribute(text String, attribute Object) : void in class org.argouml.notation.providers.uml.AttributeNotationUml",
-            "Extract Method private extracted(node Object) : boolean extracted from public isLeaf(node Object) : boolean in class org.argouml.cognitive.ui.GoListToOffenderToItem",
-            "Extract Method private extracted(targets Object[]) : void extracted from private setTargets(targets Object[]) : void in class org.argouml.ui.explorer.ExplorerTree.ExplorerTargetListener",
-            "Extract Method private extracted() : void extracted from public structureChanged() : void in class org.argouml.ui.explorer.ExplorerEventAdaptor",
-            "Extract Method private extracted(pce PropertyChangeEvent) : void extracted from public updateListener(modelElement Object, pce PropertyChangeEvent) : void in class org.argouml.notation.providers.AttributeNotation",
-            "Extract Method private extracted() : void extracted from public componentHidden(e ComponentEvent) : void in class org.argouml.cognitive.checklist.ui.TabChecklist",
-            "Extract Method private extracted() : void extracted from public NotationComboBox() in class org.argouml.notation.ui.NotationComboBox",
-            "Extract Method private extracted(m Object, profile Profile) : void extracted from private checkProfileFor(o Object, m Object) : void in class org.argouml.kernel.ProjectImpl")
-
-//        .atCommit("d8215ce80309b4bf8c92ac2e096cb8b06275aee6")
+        test.project("https://github.com/eclipse/eclipse.git", "")
+//        .atCommit("9b22e33fe6781efc0ead46a68d09131ca9a9c3aa")
 //        .containsOnly(
-//            "Inline Method private buildPanel() : void inlined to public getTabPanel() : JPanel in class org.argouml.notation.ui.SettingsTabNotation",
-//            "Inline Method private getAssociationActions() : Object[] inlined to protected getUmlActions() : Object[] in class org.argouml.uml.diagram.deployment.ui.UMLDeploymentDiagram",
-//            "Inline Method private getPersistenceVersionFromFile(file File) : int inlined to protected doLoad(originalFile File, file File, progressMgr ProgressMgr) : Project in class org.argouml.persistence.UmlFilePersister",
-//            "Inline Method protected removeAllElementListeners(listener PropertyChangeListener) : void inlined to public removeAllElementListeners() : void in class org.argouml.notation.NotationProvider",
-//            "Inline Method private findTarget(t Object) : Object inlined to public shouldBeEnabled(t Object) : boolean in class org.argouml.cognitive.checklist.ui.TabChecklist",
-////              "Inline Method private findTarget(t Object) : Object inlined to public setTarget(t Object) : void in class org.argouml.cognitive.checklist.ui.TabChecklist",
-//            "Inline Method private initFigs() : void inlined to public AbstractFigNode(owner Object, bounds Rectangle, settings DiagramSettings) in class org.argouml.uml.diagram.deployment.ui.AbstractFigNode",
-//            "Inline Method private makeSubStatesIcon(x int, y int) : void inlined to private initFigs() : void in class org.argouml.uml.diagram.activity.ui.FigSubactivityState",
-//            "Inline Method private setTodoList(member AbstractProjectMember) : void inlined to public add(member ProjectMember) : boolean in class org.argouml.kernel.MemberList",
-//            // FN** parameter substitution?
-//            "Inline Method appendArrays() inlined to ??? in class org.argouml.ui.explorer.PerspectiveManager",
-//            "Inline Method private dealWithVisibility(attribute Object, visibility String) : void inlined to protected parseAttribute(text String, attribute Object) : void in class org.argouml.notation.providers.uml.AttributeNotationUml")
-//
+//            "Extract Method private extracted(contents List, size int, list List) : void extracted from public getContents(diagram Diagram) : List in class org.argouml.persistence.PgmlUtility",
+//            "Extract Method private extracted(col int) : Class<?> extracted from public getColumnClass(col int) : Class<?> in class org.argouml.ui.cmd.SettingsTabShortcuts.ShortcutTableModel",
+//            "Extract Method private extracted(multiplicity StringBuilder, name String, properties List<String>, stereotype StringBuilder, type String, value StringBuilder, visibility String) : void extracted from protected parseAttribute(text String, attribute Object) : void in class org.argouml.notation.providers.uml.AttributeNotationUml",
+//            "Extract Method private extracted(node Object) : boolean extracted from public isLeaf(node Object) : boolean in class org.argouml.cognitive.ui.GoListToOffenderToItem",
+//            "Extract Method private extracted(targets Object[]) : void extracted from private setTargets(targets Object[]) : void in class org.argouml.ui.explorer.ExplorerTree.ExplorerTargetListener",
+//            "Extract Method private extracted() : void extracted from public structureChanged() : void in class org.argouml.ui.explorer.ExplorerEventAdaptor",
+//            "Extract Method private extracted(pce PropertyChangeEvent) : void extracted from public updateListener(modelElement Object, pce PropertyChangeEvent) : void in class org.argouml.notation.providers.AttributeNotation",
+//            "Extract Method private extracted() : void extracted from public componentHidden(e ComponentEvent) : void in class org.argouml.cognitive.checklist.ui.TabChecklist",
+//            "Extract Method private extracted() : void extracted from public NotationComboBox() in class org.argouml.notation.ui.NotationComboBox",
+//            "Extract Method private extracted(m Object, profile Profile) : void extracted from private checkProfileFor(o Object, m Object) : void in class org.argouml.kernel.ProjectImpl")
+
+                .atCommit("52dfc394f627a24f58ab811e637b392041036be9")
+                .containsOnly(
+                        "Inline Method private buildPanel() : void inlined to public getTabPanel() : JPanel in class org.argouml.notation.ui.SettingsTabNotation",
+                        "Inline Method private getAssociationActions() : Object[] inlined to protected getUmlActions() : Object[] in class org.argouml.uml.diagram.deployment.ui.UMLDeploymentDiagram",
+                        "Inline Method private getPersistenceVersionFromFile(file File) : int inlined to protected doLoad(originalFile File, file File, progressMgr ProgressMgr) : Project in class org.argouml.persistence.UmlFilePersister",
+                        "Inline Method protected removeAllElementListeners(listener PropertyChangeListener) : void inlined to public removeAllElementListeners() : void in class org.argouml.notation.NotationProvider",
+                        "Inline Method private findTarget(t Object) : Object inlined to public shouldBeEnabled(t Object) : boolean in class org.argouml.cognitive.checklist.ui.TabChecklist",
+//              "Inline Method private findTarget(t Object) : Object inlined to public setTarget(t Object) : void in class org.argouml.cognitive.checklist.ui.TabChecklist",
+                        "Inline Method private initFigs() : void inlined to public AbstractFigNode(owner Object, bounds Rectangle, settings DiagramSettings) in class org.argouml.uml.diagram.deployment.ui.AbstractFigNode",
+                        "Inline Method private makeSubStatesIcon(x int, y int) : void inlined to private initFigs() : void in class org.argouml.uml.diagram.activity.ui.FigSubactivityState",
+                        "Inline Method private setTodoList(member AbstractProjectMember) : void inlined to public add(member ProjectMember) : boolean in class org.argouml.kernel.MemberList",
+                        // FN** parameter substitution?
+                        "Inline Method appendArrays() inlined to ??? in class org.argouml.ui.explorer.PerspectiveManager",
+                        "Inline Method private dealWithVisibility(attribute Object, visibility String) : void inlined to protected parseAttribute(text String, attribute Object) : void in class org.argouml.notation.providers.uml.AttributeNotationUml")
+
 //        .atCommit("f7daed39b7096a537d138c60b7429affaec368d6")
 //        .containsOnly(
 //            "Move Method public makeKey(k1 String, k2 String, k3 String, k4 String, k5 String) : ConfigurationKey from class org.argouml.configuration.Configuration to public makeKey(k1 String, k2 String, k3 String, k4 String, k5 String) : ConfigurationKey from class org.argouml.cognitive.ui.ActionGoToCritique",
@@ -231,7 +231,7 @@ public class TestRecall {
 //            "Pull Up Method public initialize() : void from class net.sourceforge.atunes.gui.AlbumTableColumnModel to public initialize() : void from class net.sourceforge.atunes.gui.AbstractCommonColumnModel",
 //            "Pull Up Method public setLine2(text String) : void from class net.sourceforge.atunes.gui.views.dialogs.ExtendedToolTip to public setLine2(text String) : void from class net.sourceforge.atunes.gui.views.controls.AbstractCustomWindow")
 //        ;
-        
+
         test.assertExpectations();
     }
 
