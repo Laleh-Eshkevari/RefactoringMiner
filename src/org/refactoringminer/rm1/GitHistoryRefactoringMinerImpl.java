@@ -46,22 +46,22 @@ public class GitHistoryRefactoringMinerImpl implements GitHistoryRefactoringMine
 	private GitHistoryRefactoringMinerImpl(boolean analyzeMethodInvocations) {
 		this.analyzeMethodInvocations = analyzeMethodInvocations;
 		this.setRefactoringTypesToConsider(
-			RefactoringType.RENAME_CLASS,
-			RefactoringType.MOVE_CLASS,
-			RefactoringType.MOVE_CLASS_FOLDER,
-			RefactoringType.RENAME_METHOD,
-			RefactoringType.EXTRACT_OPERATION,
-			RefactoringType.INLINE_OPERATION,
-			RefactoringType.MOVE_OPERATION,
-			RefactoringType.PULL_UP_OPERATION,
-			RefactoringType.PUSH_DOWN_OPERATION,
-			RefactoringType.MOVE_ATTRIBUTE,
-			RefactoringType.PULL_UP_ATTRIBUTE,
-			RefactoringType.PUSH_DOWN_ATTRIBUTE,
-			RefactoringType.EXTRACT_INTERFACE,
-			RefactoringType.EXTRACT_SUPERCLASS,
-			RefactoringType.EXTRACT_AND_MOVE_OPERATION,
-			RefactoringType.RENAME_PACKAGE,
+//			RefactoringType.RENAME_CLASS,
+//			RefactoringType.MOVE_CLASS,
+//			RefactoringType.MOVE_CLASS_FOLDER,
+//			RefactoringType.RENAME_METHOD,
+//			RefactoringType.EXTRACT_OPERATION,
+//			RefactoringType.INLINE_OPERATION,
+//			RefactoringType.MOVE_OPERATION,
+//			RefactoringType.PULL_UP_OPERATION,
+//			RefactoringType.PUSH_DOWN_OPERATION,
+//			RefactoringType.MOVE_ATTRIBUTE,
+//			RefactoringType.PULL_UP_ATTRIBUTE,
+//			RefactoringType.PUSH_DOWN_ATTRIBUTE,
+//			RefactoringType.EXTRACT_INTERFACE,
+//			RefactoringType.EXTRACT_SUPERCLASS,
+//			RefactoringType.EXTRACT_AND_MOVE_OPERATION,
+//			RefactoringType.RENAME_PACKAGE,
 			RefactoringType.RENAME_LOCAL_VARIABLE
 		);
 	}

@@ -7,7 +7,7 @@
       "refactorings":[
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"TP",
             "description":"Rename Local Variable maybe : ArrayList renamed to lserver : ArrayList in method private findAndroid() : void in class org.xbill.DNS.ResolverConfig"
          }
       ],
@@ -133,7 +133,7 @@
          {
             "type":"Rename Local Variable",
             "validation":"UKN",
-            "description":"Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public sendAXFR(inMessage dnsMessage) : dnsMessage in class DNS.SimpleResolver"
+            "description":"Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public sendAXFR(inMessage dnsMessage) : dnsMessage in class dnsResolver"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -1320,7 +1320,11 @@
             "type":"Rename Local Variable",
             "validation":"UKN",
             "description":"Rename Local Variable rec : Record renamed to record : Record in method protected doAdd(st MyStringTokenizer) : void in class update"
-         },
+         }, {
+             "type":"Rename Local Variable",
+             "validation":"UKN",
+             "description":"Rename Local Variable qualifier : String renamed to s : String in method package doAdd(st MyStringTokenizer) : void in class update"
+          },
          {
             "type":"Rename Local Variable",
             "validation":"UKN",
@@ -1335,7 +1339,20 @@
             "type":"Rename Local Variable",
             "validation":"UKN",
             "description":"Rename Local Variable rec : Record renamed to record : Record in method protected doDelete(st MyStringTokenizer) : void in class update"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"UKN",
+            "description":"Rename Local Variable qualifier : String renamed to s : String in method package doGlue(st MyStringTokenizer) : void in class update"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"UKN",
+            "description":"Rename Local Variable rec : Record renamed to record : Record in method package doGlue(st MyStringTokenizer) : void in class update"
          }
+
+
+
       ],
       "time":"0/0/00 0:00 PM",
       "id":-1
@@ -1364,7 +1381,7 @@
          {
             "type":"Rename Local Variable",
             "validation":"UKN",
-            "description":"Rename Local Variable keyStr : String renamed to key : String in method public main(argv String) : void in class dig"
+            "description":"Rename Local Variable keyStr : String renamed to key : String in method public main(argv String[]) : void in class dig"
          },
          {
             "type":"Rename Local Variable",
@@ -1399,7 +1416,7 @@
          {
             "type":"Rename Local Variable",
             "validation":"UKN",
-            "description":"Rename Local Variable savedpos : int renamed to currentpos : int in method Name(in DataByteInputStream) : public in class org.xbill.DNS.Name"
+            "description":"Rename Local Variable savedpos : int renamed to currentpos : int in method public Name(in DataByteInputStream) in class org.xbill.DNS.Name"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -1449,7 +1466,7 @@
          {
             "type":"Rename Local Variable",
             "validation":"UKN",
-            "description":"Rename Local Variable v : Vector renamed to nametable : Hashtable in method Zone(file String, name Name, st MyStringTokenizer, st MyStringTokenizer, useLast boolean, last Record, origin Name) : public in class DNS.Zone"
+            "description":"Rename Local Variable v : Vector renamed to nametable : Hashtable in method public Zone(file String) in class DNS.Zone"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -1540,26 +1557,41 @@
             "type":"Rename Local Variable",
             "validation":"UKN",
             "description":"Rename Local Variable type : int renamed to rtype : int in method private addRRset(name Name, rrset RRset) : void in class org.xbill.DNS.Zone"
-         }
-      ],
-      "time":"0/0/00 0:00 PM",
-      "id":-1
-   },
-   {
-      "sha1":"7c560638b01e52d0a8ea3d041c9776e73b4b15e8",
-      "repository":"https://github.com/MatinMan/RefactoringDatasets.git",
-      "svnVersionMappings":"87 -> 92",
-      "author":"",
-      "refactorings":[
+         },{
+            "type":"Rename Local Variable",
+            "validation":"TP",
+            "description":"Rename Local Variable address : String renamed to addr : String in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.X25Record"
+         },
          {
             "type":"Rename Local Variable",
             "validation":"TP",
-            "description":"Rename Local Variable v : Vector renamed to nametable : Hashtable in method Zone(file String, name Name, st MyStringTokenizer, st MyStringTokenizer, useLast boolean, last Record, origin Name) : public in class org.xbill.DNS.Zone"
+            "description":"Rename Local Variable type : int renamed to typecode : int in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NXTRecord"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"TP",
+            "description":"Rename Local Variable sb : StringBuffer renamed to buffer : StringBuffer in method private remainingStrings() : String in class org.xbill.DNS.Tokenizer"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"TP",
+            "description":"Rename Local Variable type : int renamed to typecode : int in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NSECRecord"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"TP",
+            "description":"Rename Local Variable type : int renamed to rtype : int in method private maybeAddRecord(record Record) : void in class org.xbill.DNS.Zone"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"TP",
+            "description":"Rename Local Variable address : String renamed to addr : String in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NSAPRecord"
          }
       ],
       "time":"0/0/00 0:00 PM",
       "id":-1
    },
+
    {
       "sha1":"8d9aab666a5df7063b202c3f9b473f8f80de969e",
       "repository":"https://github.com/MatinMan/RefactoringDatasets.git",
@@ -1750,7 +1782,7 @@
          {
             "type":"Rename Local Variable",
             "validation":"TP",
-            "description":"Rename Local Variable zone : Name renamed to updzone : Name in method protected sendUpdate) : void in class update"
+            "description":"Rename Local Variable zone : Name renamed to updzone : Name in method package sendUpdate() : void in class update"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -1861,21 +1893,7 @@
       "time":"0/0/00 0:00 PM",
       "id":-1
    },
-   {
-      "sha1":"b4e812814f633aee6f30d90c3102e7b04df74095",
-      "repository":"https://github.com/MatinMan/RefactoringDatasets.git",
-      "svnVersionMappings":"513 -> 514",
-      "author":"",
-      "refactorings":[
-         {
-            "type":"Rename Local Variable",
-            "validation":"TP",
-            "description":"Rename Local Variable rec : Record renamed to record : Record in method protected doGlue(st MyStringTokenizer) : void in class update"
-         }
-      ],
-      "time":"0/0/00 0:00 PM",
-      "id":-1
-   },
+
    {
       "sha1":"c163f01939e25201879af9249d183051e277bcec",
       "repository":"https://github.com/MatinMan/RefactoringDatasets.git",
@@ -1935,7 +1953,12 @@
          {
             "type":"Rename Local Variable",
             "validation":"TP",
-            "description":"Rename Local Variable keyStr : String renamed to key : String in method public main(argv String) : void in class update"
+            "description":"Rename Local Variable keyStr : String renamed to key : String in method public main(argv String[]) : void in class dig"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"TP",
+            "description":"Rename Local Variable keyStr : String renamed to key : String in method public main(argv String[]) : void in class update"
          }
       ],
       "time":"0/0/00 0:00 PM",
