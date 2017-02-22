@@ -8,7 +8,7 @@
          {
             "type":"Rename Local Variable",
             "validation":"UKN",
-            "description":"Rename Local Variable maybe : ArrayList renamed to lserver : ArrayList in method private findAndroid) : void in class org.xbill.DNS.ResolverConfig"
+            "description":"Rename Local Variable maybe : ArrayList renamed to lserver : ArrayList in method private findAndroid() : void in class org.xbill.DNS.ResolverConfig"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -500,11 +500,51 @@
       "svnVersionMappings":"1461 -> 1475",
       "author":"",
       "refactorings":[
-         {
-            "type":"Rename Local Variable",
-            "validation":"UKN",
-            "description":"Rename Local Variable sb : StringBuffer renamed to buffer : StringBuffer in method private remainingStrings) : String in class org.xbill.DNS.Tokenizer"
-         }
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable address : String renamed to addr : String in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.X25Record"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable type : int renamed to rtype : int in method public removeRecord(r Record) : void in class org.xbill.DNS.Zone"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable type : int renamed to typecode : int in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NXTRecord"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable type : int renamed to rtype : int in method private addRRset(name Name, rrset RRset) : void in class org.xbill.DNS.Zone"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable sb : StringBuffer renamed to buffer : StringBuffer in method private remainingStrings() : String in class org.xbill.DNS.Tokenizer"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable type : int renamed to rtype : int in method public addRecord(r Record) : void in class org.xbill.DNS.Zone"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable type : int renamed to typecode : int in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NSECRecord"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable type : int renamed to rtype : int in method private maybeAddRecord(record Record) : void in class org.xbill.DNS.Zone"
+             },
+        {
+                "type":"Rename Local Variable",
+                "validation":"TP",
+                "description":"Rename Local Variable address : String renamed to addr : String in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NSAPRecord"
+             }
       ],
       "time":"0/0/00 0:00 PM",
       "id":-1
