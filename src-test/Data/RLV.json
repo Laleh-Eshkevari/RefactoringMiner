@@ -187,8 +187,14 @@
       "refactorings":[
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"TP",
             "description":"Rename Local Variable currentName : Name renamed to name : Name in method public next) : Object in class org.xbill.DNS.Zone"
+         },
+         {
+            "type":"Rename Attribute",
+            "validation":"TP",
+            "comment":"for this case we need first find class renaming and then we can try to find local variable renaming!",
+            "description":"Rename Attribute currentName : Name renamed to name : Name in method public next) : Object in class org.xbill.DNS.Zone"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -232,12 +238,14 @@
       "refactorings":[
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"TP",
+            "comment":"  FP -> bodymapper did not match. it is as non-mapped",
             "description":"Rename Local Variable v : Vector renamed to l : List in method public getTSIG) : TSIGRecord in class org.xbill.DNS.Message"
          },
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"FP",
+            "commnet":"their not similar",
             "description":"Rename Local Variable size : int renamed to l : List in method public getSectionArray(section int) : Record[] in class org.xbill.DNS.Message"
          }
       ],
@@ -842,12 +850,14 @@
       "refactorings":[
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"TP",
+            "comment":"couldnt detecct the variable rename part. many cases the variable name is after the type first letter name so we can take advantage of this",
             "description":"Rename Local Variable e : Enumeration renamed to it : Iterator in method private verifyRecords(tcache Cache) : void in class org.xbill.DNS.Cache"
          },
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"TP",
+            "comment":"couldnt detecct the variable rename part. many cases the variable name is after the type first letter name so we can take advantage of this",
             "description":"Rename Local Variable e : Enumeration renamed to it : Iterator in method public run(dclass short) : void in class org.xbill.DNS.Cache"
          }
       ],
@@ -992,13 +1002,8 @@
       "refactorings":[
         {
           "type":"Rename Local Variable",
-          "validation":"UKN",
-          "description":"Rename Local Variable keyStr : String renamed to key : String in method public main(argv String) : void in class dig"
-       },
-       {
-          "type":"Rename Local Variable",
-          "validation":"UKN",
-          "description":"Rename Local Variable keyStr : String renamed to key : String in method public main(argv String[]) : void in class update"
+          "validation":"TP",
+          "description":"Rename Local Variable id : Object renamed to res : Resolution in method public sendAsync(query Message, listener ResolverListener) : Object in class org.xbill.DNS.ExtendedResolver"
        }
 
       ],
@@ -1043,7 +1048,8 @@
       "refactorings":[
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"FP",
+            "comment": "q only used in one statement so we can justify if it turns to i in the new revision",
             "description":"Rename Local Variable q : int renamed to i : int in method public send(query Message) : Message in class org.xbill.DNS.ExtendedResolver"
          }
       ],
@@ -1480,8 +1486,15 @@
       "refactorings":[
          {
             "type":"Rename Local Variable",
-            "validation":"UKN",
+            "validation":"FP",
+            "comment": "there is no variable replacement!",
             "description":"Rename Local Variable data : byte[] renamed to opt : Option in method protected rrToWire(out DNSOutput, c Compression, canonical boolean) : void in class org.xbill.DNS.OPTRecord"
+         },
+         {
+            "type":"Rename Local Variable",
+            "validation":"FP",
+            "comment":"it mached record with record while the record in the base record renamed to _record and the new method is created in new revision which is called record",
+            "description":"Rename Local Variable token : Tokenizer.Token renamed to rec : Record in method public nextRecord() : Record in class org.xbill.DNS.Master"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -1617,6 +1630,10 @@
             "type":"Rename Local Variable",
             "validation":"TP",
             "description":"Rename Local Variable ok : boolean renamed to waiting : boolean in method public send(query Message) : Message in class DNS.ExtendedResolver"
+         },{
+            "type":"Rename Local Variable",
+            "validation":"TP",
+            "description":"Rename Local Variable ok : boolean renamed to waiting : boolean in method public send(query Message) : Message in class org.xbill.DNS.ExtendedResolver"
          }
       ],
       "time":"0/0/00 0:00 PM",
@@ -1637,21 +1654,7 @@
       "time":"0/0/00 0:00 PM",
       "id":-1
    },
-   {
-      "sha1":"d24c6879b186261672145bb671fd3e265b68d78b",
-      "repository":"https://github.com/MatinMan/RefactoringDatasets.git",
-      "svnVersionMappings":"283 -> 309",
-      "author":"",
-      "refactorings":[
-         {
-            "type":"Rename Local Variable",
-            "validation":"TP",
-            "description":"Rename Local Variable ok : boolean renamed to waiting : boolean in method public send(query Message) : Message in class org.xbill.DNS.ExtendedResolver"
-         }
-      ],
-      "time":"0/0/00 0:00 PM",
-      "id":-1
-   },
+
    {
       "sha1":"129a34b7f184a46994fa81f0009653593eddbf5b",
       "repository":"https://github.com/MatinMan/RefactoringDatasets.git",
