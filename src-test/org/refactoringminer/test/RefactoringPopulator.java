@@ -2787,6 +2787,7 @@ public class RefactoringPopulator {
         public String type;
         public String description;
         public String validation;
+        public String comment;
     }
 
 

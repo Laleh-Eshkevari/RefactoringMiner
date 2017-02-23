@@ -196,7 +196,7 @@
 		}, {
 			"type": "Rename Local Variable",
 			"validation": "FP",
-			"commnet": "their not similar",
+			"comment": "their not similar",
 			"description": "Rename Local Variable size : int renamed to l : List in method public getSectionArray(section int) : Record[] in class org.xbill.DNS.Message"
 		}],
 		"time": "0/0/00 0:00 PM",
