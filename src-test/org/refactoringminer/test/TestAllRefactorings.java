@@ -16,7 +16,7 @@ public class TestAllRefactorings {
 		
 		int refactoring= Refactorings.RenameLocalVariable.getValue();
 
-		TestBuilder test = new TestBuilder(new GitHistoryRefactoringMinerImpl(), "tmp7", refactoring);
+		TestBuilder test = new TestBuilder(new GitHistoryRefactoringMinerImpl(), "tmp8", refactoring);
 		
 		RefactoringPopulator.feedRefactoringsInstances(refactoring, Systems.FSE.getValue(), test);
 
