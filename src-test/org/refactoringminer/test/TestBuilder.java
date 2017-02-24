@@ -119,6 +119,7 @@ public class TestBuilder {
 //                                commitId.equals("51ad574fcfa967e3655bf15ccac133ef1041cdd3") ||
 //                                commitId.equals("deee9d5918787e571e37a997b8090a67bd3be83c"))
 //                            continue;
+
                         if (commitId.equals("321a84fa677acec950bb3b0894d7917a751bb0fd"))
                             refactoringDetector.detectAtCommit(rep, commitId, m);
                     }
