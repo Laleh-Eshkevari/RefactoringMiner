@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.prism.impl.Disposer;
 import org.refactoringminer.test.TestBuilder.ProjectMatcher.CommitMatcher;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -2789,7 +2788,6 @@ public class RefactoringPopulator {
         public String description;
         public String validation;
         public String comment;
-
     }
 
 
@@ -2800,7 +2798,6 @@ public class RefactoringPopulator {
         public String type;
         public String reportedCase;
     }
-
 
 
 }
