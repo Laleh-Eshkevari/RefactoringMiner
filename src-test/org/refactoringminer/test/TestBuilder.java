@@ -1,5 +1,6 @@
 package org.refactoringminer.test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -119,7 +120,7 @@ public class TestBuilder {
 //                                commitId.equals("51ad574fcfa967e3655bf15ccac133ef1041cdd3") ||
 //                                commitId.equals("deee9d5918787e571e37a997b8090a67bd3be83c"))
 //                            continue;
-                        if (commitId.equals("0302f63bf7c6a3a32c49b5933b9db995235fa02a"))
+//                        if (commitId.equals("0302f63bf7c6a3a32c49b5933b9db995235fa02a"))
                             refactoringDetector.detectAtCommit(rep, commitId, m);
                     }
                 } else {
@@ -340,7 +341,7 @@ public class TestBuilder {
             // e.getMessage());
         }
 
-        private void printResults() {
+        private void printResults() throws IOException {
             // if (verbose || this.falsePositiveCount > 0 ||
             // this.falseNegativeCount > 0 || this.errorsCount > 0) {
             // System.out.println(this.cloneUrl);
@@ -370,20 +371,24 @@ public class TestBuilder {
                         System.out.println(" false positives");
                         for (String ref : matcher.notExpected) {
                             System.out.println("  " + ref);
+                            System.out.println(RefactoringPopulator.getComment(entry.getKey(),ref));
                         }
                     }
                     if (!matcher.expected.isEmpty()) {
                         System.out.println(" false negatives");
                         for (String ref : matcher.expected) {
                             System.out.println("  " + ref);
+                            System.out.println(RefactoringPopulator.getComment(entry.getKey(),ref));
                         }
                     }
                     if (!matcher.unknown.isEmpty()) {
                         System.out.println(" unknown");
                         for (String ref : matcher.unknown) {
                             System.out.println("  " + ref);
+                            System.out.println(RefactoringPopulator.getComment(entry.getKey(),ref));
                         }
                     }
+
                 }
             }
         }

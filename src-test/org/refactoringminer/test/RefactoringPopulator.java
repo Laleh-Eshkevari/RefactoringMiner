@@ -3,6 +3,7 @@ package org.refactoringminer.test;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.refactoringminer.test.TestBuilder.ProjectMatcher.CommitMatcher;
@@ -2715,21 +2716,47 @@ public class RefactoringPopulator {
 
     private static void prepareFSERefactorings(TestBuilder test, int flag) throws JsonParseException, JsonMappingException, IOException {
         List<Root> refactorings = getFSERefactorings(flag);
-
+        _roots = new HashMap<>();
         for (Root refactoring : refactorings) {
-            test.project(refactoring.repository, "master").atCommit(refactoring.sha1).containsOnly(extractRefactorings(refactoring.refactorings));
+            String[] refs = extractRefactorings(refactoring.refactorings, "TP");
+
+            if (refs.length > 0)
+                test.project(refactoring.repository, "master").atCommit(refactoring.sha1).containsOnly(refs);
+            refs = extractRefactorings(refactoring.refactorings, "FP");
+            if (refs.length > 0)
+                test.project(refactoring.repository, "master").atCommit(refactoring.sha1).notContains(refs);
+            refs = extractRefactorings(refactoring.refactorings, "UKN");
+            if (refs.length > 0)
+                test.project(refactoring.repository, "master").atCommit(refactoring.sha1).containsOnly(refs);
+            _roots.put(refactoring.sha1, refactoring);
         }
     }
 
-    private static String[] extractRefactorings(List<Refactoring> refactoring) {
 
-        String[] refactorings = new String[refactoring.size()];
+    private static String[] extractRefactorings(List<Refactoring> refactoring, String state) {
+
+        List<String> refactorings = new ArrayList<>();
 
         for (int i = 0; i < refactoring.size(); i++) {
-            refactorings[i] = refactoring.get(i).description;
+            Refactoring ref = refactoring.get(i);
+            if (ref.validation.toLowerCase().equals(state.toLowerCase()))
+                refactorings.add(refactoring.get(i).description);
         }
+        String[] s = new String[refactorings.size()];
+        return refactorings.toArray(s);
+    }
 
-        return refactorings;
+    private static HashMap<String, Root> _roots = new HashMap<>();
+
+    public static String getComment(String sha, String refactoring) throws IOException {
+
+        Root root = _roots.get(sha);
+        for (int i = 0; i < root.refactorings.size(); i++) {
+            Refactoring ref = root.refactorings.get(i);
+            if (ref.description.equals(refactoring))
+                return ref.comment;
+        }
+        return "";
     }
 
     public static List<Root> getFSERefactorings(int flag) throws JsonParseException, JsonMappingException, IOException {
