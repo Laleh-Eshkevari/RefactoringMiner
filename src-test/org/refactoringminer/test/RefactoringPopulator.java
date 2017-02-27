@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import jdk.nashorn.internal.ir.LiteralNode;
+import org.apache.commons.lang3.ArrayUtils;
 import org.refactoringminer.test.TestBuilder.ProjectMatcher.CommitMatcher;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -2718,17 +2720,15 @@ public class RefactoringPopulator {
         List<Root> refactorings = getFSERefactorings(flag);
         _roots = new HashMap<>();
         for (Root refactoring : refactorings) {
-            String[] refs = extractRefactorings(refactoring.refactorings, "TP");
+            String[] refs = ArrayUtils.addAll(extractRefactorings(refactoring.refactorings, "TP"),extractRefactorings(refactoring.refactorings, "UKN"));
 
             if (refs.length > 0)
                 test.project(refactoring.repository, "master").atCommit(refactoring.sha1).containsOnly(refs);
             refs = extractRefactorings(refactoring.refactorings, "FP");
             if (refs.length > 0)
                 test.project(refactoring.repository, "master").atCommit(refactoring.sha1).notContains(refs);
-            refs = extractRefactorings(refactoring.refactorings, "UKN");
-            if (refs.length > 0)
-                test.project(refactoring.repository, "master").atCommit(refactoring.sha1).containsOnly(refs);
-            _roots.put(refactoring.sha1, refactoring);
+
+           _roots.put(refactoring.sha1, refactoring);
         }
     }
 

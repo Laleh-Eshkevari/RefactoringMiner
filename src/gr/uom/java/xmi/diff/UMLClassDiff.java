@@ -545,6 +545,9 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
     private boolean isVariableExistInBoth(Replacement replacement,Set<VariableDeclaration> baseVars, Set<VariableDeclaration> refVars){
         boolean variableExistInBoth = findVariableByName(replacement.getBefore(), refVars);
 
+        if(!findVariableByName(replacement.getAfter(),refVars) && variableExistInBoth)
+            return true;
+
         if (variableExistInBoth){
             VariableDeclaration selected= compareCandidates(replacement.getAfter(),replacement.getBefore(),baseVars,refVars);
             if (selected.getVariableName().equals(replacement.getBefore()))
@@ -570,11 +573,17 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
         VariableDeclaration first = getVariable(before, refVars);
         VariableDeclaration second = getVariable(after, refVars);
         VariableDeclaration base = getVariable(before, baseVars);
-        int firstVarSimilarity = (stringHandle( first.getVariableName()).equals(stringHandle( base.getVariableName())) ? 1 : 0) + (stringHandle( first.getVariableType()).equals( stringHandle( base.getVariableType())) ? 1 : 0) + (stringHandle( first.getInitializer()).replace(" ", "").equals(stringHandle( base.getInitializer()).replace(" ", "")) ? 1 : 0);
-        int secondVarSimilarity = (stringHandle( second.getVariableName()).equals(stringHandle( base.getVariableName())) ? 1 : 0) + (stringHandle( second.getVariableType()).equals(stringHandle( base.getVariableType())) ? 1 : 0) + (stringHandle( second.getInitializer()).replace(" ", "").equals(stringHandle( base.getInitializer()).replace(" ", "")) ? 1 : 0);
+        try {
+            int firstVarSimilarity = (stringHandle( first.getVariableName()).equals(stringHandle( base.getVariableName())) ? 1 : 0) + (stringHandle( first.getVariableType()).equals( stringHandle( base.getVariableType())) ? 1 : 0) + (stringHandle( first.getInitializer()).replace(" ", "").equals(stringHandle( base.getInitializer()).replace(" ", "")) ? 1 : 0);
+            int secondVarSimilarity = (stringHandle( second.getVariableName()).equals(stringHandle( base.getVariableName())) ? 1 : 0) + (stringHandle( second.getVariableType()).equals(stringHandle( base.getVariableType())) ? 1 : 0) + (stringHandle( second.getInitializer()).replace(" ", "").equals(stringHandle( base.getInitializer()).replace(" ", "")) ? 1 : 0);
 
-        //we need to take to account the fact that they might be eqaul so we need a more sophosticated approach!
-        return firstVarSimilarity > secondVarSimilarity ? first : second;
+            //we need to take to account the fact that they might be eqaul so we need a more sophosticated approach!
+            return firstVarSimilarity >= secondVarSimilarity ? first : second;
+        }
+        catch (Exception e){
+            return first;
+        }
+
     }
 
     private HashSet<String> getVariables(UMLOperationBodyMapper mapper) {
