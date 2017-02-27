@@ -28,3 +28,5 @@ src/META-INF/persistence.xml
 .project
 .classpath
 /.settings/
+*.xml
+*.iml
