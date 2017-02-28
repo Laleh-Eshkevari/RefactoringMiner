@@ -55,14 +55,14 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#SecondIdea - seems incorrect. it only declared in the bease revision",
+			"validation": "FP",
+			"comment":"#Verified - Matin, Lale",
 			"description": "Rename Local Variable array : Object[] renamed to bestns : Object in method protected findSets(name Name, type short) : Object[] in class org.xbill.DNS.NameSet"
 		},
 		{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#SecondIdea - seems incorrect. sr only declared in the new revision",
+			"validation": "FP",
+			"comment":"#Verified - Matin, Lale",
 			"description": "Rename Local Variable cr : SetResponse renamed to sr : SetResponse in method package generateReply(query Message, in byte[], s Socket) : Message in class jnamed"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -74,13 +74,13 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#SecondIdea - seems to be correct (it replace almost always with alenght but one case) waiting for lale's idea",
+			"validation": "FP",
+			"comment":"#SecondIdea - seems to be correct (it replace almost always with alenght but one case) waiting for lale's idea. verified me and lale FP",
 			"description": "Rename Local Variable ab : byte[] renamed to alength : int in method public compareTo(o Object) : int in class org.xbill.DNS.Name"
 		}, {
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"Method grow do not exist in the refactord revision so we need to fine the corresponding method first",
+			"validation": "FP",
+			"comment":"Method grow do not exist in the refactord revision so we need to fine the corresponding method first! #verified(lale and matin)",
 			"description": "Rename Local Variable newarray : Object[] renamed to newname : byte[] in method private grow(n int) : void in class org.xbill.DNS.Name"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -122,7 +122,7 @@
 		},{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment":"verified",
+			"comment":"verified - we should remove this commit due to code problem! this code might not compied. EX: it has many file containing same class in the same package",
 			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public sendAXFR(inMessage dnsMessage) : dnsMessage in class org.xbill.DNS.dnsResolver"
 		},{
 			"type": "Rename Local Variable",
@@ -166,8 +166,8 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"Seems to be false positive",
+			"validation": "TP",
+			"comment":"Seems to be false positive(Me), User defined class Set is renamed to ChacheElement so we lale and davood consider it as TP",
 			"description": "Rename Local Variable set : Set renamed to element : CacheElement in method protected addRecord(r Record, cred byte) : void in class org.xbill.DNS.Cache"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -506,8 +506,8 @@
 			"description": "Rename Local Variable bs : ByteArrayOutputStream renamed to dbs : DataByteOutputStream in method protected verify(m Message, b byte[], old TSIGRecord) : boolean in class DNS.TSIG"
 		},{
 		  "type": "Rename Local Variable",
-		  "validation": "UKN",
-		  "comment": "#SecondIdea",
+			"validation": "TP",
+		  "comment": "#Verified - Lale, Matin",
 		  "description": "Rename Local Variable dout : CountedDataOutputStream renamed to out : DataByteOutputStream in method package verify(m Message, b byte[], old TSIGRecord) : boolean in class DNS.TSIG"
 		},
 		{
@@ -518,8 +518,8 @@
 		},
 		{
 		  "type": "Rename Local Variable",
-		  "validation": "UKN",
-		  "comment": "#SecondIdea",
+		  "validation": "TP",
+		  "comment": "#Verified - Lale, Matin",
 		  "description": "Rename Local Variable dout : CountedDataOutputStream renamed to out : DataByteOutputStream in method package apply(m Message) : void in class DNS.TSIG"
 		},
 		{
@@ -596,23 +596,23 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#TypeReplacement - bodymapper couldnt map anything!",
+			"validation": "TP",
+			"comment":"verified! Lale",
 			"description": "Rename Local Variable nameInfo : TypeMap renamed to typelist : Object in method protected findExactSet(name Name, type short) : Object in class org.xbill.DNS.NameSet"
 		}, {
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
 			"comment":"#TypeReplacement - bodymapper couldnt match!",
 			"description": "Rename Local Variable nameInfo : TypeMap renamed to typelist : Object in method public toString() : String in class org.xbill.DNS.NameSet"
 		},{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#SecondIdea - seems FP but still need second opinion",
+			"validation": "FP",
+			"comment":"#verified! matin, lale",
 			"description": "Rename Local Variable nameInfo : TypeMap renamed to typelist : Object in method protected findSets(name Name, type short) : Object in class org.xbill.DNS.NameSet"
 		},{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#SecondIdea - seems FP but still need second opinion",
+			"validation": "FP",
+			"comment":"#verified! matin, lale",
 			"description": "Rename Local Variable o : Object renamed to typelist : Object in method protected removeSet(name Name, type short, set TypedObject) : void in class org.xbill.DNS.NameSet"
 		} ],
 		"time": "0/0/00 0:00 PM",
@@ -672,12 +672,13 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
+			"comment":"#Verified - lale, dave",
 			"description": "Rename Local Variable rec : Record renamed to record : Record in method public fromXFR(zone Name, dclass int, remote String, zone Name, dclass int, remote String, zone Name, dclass int, remote String, cache Cache) : void in class org.xbill.DNS.Zone"
 		},{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#SecondIdea - Seems true positive",
+			"validation": "TP",
+			"comment":"#Verified - laleh, matin",
 			"description": "Rename Local Variable h : hmacSigner renamed to hmac : HMAC in method public generate(m Message, b byte[], error int, old TSIGRecord) : TSIGRecord in class org.xbill.DNS.TSIG"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -702,7 +703,13 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "UKN",
+			"comment":"#SecondIdea",
 			"description": "Rename Local Variable s : String renamed to token : Tokenizer.Token in method protected doRequire(st MyStringTokenizer) : void in class update"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"#ExistInBoth - line",
+			"description": "  Rename Local Variable s : String renamed to line : String in method public update(in InputStream) in class update"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -984,7 +991,7 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "#Verified - Lale, davood",
 			"description": "Rename Local Variable r : Record renamed to rrset : RRset in method public generateReply(query Message) : Message in class jnamed"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -1052,8 +1059,8 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"#SecondIdea - wrong!",
+			"validation": "FP",
+			"comment":"#Verified - Matin, Lale",
 			"description": "Rename Local Variable r : Record renamed to records : Record[] in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -1143,8 +1150,8 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"need second idea",
+			"validation": "FP",
+			"comment":"need second idea(Davood)",
 			"description": "Rename Local Variable sb : StringBuffer renamed to bytes : byte[] in method private toDottedQuad(addr int, name Name, dclass int, ttl long, address InetAddress) : String in class org.xbill.DNS.ARecord"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -1239,13 +1246,13 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"comment":"For me it is a false positive since it repaced with two vaiable!!!",
+			"validation": "TP",
+			"comment":"For me it is a false positive since it repaced with two vaiable!!!. ME, LALEH",
 			"description": "Rename Local Variable flags1 : int renamed to flagsval : int in method private readFlags(in DataByteInputStream) : void in class org.xbill.DNS.Header"
 		},{
 			"type": "Rename Local Variable",
-			"validation": "ME",
-			"comment":"Although we have type changing refactoring miner could find it!",
+			"validation": "TP",
+			"comment":"Although we have type changing refactoring miner could find it! ME and Laleh",
 			"description": "Rename Local Variable dbs : DataByteInputStream renamed to in : DNSInput in method public newRecord(name Name, type int, dclass int, ttl long, length int, data byte[]) : Record in class org.xbill.DNS.Record"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -1698,12 +1705,19 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
+			"comment":"bodymapper couldnt match",
 			"description": "Rename Local Variable r : SIGRecord renamed to sig : SIGRecord in method public apply(m Message, old byte) : void in class org.xbill.DNS.security.SIG0Signer"
 		},{
 			"type": "Rename Local Variable",
 			"validation": "TP",
 			"description": "Rename Local Variable out : byte[] renamed to response : byte[] in method public serveTCP(addr InetAddress, port short) : void in class jnamed"
-		}],
+		},{
+			"type": "Rename Local Variable",
+			"validation": "D",
+			"comment":"there are lots of changes",
+			"description": "Rename Local Variable nameInfo : TypeMap renamed to typelist : Object in method protected findSets(name Name, type short) : Object in class org.xbill.DNS.NameSet"
+		}
+	],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
 	}

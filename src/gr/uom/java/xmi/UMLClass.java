@@ -391,4 +391,5 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
 		double normalized = (double)distance/(double)Math.max(s1.length(), s2.length());
 		return normalized;
 	}
+
 }

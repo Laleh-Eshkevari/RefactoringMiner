@@ -2817,7 +2817,6 @@ public class RefactoringPopulator {
         public String comment;
     }
 
-
     public static class Comment {
         public String refactored;
         public String link;
@@ -2825,6 +2824,7 @@ public class RefactoringPopulator {
         public String type;
         public String reportedCase;
     }
+
 
 
 }

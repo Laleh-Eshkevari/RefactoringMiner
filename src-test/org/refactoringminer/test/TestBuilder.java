@@ -120,7 +120,7 @@ public class TestBuilder {
 //                                commitId.equals("51ad574fcfa967e3655bf15ccac133ef1041cdd3") ||
 //                                commitId.equals("deee9d5918787e571e37a997b8090a67bd3be83c"))
 //                            continue;
-                        if (commitId.equals("9e48669a7729eb07b9c0d98265493257d76ef7d2"))
+                        if (commitId.equals("8906b5b0782c2960ff42398b0ac416679682a94d"))
                             refactoringDetector.detectAtCommit(rep, commitId, m);
                     }
                 } else {
