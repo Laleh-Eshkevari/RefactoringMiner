@@ -709,7 +709,7 @@
 			"type": "Rename Local Variable",
 			"validation": "FP",
 			"comment":"#ExistInBoth - line",
-			"description": "  Rename Local Variable s : String renamed to line : String in method public update(in InputStream) in class update"
+			"description": "Rename Local Variable s : String renamed to line : String in method public update(in InputStream) in class update"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
