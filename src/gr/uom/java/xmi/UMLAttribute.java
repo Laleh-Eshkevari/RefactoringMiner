@@ -12,6 +12,8 @@ public class UMLAttribute implements Comparable<UMLAttribute>, Serializable {
 	private boolean isFinal;
 	private boolean isStatic;
 	private Object value;
+	private int startLine;
+	private int endLine;
 
 	public UMLAttribute(String name, UMLType type) {
 		this.name = name;
@@ -68,6 +70,22 @@ public class UMLAttribute implements Comparable<UMLAttribute>, Serializable {
 
 	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	public int getStartLine() {
+		return startLine;
+	}
+
+	public void setStartLine(int startLine) {
+		this.startLine = startLine;
+	}
+
+	public int getEndLine() {
+		return endLine;
+	}
+
+	public void setEndLine(int endLine) {
+		this.endLine = endLine;
 	}
 
 	public boolean equalsIgnoringChangedType(UMLAttribute attribute) {

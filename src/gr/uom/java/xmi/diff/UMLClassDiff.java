@@ -375,8 +375,10 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
                             if (!operationBodyMapper.getMappings().isEmpty() &&
                                     (operationBodyMapper.getMappings().size() > operationBodyMapper.nonMappedElementsT2()
                                             || operationBodyMapper.exactMatches() > 0)) {
-                                ExtractOperationRefactoring extractOperationRefactoring =
-                                        new ExtractOperationRefactoring(addedOperation, operationBodyMapper.getOperation1(), operationBodyMapper.getOperation1().getClassName());
+                            	 UMLOperation extractedFromOperationInNewVersion= this.findExistingMappingInOperationBodyMapperFor(operationBodyMapper.getOperation1());
+                            	ExtractOperationRefactoring extractOperationRefactoring =
+                                        new ExtractOperationRefactoring(addedOperation, operationBodyMapper.getOperation1(), extractedFromOperationInNewVersion, operationBodyMapper.getOperation1().getClassName());
+                               
                                 refactorings.add(extractOperationRefactoring);
                                 operationsToBeRemoved.add(addedOperation);
                             } else if (addedOperation.isDelegate() != null) {
@@ -391,7 +393,16 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
         addedOperations.removeAll(operationsToBeRemoved);
     }
 
-    private boolean parameterTypesMatch(Map<UMLParameter, UMLParameter> originalMethodParametersPassedAsArgumentsMappedToCalledMethodParameters) {
+    private UMLOperation findExistingMappingInOperationBodyMapperFor(UMLOperation operation1) {
+		for(UMLOperationBodyMapper umlOperationBodyMapper : this.operationBodyMapperList){
+			if(umlOperationBodyMapper.getOperation1().equals(operation1)){
+				return umlOperationBodyMapper.getOperation2();
+			}
+		}
+		return null;
+	}
+
+	private boolean parameterTypesMatch(Map<UMLParameter, UMLParameter> originalMethodParametersPassedAsArgumentsMappedToCalledMethodParameters) {
         for (UMLParameter key : originalMethodParametersPassedAsArgumentsMappedToCalledMethodParameters.keySet()) {
             UMLParameter value = originalMethodParametersPassedAsArgumentsMappedToCalledMethodParameters.get(key);
             if (!key.getType().equals(value.getType()) && !key.getType().equalsWithSubType(value.getType())) {

@@ -127,7 +127,7 @@ public class GitHistoryRefactoringMinerImpl implements GitHistoryRefactoringMine
 			
 			// Diff between currentModel e parentModel
 			refactoringsAtRevision = parentUMLModel.diff(currentUMLModel, renamedFilesHint).getRefactorings();
-			refactoringsAtRevision = filter(refactoringsAtRevision);
+			//refactoringsAtRevision = filter(refactoringsAtRevision); for AIKO we don't need it
 			
 		} else {
 			//logger.info(String.format("Ignored revision %s with no changes in java files", commitId));

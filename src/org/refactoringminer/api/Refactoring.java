@@ -1,6 +1,7 @@
 package org.refactoringminer.api;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface Refactoring extends Serializable {
 
@@ -8,6 +9,6 @@ public interface Refactoring extends Serializable {
 	
 	public String getName();
 
-	public String toString();
+	public String toString();	
 	
 }

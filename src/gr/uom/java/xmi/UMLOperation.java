@@ -27,6 +27,9 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	private boolean isStatic;
 	private boolean emptyBody;
 	private OperationBody operationBody;
+	private int startLine;
+	private int endLine;
+	private String sourceFile;
 	
 	public UMLOperation(String name) {
         this.name = name;
@@ -102,6 +105,30 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 		this.className = className;
 	}
 
+	public int getStartLine() {
+		return startLine;
+	}
+
+	public void setStartLine(int startLine) {
+		this.startLine = startLine;
+	}
+
+	public int getEndLine() {
+		return endLine;
+	}
+
+	public void setEndLine(int endLine) {
+		this.endLine = endLine;
+	}
+	
+	public String getSourceFile() {
+		return this.sourceFile;
+	}
+	
+	public void setSourceFile(String sourceFile) {
+		this.sourceFile= sourceFile;
+	}
+	
 	public void addParameter(UMLParameter parameter) {
 		this.parameters.add(parameter);
 	}

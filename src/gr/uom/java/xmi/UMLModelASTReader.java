@@ -130,7 +130,10 @@ public class UMLModelASTReader {
 			}
 		}
 		String className = typeDeclaration.getName().getFullyQualifiedName();
+		CompilationUnit cu= (CompilationUnit) (typeDeclaration.getRoot());
 		UMLClass umlClass = new UMLClass(packageName, className, sourceFile, typeDeclaration.isPackageMemberTypeDeclaration());
+		umlClass.setStartLine(cu.getLineNumber(typeDeclaration.getStartPosition()));
+		umlClass.setEndLine(cu.getLineNumber(typeDeclaration.getStartPosition() + (typeDeclaration.getLength()-1)));
 		
 		if(typeDeclaration.isInterface()) {
 			umlClass.setInterface(true);
@@ -173,8 +176,11 @@ public class UMLModelASTReader {
     	}
     	
     	MethodDeclaration[] methodDeclarations = typeDeclaration.getMethods();
-    	for(MethodDeclaration methodDeclaration : methodDeclarations) {
+     	for(MethodDeclaration methodDeclaration : methodDeclarations) {
     		UMLOperation operation = processMethodDeclaration(methodDeclaration, packageName, className/*, bytecodeClass*/);
+    		operation.setStartLine(cu.getLineNumber(methodDeclaration.getStartPosition()));
+    		operation.setEndLine(cu.getLineNumber(methodDeclaration.getStartPosition() + methodDeclaration.getLength()));
+    		operation.setSourceFile(sourceFile);
     		operation.setClassName(umlClass.getName());
     		umlClass.addOperation(operation);
     	}
@@ -275,6 +281,9 @@ public class UMLModelASTReader {
 			String fieldName = fragment.getName().getFullyQualifiedName();
 			UMLAttribute umlAttribute = new UMLAttribute(fieldName, type);
 			//umlAttribute.setClassName(umlClass.getName());
+			CompilationUnit cu= (CompilationUnit) (fieldDeclaration.getRoot());
+			umlAttribute.setStartLine(cu.getLineNumber(fragment.getStartPosition()));
+			umlAttribute.setEndLine(cu.getLineNumber(fragment.getStartPosition() +fragment.getLength()));
 			
 			int fieldModifiers = fieldDeclaration.getModifiers();
 			if((fieldModifiers & Modifier.PUBLIC) != 0)

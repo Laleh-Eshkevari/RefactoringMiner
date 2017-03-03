@@ -21,6 +21,8 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     private List<UMLOperation> operations;
     private List<UMLAttribute> attributes;
     private UMLType superclass;
+    private int startLine;
+    private int endLine;
 
     public UMLClass(String packageName, String name, boolean topLevel) {
     	this(packageName, name, packageName.replace('.', '/') + '/' + name + ".java", topLevel);
@@ -100,6 +102,22 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
 
 	public void setSuperclass(UMLType superclass) {
 		this.superclass = superclass;
+	}
+
+	public int getStartLine() {
+		return startLine;
+	}
+
+	public void setStartLine(int startLine) {
+		this.startLine = startLine;
+	}
+
+	public int getEndLine() {
+		return this.endLine;
+	}
+
+	public void setEndLine(int endLine) {
+		this.endLine = endLine;
 	}
 
 	public void addOperation(UMLOperation operation) {
@@ -312,7 +330,7 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     	classDiff.checkForOperationSignatureChanges();
     	classDiff.checkForInlinedOperations();
     	classDiff.checkForExtractedOperations();
-    	classDiff.checkForRenameLocalVariable();
+//    	classDiff.checkForRenameLocalVariable();
 //    	classDiff.checkForRenameLocalVariable2();
     	//classDiff.checkForAttributeRenames();
     	//classDiff.checkForOperationRenames();

@@ -3,13 +3,21 @@ package gr.uom.java.xmi.diff;
 import org.refactoringminer.api.Refactoring;
 import org.refactoringminer.api.RefactoringType;
 
+import gr.uom.java.xmi.UMLClass;
+
 public class RenameClassRefactoring implements Refactoring {
 	private String originalClassName;
 	private String renamedClassName;
+	private UMLClass renamedUMlClass;
 	
-	public RenameClassRefactoring(String originalClassName,  String renamedClassName) {
+	public RenameClassRefactoring(String originalClassName,  String renamedClassName, UMLClass renamedUMlClass) {
 		this.originalClassName = originalClassName;
 		this.renamedClassName = renamedClassName;
+		this.renamedUMlClass=renamedUMlClass;
+	}
+
+	public UMLClass getRenamedUMlClass() {
+		return renamedUMlClass;
 	}
 
 	public String toString() {
