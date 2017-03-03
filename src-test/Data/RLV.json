@@ -223,13 +223,25 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment": "#TypeReplacement - bodymapper did not match. it is as non-mapped",
-			"description": "Rename Local Variable v : Vector renamed to l : List in method public getTSIG) : TSIGRecord in class org.xbill.DNS.Message"
+			"comment": "#verified Laleh, Matin",
+			"description": "Rename Local Variable v : Vector renamed to l : List in method public getTSIG() : TSIGRecord in class org.xbill.DNS.Message"
 		}, {
 			"type": "Rename Local Variable",
 			"validation": "FP",
 			"comment": "their not similar",
 			"description": "Rename Local Variable size : int renamed to l : List in method public getSectionArray(section int) : Record[] in class org.xbill.DNS.Message"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#verified Laleh",
+			"description": "Rename Local Variable v : Vector renamed to l : List in method public answers() : RRset[] in class org.xbill.DNS.SetResponse"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#verified Laleh",
+			"description": "Rename Local Variable v : Vector renamed to l : List in method package addRRset(rrset RRset) : void in class org.xbill.DNS.SetResponse"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -242,6 +254,18 @@
 			"type": "Rename Local Variable",
 			"validation": "UKN",
 			"description": "Rename Local Variable rrset : RRset renamed to crrset : CacheRRset in method public addRecord(r Record, cred int, o Object) : void in class org.xbill.DNS.Cache"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"#verified, Laleh and Davood. Line mappings: 333-> 351. If we check the declarations of PositiveElement and CacheRRset, we see both are inner static class with same logic.",
+			"description": "Rename Local Variable pe : PositiveElement renamed to crrset : CacheRRset in method public addRecord(r Record, cred int, o Object) : void in class org.xbill.DNS.Cache"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"#verified, Laleh, same as above. Line mappings: 394-> 417. If we check the declarations of PositiveElement and CacheRRset, we see both are inner static class with same logic.",
+			"description": "Rename Local Variable pe : PositiveElement renamed to crrset : CacheRRset in method protected lookup(name Name, type int, minCred int) : SetResponse in class org.xbill.DNS.Cache"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -716,6 +740,12 @@
 			"validation": "FP",
 			"comment":"#ExistInBoth - line",
 			"description": "Rename Local Variable s : String renamed to line : String in method public update(in InputStream) in class update"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"#verified Laleh and Matin. we have st : MyStringTokenizer as field in the new version ",
+			"description": "Rename Local Variable st : MyStringTokenizer renamed to token : Tokenizer.Token in method public nextRecord() : Record in class org.xbill.DNS.Master"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -770,6 +800,22 @@
 			"validation": "TP",
 			"comment": "couldnt detecct the variable rename part. many cases the variable name is after the type first letter name so we can take advantage of this",
 			"description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method public run(dclass short) : void in class org.xbill.DNS.Cache"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#verified laleh",
+			"description": "Rename Local Variable v : Vector renamed to l : List in method public answers() : RRset[] in class org.xbill.DNS.SetResponse"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#verified laleh",
+			"description": "Rename Local Variable v : Vector renamed to l : List in method package addRRset(rrset RRset) : void in class org.xbill.DNS.SetResponse"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#verified laleh",
+			"description": "Rename Local Variable v : Vector renamed to l : List in method public getTSIG() : TSIGRecord in class org.xbill.DNS.Message"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1549,6 +1595,12 @@
 			"type": "Rename Local Variable",
 			"validation": "TP",
 			"description": "Rename Local Variable i : int renamed to n : int in method getRecords(namestr String, type short, dclass short, cred byte) : public in class dns"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment": "#verifed Laleh- based on how the varibales are used I dont consider them as renaming",
+			"description": "Rename Local Variable now : long renamed to bestrcode : byte in method public send(query Message) : Message in class DNS.ExtendedResolver"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1747,8 +1799,8 @@
 			"description": "Rename Local Variable out : byte[] renamed to response : byte[] in method public serveTCP(addr InetAddress, port short) : void in class jnamed"
 		},{
 			"type": "Rename Local Variable",
-			"validation": "D",
-			"comment":"there are lots of changes",
+			"validation": "TP",
+			"comment":"#verified Laleh Matin Davood. though there are lots of changes, if we see the method declarations TypeMap.getAll() and lookupAll also  TypeMap.get(..) with lookupType() we can conclude it is a renaming ",
 			"description": "Rename Local Variable nameInfo : TypeMap renamed to typelist : Object in method protected findSets(name Name, type short) : Object in class org.xbill.DNS.NameSet"
 		}
 	],
