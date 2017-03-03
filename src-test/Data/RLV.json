@@ -146,8 +146,9 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"description": "Rename Local Variable znames : Iterator renamed to zentries : Iterator in method public toMasterFile) : String in class org.xbill.DNS.Zone"
+			"validation": "TP",
+			"comment":"#Verified",
+			"description": "Rename Local Variable znames : Iterator renamed to zentries : Iterator in method public toMasterFile() : String in class org.xbill.DNS.Zone"
 		}, {
 			"type": "Rename Local Variable",
 			"validation": "UKN",
@@ -352,12 +353,12 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
 			"comment": "#TypeReplacement",
 			"description": "Rename Local Variable eport : Enumeration renamed to iport : Iterator in method jnamed(conffile String, zname String, zonefile String, zone String, remote String, namestr String, key String, dclass short, name Name, name Name, type short, dclass short, glue boolean, name Name, response Message, rrset RRset, section byte, flags int, response Message, zone Zone, response Message, zone Zone, flags int, response Message, cache Cache, name Name, response Message, name Name, flags int, response Message, section int, flags int, response Message, flags int, response Message, name Name, type short, dclass short, iterations int, flags int, name Name, name Name, query Message, tsig TSIG, qtsig TSIGRecord, s Socket, query Message, in byte[], s Socket, in Message, maxLength int, length int, section int, in Message, length int, maxLength int, in byte[], query Message, rcode short, addr InetAddress, port short, addr InetAddress, port short, addr InetAddress, port short, addr InetAddress, port short, args String[]) : public in class jnamed"
 		}, {
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
 			"comment": "#TypeReplacement",
 			"description": "Rename Local Variable eaddr : Enumeration renamed to iaddr : Iterator in method jnamed(conffile String, zname String, zonefile String, zone String, remote String, namestr String, key String, dclass short, name Name, name Name, type short, dclass short, glue boolean, name Name, response Message, rrset RRset, section byte, flags int, response Message, zone Zone, response Message, zone Zone, flags int, response Message, cache Cache, name Name, response Message, name Name, flags int, response Message, section int, flags int, response Message, flags int, response Message, name Name, type short, dclass short, iterations int, flags int, name Name, name Name, query Message, tsig TSIG, qtsig TSIGRecord, s Socket, query Message, in byte[], s Socket, in Message, maxLength int, length int, section int, in Message, length int, maxLength int, in byte[], query Message, rcode short, addr InetAddress, port short, addr InetAddress, port short, addr InetAddress, port short, addr InetAddress, port short, args String[]) : public in class jnamed"
 		}],
@@ -981,6 +982,11 @@
 			"type": "Rename Local Variable",
 			"validation": "UKN",
 			"description": "Rename Local Variable dbs : DataByteOutputStream renamed to out : DNSOutput in method public verify(m Message, b byte[], length int, old TSIGRecord) : byte in class org.xbill.DNS.TSIG"
+		}, {
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"#Verified - Matin",
+			"description": "Rename Local Variable dbs : DataByteInputStream renamed to in : DNSInput in method public newRecord(name Name, type int, dclass int, ttl long, length int, data byte[]) : Record in class org.xbill.DNS.Record"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1246,7 +1252,7 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "TP",
+			"validation": "FP",
 			"comment":"For me it is a false positive since it repaced with two vaiable!!!. ME, LALEH",
 			"description": "Rename Local Variable flags1 : int renamed to flagsval : int in method private readFlags(in DataByteInputStream) : void in class org.xbill.DNS.Header"
 		},{
@@ -1341,7 +1347,7 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"description": "Rename Local Variable array1 : byte[] renamed to array : byte[] in method public hashCode) : int in class org.xbill.DNS.Record"
+			"description": "Rename Local Variable array1 : byte[] renamed to array : byte[] in method public hashCode() : int in class org.xbill.DNS.Record"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1519,6 +1525,10 @@
 			"type": "Rename Local Variable",
 			"validation": "TP",
 			"description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method private verifySIG(set RRset, sigrec SIGRecord, cache Cache) : byte in class org.xbill.DNS.security.DNSSECVerifier"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable array1 : byte[] renamed to array : byte[] in method public hashCode() : int in class org.xbill.DNS.Record"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1

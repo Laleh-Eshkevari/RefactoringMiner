@@ -447,6 +447,42 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
         return this.className.compareTo(classDiff.className);
     }
 
+    public void checkForRLV() {
+        ArrayList<UMLOperationBodyMapper> bodyMapperList = new ArrayList<>(getOperationBodyMapperList());
+
+        for (int index = 0; index < bodyMapperList.size(); index++) {
+
+            UMLOperationBodyMapper umlOperationBodyMapper = bodyMapperList.get(index);
+            HashMap<String, String> potentialLVDrenamings = new HashMap<>();
+
+            if (umlOperationBodyMapper.getOperation1().getBody() != null && umlOperationBodyMapper.getOperation2().getBody() != null) {
+                List<AbstractCodeMapping> mappings = umlOperationBodyMapper.getMappings();
+                Set<VariableDeclaration> variableDeclarationInOperation1 = new HashSet<>(umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations());
+                Set<VariableDeclaration> variableDeclarationInOperation2 = new HashSet<>(umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariableDeclarations());
+
+                ArrayList<Replacement> replacements = new ArrayList<>(umlOperationBodyMapper.getReplacements());
+
+
+                if (replacements.size() == 0 || variableDeclarationInOperation1.size() == 0)
+                    continue;
+
+                for (VariableDeclaration variableDeclaration : variableDeclarationInOperation1
+                        ) {
+                    potentialLVDrenamings.put(variableDeclaration.getVariableName(), "");
+                }
+
+                for (int i = 0; i < mappings.size(); i++) {
+                    List<String> vars = mappings.get(i).getFragment1().getVariables();
+                    if (vars.size() > 0) {
+                        for (int j = 0; j < vars.size(); j++) {
+                            //check its not in the
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 
     public void checkForRenameLocalVariable() {
 
@@ -506,6 +542,27 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
                                 potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
                             } else if (!candidate.equals(replacement.getAfter()) || variableExistInBoth)
                                 potentialLVDrenamings.remove(replacement.getBefore());
+
+
+                        } else if (replacement instanceof VariableReplacementWithMethodInvocation) {
+                            //potentialLVDrenamings.remove(replacement.getBefore());
+
+                        }
+                        else {
+                            String baseVar = replacement.getBefore().split(".")[0];
+                            String refVar = replacement.getAfter().split(".")[0];
+
+
+                            if (!baseVar.contains("(") && !refVar.contains("(")) {
+                                String candidate = potentialLVDrenamings.get(replacement.getBefore());
+                                if (candidate == "" && getVariable(refVar, variableDeclarationInOperation2) != null)
+                                    potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
+                                else
+                                    potentialLVDrenamings.remove(replacement.getBefore());
+                            } else
+                                potentialLVDrenamings.remove(replacement.getBefore());
+
+
                         }
 
 
@@ -553,7 +610,6 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
             return true;
 
 
-
         if (variableExistInBoth) {
             VariableDeclaration selected = compareCandidates(replacement.getAfter(), replacement.getBefore(), baseVars, refVars);
             if (selected.getVariableName().equals(replacement.getBefore()))
@@ -561,7 +617,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 
         }
 
-        if(secondVarExistInBoth){
+        if (secondVarExistInBoth) {
             VariableDeclaration selected = compareCandidates(replacement.getBefore(), replacement.getAfter(), refVars, baseVars);
             if (selected.getVariableName().equals(replacement.getAfter()))
                 return true;
@@ -569,7 +625,6 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 
         return false;
     }
-
 
 
     //we can get the variable name in the first place

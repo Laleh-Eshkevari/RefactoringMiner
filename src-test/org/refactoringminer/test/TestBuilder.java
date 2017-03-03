@@ -1,14 +1,7 @@
 package org.refactoringminer.test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -107,7 +100,7 @@ public class TestBuilder {
         commitsCount = 0;
         errorCommitsCount = 0;
         GitService gitService = new GitServiceImpl();
-
+StringBuffer sb =new StringBuffer();
         for (ProjectMatcher m : map.values()) {
             String folder = tempDir + "/"
                     + m.cloneUrl.substring(m.cloneUrl.lastIndexOf('/') + 1, m.cloneUrl.lastIndexOf('.'));
@@ -120,14 +113,24 @@ public class TestBuilder {
 //                                commitId.equals("51ad574fcfa967e3655bf15ccac133ef1041cdd3") ||
 //                                commitId.equals("deee9d5918787e571e37a997b8090a67bd3be83c"))
 //                            continue;
-                        if (commitId.equals("3ee7fbc9be45865853b108820e47f103c3868f08"))
+//                        if (commitId.equals("3ee7fbc9be45865853b108820e47f103c3868f08"))
                             refactoringDetector.detectAtCommit(rep, commitId, m);
+                        ProjectMatcher.CommitMatcher matcher;
+                        matcher = m.expected.get(commitId);
+                        for (String s   :matcher.truePositive
+                             ) {
+                            sb.append(s);
+                            sb.append(System.lineSeparator());
+                        }
+
                     }
                 } else {
                     // Iterate over each commit
                     refactoringDetector.detectAll(rep, m.branch, m);
                 }
+                System.out.println( sb.toString());
             }
+
         }
         System.out.println(String.format("Commits: %d  Errors: %d", commitsCount, errorCommitsCount));
 
@@ -147,6 +150,7 @@ public class TestBuilder {
                 m.printResults();
             }
         }
+
         Assert.assertTrue(mainResultMessage, success);
     }
 
