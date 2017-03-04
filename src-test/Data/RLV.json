@@ -19,6 +19,51 @@
 			"type": "Rename Local Variable",
 			"validation": "UKN",
 			"description": "Rename Local Variable left : int renamed to empty : int in method private parseV6(s String) : byte[] in class org.xbill.DNS.Address"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable address : String renamed to addr : String in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.X25Record"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable type : int renamed to rtype : int in method public removeRecord(r Record) : void in class org.xbill.DNS.Zone"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable type : int renamed to typecode : int in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NXTRecord"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable type : int renamed to rtype : int in method private addRRset(name Name, rrset RRset) : void in class org.xbill.DNS.Zone"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable sb : StringBuffer renamed to buffer : StringBuffer in method private remainingStrings() : String in class org.xbill.DNS.Tokenizer"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable type : int renamed to rtype : int in method public addRecord(r Record) : void in class org.xbill.DNS.Zone"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable type : int renamed to typecode : int in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NSECRecord"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable type : int renamed to rtype : int in method private maybeAddRecord(record Record) : void in class org.xbill.DNS.Zone"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable address : String renamed to addr : String in method package rdataFromString(st Tokenizer, origin Name) : void in class org.xbill.DNS.NSAPRecord"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -94,6 +139,31 @@
 			"type": "Rename Local Variable",
 			"validation": "UKN",
 			"description": "Rename Local Variable i : short renamed to val : Short in method public value(s String) : short in class org.xbill.DNS.Type"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation": "TP",
+		  "comment": "verified",
+		  "description": "Rename Local Variable eport : Enumeration renamed to iport : Iterator in method public jnamed(conffile String) in class jnamed"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation": "TP",
+		  "comment": "#SecondIdea",
+		  "description": "Rename Local Variable v : Vector renamed to l : List in method public answers() : RRset[] in class org.xbill.DNS.SetResponse"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation": "TP",
+		  "comment": "verified",
+		  "description": "Rename Local Variable eaddr : Enumeration renamed to iaddr : Iterator in method public jnamed(conffile String) in class jnamed"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#SecondIdea",
+		  "description": "Rename Local Variable v : Vector renamed to l : List in method package addRRset(rrset RRset) : void in class org.xbill.DNS.SetResponse"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#SecondIdea",
+		  "description": "Rename Local Variable v : Vector renamed to l : List in method public getTSIG() : TSIGRecord in class org.xbill.DNS.Message"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -409,6 +479,10 @@
 			"type": "Rename Local Variable",
 			"validation": "TP",
 			"description": "Rename Local Variable dbs : DataByteInputStream renamed to in : DataInputStream in method package parseRecord(alg int, data byte[]) : PublicKey in class org.xbill.DNS.security.KEYConverter"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable dbs : DataByteInputStream renamed to in : DNSInput in method public newRecord(name Name, type int, dclass int, ttl long, length int, data byte[]) : Record in class org.xbill.DNS.Record"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1119,6 +1193,31 @@
 			"validation": "FP",
 			"comment":"#Verified - Matin, Lale",
 			"description": "Rename Local Variable r : Record renamed to records : Record[] in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation": "TP",
+		  "comment": "verified",
+		  "description": "Rename Local Variable eport : Enumeration renamed to iport : Iterator in method public jnamed(conffile String) in class jnamed"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation": "TP",
+		  "comment": "#SecondIdea",
+		  "description": "Rename Local Variable v : Vector renamed to l : List in method public answers() : RRset[] in class org.xbill.DNS.SetResponse"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation": "TP",
+		  "comment": "verified",
+		  "description": "Rename Local Variable eaddr : Enumeration renamed to iaddr : Iterator in method public jnamed(conffile String) in class jnamed"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#SecondIdea",
+		  "description": "Rename Local Variable v : Vector renamed to l : List in method package addRRset(rrset RRset) : void in class org.xbill.DNS.SetResponse"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#SecondIdea",
+		  "description": "Rename Local Variable v : Vector renamed to l : List in method public getTSIG() : TSIGRecord in class org.xbill.DNS.Message"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1131,6 +1230,11 @@
 			"type": "Rename Local Variable",
 			"validation": "UKN",
 			"description": "Rename Local Variable nelements : int renamed to added : int in method public lookupRecords(name Name, type int, minCred int) : SetResponse in class org.xbill.DNS.Cache"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"#Verified - Matin",
+			"description": "Rename Local Variable name : Name renamed to entry : Map.Entry in method public next() : Object in class org.xbill.DNS.Zone.ZoneIterator"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1532,7 +1636,15 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"description": "Rename Local Variable tcm : TypeClassMap renamed to tm : TypeMap in method public nextElement() : Object in class org.xbill.DNS.Zone"
+			"description": "Rename Local Variable tcm : TypeClassMap renamed to tm : TypeMap in method public addMessage(in Message) : void in class org.xbill.DNS.Cache"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable tcm : TypeClassMap renamed to tm : TypeMap in method public nextElement() : Object in class org.xbill.DNS.Zone.AXFREnumeration"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable tcm : TypeClassMap renamed to tm : TypeMap in method public run() : void in class org.xbill.DNS.Cache.CacheCleaner"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
