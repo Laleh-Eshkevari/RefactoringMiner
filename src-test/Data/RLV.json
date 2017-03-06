@@ -2596,7 +2596,7 @@
 			"description": "Rename Local Variable r : SIGRecord renamed to sig : SIGRecord in method public apply(m Message, old byte) : void in class org.xbill.DNS.security.SIG0Signer"
 		},{
 			"type": "Rename Local Variable",
-			"validation": "TP",
+			"validation": "FP",
 			"description": "Rename Local Variable out : byte[] renamed to response : byte[] in method public serveTCP(addr InetAddress, port short) : void in class jnamed"
 		},{
 			"type": "Rename Local Variable",
