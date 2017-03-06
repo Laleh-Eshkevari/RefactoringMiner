@@ -519,6 +519,8 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
         ArrayList<UMLOperationBodyMapper> bodyMapperList = new ArrayList<>(getOperationBodyMapperList());
 
 
+
+
         for (int index = 0; index < bodyMapperList.size(); index++) {
 
 
@@ -526,6 +528,9 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
             HashMap<String, String> potentialLVDrenamings = new HashMap<>();
             HashMap<String, String> occupiedTarget = new HashMap<>();
             HashSet<String> operationTwoVars = getVariables(umlOperationBodyMapper);
+
+            UMLOperationBodyMapper b= new UMLOperationBodyMapper(umlOperationBodyMapper.getOperation1(),umlOperationBodyMapper.getOperation2());
+            b.getMappings();
 
 //            System.out.println("class name: "+ umlOperationBodyMapper.getOperation1().getClassName()+"\tmethod1: "+ umlOperationBodyMapper.getOperation1().getName()+ "\tmethod2: "+umlOperationBodyMapper .getOperation2().getName());
 
@@ -565,7 +570,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
                         if (potentialLVDrenamings.containsKey(replacement.getBefore())) {
                             String candidate = potentialLVDrenamings.get(replacement.getBefore());
 
-                            boolean variableExistInBoth = isVariableExistInBoth(replacement, variableDeclarationInOperation1, variableDeclarationInOperation2);
+                            boolean variableExistInBoth = isVariableExistInBoth(replacement.getBefore(), replacement.getAfter(), variableDeclarationInOperation1, variableDeclarationInOperation2);
 
                             if (candidate == "" && !variableExistInBoth && getVariable(replacement.getAfter(), variableDeclarationInOperation2) != null) {
                                 potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
@@ -574,51 +579,55 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 
 
                         }
-                    }
-                    else if (replacement instanceof VariableReplacementWithMethodInvocation) {
+                    } else if (replacement instanceof VariableReplacementWithMethodInvocation) {
                         potentialLVDrenamings.remove(replacement.getBefore());
 
                     } else if (replacement instanceof MethodInvocationReplacement) {
                         if (!replacement.getAfter().contains(".") || !replacement.getBefore().contains("."))
                             continue;
-                        String[] base=replacement.getBefore().split(".");
-                        String[] ref= replacement.getAfter().split(".");
 
-                        String baseVar = replacement.getBefore().substring(0,replacement.getBefore().indexOf("."))  ;
-                        String refVar = replacement.getAfter().substring(0,replacement.getAfter().indexOf("."));
+                        String baseVar = replacement.getBefore().substring(0, replacement.getBefore().indexOf("."));
+                        String refVar = replacement.getAfter().substring(0, replacement.getAfter().indexOf("."));
 
+                        //last part of the condition should change
+                        if (!findVariableByName(baseVar, variableDeclarationInOperation1) && !findVariableByName(refVar, variableDeclarationInOperation2) || baseVar.equals(refVar))
+                            continue;
 
+                        boolean variableExistInBoth = isVariableExistInBoth(baseVar, refVar, variableDeclarationInOperation1, variableDeclarationInOperation2);
 
                         if (!baseVar.contains("(") && !refVar.contains("(")) {
-                            String candidate = potentialLVDrenamings.get(replacement.getBefore());
-                            if (candidate == "" && getVariable(refVar, variableDeclarationInOperation2) != null)
-                                potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
-                            else
-                                potentialLVDrenamings.remove(replacement.getBefore());
-                        } else
-                            potentialLVDrenamings.remove(replacement.getBefore());
-
-
-                    }
-
-
-                }
-
-                for (Replacement replacement : replacements) {
-                    if (replacement instanceof VariableRename) {
-                        if (potentialLVDrenamings.containsKey(replacement.getBefore())) {
-                            String candidate = potentialLVDrenamings.get(replacement.getBefore());
-
-                            if (candidate == "") {
-                                potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
-                            } else if (!candidate.equals(replacement.getAfter()))
-                                potentialLVDrenamings.remove(replacement.getBefore());
+                            if (potentialLVDrenamings.containsKey(baseVar)) {
+                                String candidate = potentialLVDrenamings.get(baseVar);
+                                if (candidate == "" && !variableExistInBoth && getVariable(refVar, variableDeclarationInOperation2) != null)
+                                    potentialLVDrenamings.put(baseVar, refVar);
+                                else if (!candidate.equals(refVar) || variableExistInBoth)
+                                    potentialLVDrenamings.remove(replacement.getBefore());
+                            }
                         }
+//                        else
+//                            potentialLVDrenamings.remove(replacement.getBefore());
 
 
                     }
 
+
                 }
+
+//                for (Replacement replacement : replacements) {
+//                    if (replacement instanceof VariableRename) {
+//                        if (potentialLVDrenamings.containsKey(replacement.getBefore())) {
+//                            String candidate = potentialLVDrenamings.get(replacement.getBefore());
+//
+//                            if (candidate == "") {
+//                                potentialLVDrenamings.put(replacement.getBefore(), replacement.getAfter());
+//                            } else if (!candidate.equals(replacement.getAfter()))
+//                                potentialLVDrenamings.remove(replacement.getBefore());
+//                        }
+//
+//
+//                    }
+//
+//                }
 
                 for (String key :
                         potentialLVDrenamings.keySet()) {
@@ -637,24 +646,24 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
         }
     }
 
-    private boolean isVariableExistInBoth(Replacement replacement, Set<VariableDeclaration> baseVars, Set<VariableDeclaration> refVars) {
-        boolean variableExistInBoth = findVariableByName(replacement.getBefore(), refVars);
-        boolean secondVarExistInBoth = findVariableByName(replacement.getAfter(), baseVars);
+    private boolean isVariableExistInBoth(String baseVar, String refVar, Set<VariableDeclaration> baseVars, Set<VariableDeclaration> refVars) {
+        boolean variableExistInBoth = findVariableByName(baseVar, refVars);
+        boolean secondVarExistInBoth = findVariableByName(refVar, baseVars);
 
-        if (!findVariableByName(replacement.getAfter(), refVars) && variableExistInBoth)
+        if (!findVariableByName(refVar, refVars) && variableExistInBoth)
             return true;
 
 
         if (variableExistInBoth) {
-            VariableDeclaration selected = compareCandidates(replacement.getAfter(), replacement.getBefore(), baseVars, refVars);
-            if (selected.getVariableName().equals(replacement.getBefore()))
+            VariableDeclaration selected = compareCandidates(refVar, baseVar, baseVars, refVars);
+            if (selected.getVariableName().equals(baseVar))
                 return true;
 
         }
 
         if (secondVarExistInBoth) {
-            VariableDeclaration selected = compareCandidates(replacement.getBefore(), replacement.getAfter(), refVars, baseVars);
-            if (selected.getVariableName().equals(replacement.getAfter()))
+            VariableDeclaration selected = compareCandidates(baseVar, refVar, refVars, baseVars);
+            if (selected.getVariableName().equals(refVar))
                 return true;
         }
 
