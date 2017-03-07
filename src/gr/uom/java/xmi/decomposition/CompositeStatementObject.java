@@ -11,6 +11,7 @@ public class CompositeStatementObject extends AbstractStatement {
 
 	private List<AbstractStatement> statementList;
 	private List<AbstractExpression> expressionList;
+	private List<VariableDeclaration> variableDeclaration;
 	private String type;
 
 	public CompositeStatementObject(Statement statement, int depth, String type) {
@@ -19,6 +20,10 @@ public class CompositeStatementObject extends AbstractStatement {
 		this.setDepth(depth);
 		this.statementList = new ArrayList<AbstractStatement>();
 		this.expressionList = new ArrayList<AbstractExpression>();
+		Visitor visitor = new Visitor();
+		statement.accept(visitor);
+
+		variableDeclaration =visitor.getVariableDeclarations();
 	}
 
 	public void addStatement(AbstractStatement statement) {
@@ -100,6 +105,7 @@ public class CompositeStatementObject extends AbstractStatement {
 		for(AbstractStatement expression : getStatements()) {
 			variableDeclarations.addAll(expression.getVariableDeclarations());
 		}
+		variableDeclarations.addAll(this.variableDeclaration);
 		return variableDeclarations;
 	}
 

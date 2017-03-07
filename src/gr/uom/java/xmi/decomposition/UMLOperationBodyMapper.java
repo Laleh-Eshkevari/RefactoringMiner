@@ -12,15 +12,7 @@ import gr.uom.java.xmi.diff.StringDistance;
 import gr.uom.java.xmi.diff.UMLModelDiff;
 import gr.uom.java.xmi.diff.UMLOperationDiff;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,9 +38,11 @@ public class UMLOperationBodyMapper implements Comparable<UMLOperationBodyMapper
 	}
 
 	private void initialize() {
+
 		if (this.isInitialized) {
 			return;
 		}
+//		System.out.println("HERE" + Arrays.toString((StackTraceElement[]) Thread.currentThread().getStackTrace()).replace(",","\n"));
 		this.isInitialized = true;
 		OperationBody body1 = operation1.getBody();
 		OperationBody body2 = operation2.getBody();

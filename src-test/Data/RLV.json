@@ -1202,8 +1202,8 @@
 		}, {
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment": "couldnt detecct the variable rename part. many cases the variable name is after the type first letter name so we can take advantage of this",
-			"description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method public run(dclass short) : void in class org.xbill.DNS.Cache"
+			"comment": "#Verified - Matin, laleh",
+			"description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method public run() : void in class org.xbill.DNS.Cache.CacheCleaner"
 		},
 		{
 			"type": "Rename Local Variable",
@@ -2124,8 +2124,13 @@
 		}, {
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment":"this packge name is DNS so refactoring minder find is with that packege name not with the following ",
+			"comment":"this packge name is DNS so refactoring miner find is with that packege name not with the following ",
 			"description": "Rename Local Variable ok : boolean renamed to waiting : boolean in method public send(query Message) : Message in class org.xbill.DNS.ExtendedResolver"
+		}, {
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"FP",
+			"description": "Rename Local Variable nameRecords : Hashtable renamed to cname : Record in method package generateReply(query Message, in byte[], maxLength int) : Message in class jnamed"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -2309,6 +2314,7 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
+			"comment":"method record is renamed to lookup and new method which called record is added",
 			"description": "Rename Local Variable i : int renamed to n : int in method getRecords(namestr String, type short, dclass short, cred byte) : public in class dns"
 		},
 		{
