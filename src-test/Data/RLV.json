@@ -1459,7 +1459,8 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
+			"comment": "#verified Laleh, line mapping: 66->141",
 			"description": "Rename Local Variable r : Record renamed to rrset : RRset in method public generateReply(query Message) : Message in class dnsServer"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -2495,6 +2496,18 @@
 			"validation": "TP",
 			"comment":"#TypeReplacement",
 			"description": "Rename Local Variable s : String renamed to b : byte[] in method protected rrToWire(out DataByteOutputStream, c Compression, canonical boolean) : void in class org.xbill.DNS.TXTRecord"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"#Verified Laleh, line mappings  340 -> 321",
+			"description": "Rename Local Variable m : Message renamed to it : Iterator in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"#Verified Laleh, line mappings  345 -> 308",
+			"description": "Rename Local Variable header : Header renamed to qname : Name in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -2542,6 +2555,7 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
+			"comment": "#verified Laleh, the reason that we missed it is that the mapper content of the send method is wrongly updated during checkForInlineOperation()",
 			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class DNS.SimpleResolver"
 		}],
 		"time": "0/0/00 0:00 PM",
