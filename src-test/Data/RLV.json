@@ -1447,7 +1447,8 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
+			"comment":"#verified - We cannot detect Variable that declared in the for loops body!",
 			"description": "Rename Local Variable pos : int renamed to spos : int in method public toWireCanonical) : byte[] in class org.xbill.DNS.Name"
 		}],
 		"time": "0/0/00 0:00 PM",
