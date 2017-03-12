@@ -2064,6 +2064,9 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method protected createTestGraph() : Graph renamed to protected createTestStorage() : GraphHopperStorage in class com.graphhopper.routing.AbstractRoutingAlgorithmTester"
+	}, {
+		"type": "Extract And Move Method",
+		"description": "Extract And Move Method public setAdditionalEdgeField(edgePointer long, value int) : void extracted from public setAdditionalEdgeField(edgePointer long, value int) : void in class com.graphhopper.storage.GraphHopperStorage & moved to class com.graphhopper.storage.BaseGraph"
 	}],
 	"time": "6/17/15 5:42 AM",
 	"id": 1117304
@@ -2307,6 +2310,9 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public removeRecoveryInformationFromCluster(lockOwners Collection, xid Xid, sync boolean, gtx GlobalTransaction) : void renamed to public removeRecoveryInformation(lockOwners Collection, xid Xid, sync boolean, gtx GlobalTransaction, fromCluster boolean) : void in class org.infinispan.transaction.xa.recovery.RecoveryManagerImpl"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method protected assertNotLocked(cache Cache, key Object) : void renamed to protected assertEventuallyNotLocked(cache Cache, key Object) : void in class org.infinispan.test.AbstractCacheTest"
 	}],
 	"time": "6/18/15 3:08 AM",
 	"id": 1119109
@@ -2539,6 +2545,9 @@
 	"refactorings": [{
 		"type": "Inline Method",
 		"description": "Inline Method private adaptResult(result BuildResult, startTime long, endTime long) : AbstractOperationResult inlined to private adaptResult(source BuildOperationInternal) : AbstractOperationResult in class org.gradle.tooling.internal.provider.runner.ClientForwardingBuildListener"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public getPayload() : Object renamed to public getFailure() : Throwable in class org.gradle.internal.progress.BuildOperationInternal"
 	}],
 	"time": "6/19/15 1:38 AM",
 	"id": 1121362
@@ -3809,6 +3818,9 @@
 		"type": "Extract Method",
 		"description": "Extract Method private rescueMembersAndInstantiateSuperInterfaces(type JDeclaredType) : void extracted from public visit(type JInterfaceType, ctx Context) : boolean in class com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer.RescueVisitor"
 	}, {
+		"type": "Extract Method",
+		"description": "Extract Method private rescueMembersAndInstantiateSuperInterfaces(type JDeclaredType) : void extracted from public visit(type JClassType, ctx Context) : boolean in class com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer.RescueVisitor"
+	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public _disabled_testJsType3DimArray_castedFromNativeWithACall() : void renamed to public __disabled__testJsType3DimArray_castedFromNativeWithACall() : void in class com.google.gwt.core.client.interop.JsTypeArrayTest"
 	}, {
@@ -3820,6 +3832,12 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public _disabled_testJsTypeArray_asAField() : void renamed to public __disabled__testJsTypeArray_asAField() : void in class com.google.gwt.core.client.interop.JsTypeArrayTest"
+	}, {
+		"type": "Inline Method",
+		"description": "Inline Method private rescueAndInstantiate(type JClassType) : void inlined to public visit(x JNewInstance, ctx Context) : boolean in class com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer.RescueVisitor"
+	}, {
+		"type": "Inline Method",
+		"description": "Inline Method private rescueAndInstantiate(type JClassType) : void inlined to public visit(x JsniMethodRef, ctx Context) : boolean in class com.google.gwt.dev.jjs.impl.ControlFlowAnalyzer.RescueVisitor"
 	}],
 	"time": "6/24/15 6:41 PM",
 	"id": 1124507
@@ -3931,6 +3949,54 @@
 	}, {
 		"type": "Extract Superclass",
 		"description": "Extract Superclass org.mockito.MockitoMatcher from class org.mockito.internal.matchers.LocalizedMatcher"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.NotNull"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.Contains"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.EndsWith"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.InstanceOf"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.StartsWith"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.Matches"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.Find"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.CompareTo"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.Any"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.Equals"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.apachecommons.ReflectionEquals"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.EqualsWithDelta"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.Null"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.VarargCapturingMatcher"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.CapturingMatcher"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public describeTo(description Description) : void renamed to public describe() : String in class org.mockito.internal.matchers.ArrayEquals"
 	}],
 	"time": "6/25/15 11:28 AM",
 	"id": 1124301
@@ -4175,6 +4241,18 @@
 	"refactorings": [{
 		"type": "Pull Up Method",
 		"description": "Pull Up Method public onSharedPreferenceChanged(prefs SharedPreferences, key String) : void from class org.quantumbadger.redreader.activities.MainActivity to protected onSharedPreferenceChangedInner(prefs SharedPreferences, key String) : void from class org.quantumbadger.redreader.activities.RefreshableActivity"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected onDestroy() : void from class org.quantumbadger.redreader.activities.CommentListingActivity to protected onDestroy() : void from class org.quantumbadger.redreader.activities.BaseActivity"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected onDestroy() : void from class org.quantumbadger.redreader.activities.MoreCommentsListingActivity to protected onDestroy() : void from class org.quantumbadger.redreader.activities.BaseActivity"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected onDestroy() : void from class org.quantumbadger.redreader.activities.MainActivity to protected onDestroy() : void from class org.quantumbadger.redreader.activities.BaseActivity"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected onDestroy() : void from class org.quantumbadger.redreader.activities.PostListingActivity to protected onDestroy() : void from class org.quantumbadger.redreader.activities.BaseActivity"
 	}],
 	"time": "6/28/15 5:50 PM",
 	"id": 1126206
@@ -4402,6 +4480,9 @@
 	"refactorings": [{
 		"type": "Move Attribute",
 		"description": "Move Attribute private stopped : AtomicBoolean from class org.gradle.play.internal.run.PlayApplicationDeploymentHandle to class org.gradle.play.internal.run.PlayApplicationRunnerToken"
+	}, {
+		"type": "Extract And Move Method",
+		"description": "Extract And Move Method public isRunning() : boolean extracted from public isRunning() : boolean in class org.gradle.play.internal.run.PlayApplicationDeploymentHandle & moved to class org.gradle.play.internal.run.PlayApplicationRunnerToken"
 	}],
 	"time": "6/30/15 9:10 AM",
 	"id": 1129713
@@ -5576,6 +5657,9 @@
 		}, {
 			"type": "Extract Method",
 			"description": "Extract Method protected setCpuSpeedSteps(numSpeedSteps int) : void extracted from package readFromParcelLocked(in Parcel) : void in class com.android.internal.os.BatteryStatsImpl"
+		}, {
+			"type": "Extract Method",
+			"description": "Extract Method protected getKernelWakelockUpdateVersion() : int extracted from public updateKernelWakelocksLocked() : void in class com.android.internal.os.BatteryStatsImpl"
 		}, {
 			"type": "Rename Method",
 			"description": "Rename Method private load() : void renamed to private loadStats() : void in class com.android.internal.os.BatteryStatsHelper"
@@ -7879,6 +7963,9 @@
 	"refactorings": [{
 		"type": "Inline Method",
 		"description": "Inline Method public generate(schema DataSchema) : ClassTemplateSpec inlined to private generateRecord(schema RecordDataSchema) : RecordTemplateSpec in class com.linkedin.pegasus.generator.TemplateSpecGenerator"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public getSchemaAndNames() : Collection<CodeUtil.Pair<DataSchema, String>> renamed to public getSchemaAndLocations() : Collection<CodeUtil.Pair<DataSchema, DataSchemaLocation>> in class com.linkedin.pegasus.generator.DataSchemaParser.ParseResult"
 	}],
 	"time": "7/23/15 6:42 PM",
 	"id": 1147644
@@ -8733,6 +8820,9 @@
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method private awaitForComplete(latch CountDownLatch, subscription Subscription) : void extracted from public forEach(onNext Action1<? super T>) : void in class rx.observables.BlockingObservable"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method private createObservable() : Observable<Void> renamed to private createOnUnsubscribe() : Action0 in class rx.observables.BlockingObservableTest.InterruptionTests"
 	}],
 	"time": "7/29/15 2:36 PM",
 	"id": 1153435
@@ -8948,6 +9038,9 @@
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method private copyOneFunction(dbName String, funcName String) : void extracted from private copyFunctions() : void in class org.apache.hadoop.hive.metastore.hbase.HBaseImport"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public doImport() : void renamed to public importAll() : void in class org.apache.hadoop.hive.metastore.hbase.TestHBaseImport"
 	}],
 	"time": "7/31/15 3:07 PM",
 	"id": 1155930
@@ -9386,6 +9479,9 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public setOgrExecutable(ogrExecutable String) : void renamed to public setExecutable(ogrExecutable String) : void in class org.geoserver.wfs.response.Ogr2OgrOutputFormat"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public getGdalData() : String renamed to public getEnvironment() : Map<String, String> in class org.geoserver.wfs.response.Ogr2OgrOutputFormat"
 	}],
 	"time": "8/5/15 7:22 PM",
 	"id": 1158913
