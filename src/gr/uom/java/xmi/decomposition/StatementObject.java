@@ -18,16 +18,22 @@ public class StatementObject extends AbstractStatement {
 	
 	private String statement;
 	private List<String> variables;
+	private List<String> types;
 	private List<VariableDeclaration> variableDeclarations;
 	private Map<String, OperationInvocation> methodInvocationMap;
+	private List<String> anonymousClassDeclarations;
+	private List<String> stringLiterals;
 	
 	public StatementObject(Statement statement, int depth) {
 		super();
-		SimpleNameVisitor visitor = new SimpleNameVisitor();
+		Visitor visitor = new Visitor();
 		statement.accept(visitor);
 		this.variables = visitor.getVariables();
+		this.types = visitor.getTypes();
 		this.variableDeclarations = visitor.getVariableDeclarations();
 		this.methodInvocationMap = visitor.getMethodInvocationMap();
+		this.anonymousClassDeclarations = visitor.getAnonymousClassDeclarations();
+		this.stringLiterals = visitor.getStringLiterals();
 		setDepth(depth);
 		if(statement.toString().matches("!(\\w|\\.)*@\\w*")) {
 			if(statement instanceof VariableDeclarationStatement) {
@@ -46,11 +52,11 @@ public class StatementObject extends AbstractStatement {
 						sb.append(" = ");
 						if(initializer instanceof MethodInvocation) {
 							MethodInvocation methodInvocation = (MethodInvocation)initializer;
-							sb.append(SimpleNameVisitor.processMethodInvocation(methodInvocation));
+							sb.append(Visitor.processMethodInvocation(methodInvocation));
 						}
 						else if(initializer instanceof ClassInstanceCreation) {
 							ClassInstanceCreation classInstanceCreation = (ClassInstanceCreation)initializer;
-							sb.append(SimpleNameVisitor.processClassInstanceCreation(classInstanceCreation));
+							sb.append(Visitor.processClassInstanceCreation(classInstanceCreation));
 						}
 					}
 				}
@@ -63,11 +69,11 @@ public class StatementObject extends AbstractStatement {
 				Expression expression = returnStatement.getExpression();
 				if(expression instanceof MethodInvocation) {
 					MethodInvocation methodInvocation = (MethodInvocation)expression;
-					sb.append(SimpleNameVisitor.processMethodInvocation(methodInvocation));
+					sb.append(Visitor.processMethodInvocation(methodInvocation));
 				}
 				else if(expression instanceof ClassInstanceCreation) {
 					ClassInstanceCreation classInstanceCreation = (ClassInstanceCreation)expression;
-					sb.append(SimpleNameVisitor.processClassInstanceCreation(classInstanceCreation));
+					sb.append(Visitor.processClassInstanceCreation(classInstanceCreation));
 				}
 				this.statement = sb.toString();
 			}
@@ -77,11 +83,11 @@ public class StatementObject extends AbstractStatement {
 				Expression expression = expressionStatement.getExpression();
 				if(expression instanceof MethodInvocation) {
 					MethodInvocation methodInvocation = (MethodInvocation)expression;
-					sb.append(SimpleNameVisitor.processMethodInvocation(methodInvocation));
+					sb.append(Visitor.processMethodInvocation(methodInvocation));
 				}
 				else if(expression instanceof ClassInstanceCreation) {
 					ClassInstanceCreation classInstanceCreation = (ClassInstanceCreation)expression;
-					sb.append(SimpleNameVisitor.processClassInstanceCreation(classInstanceCreation));
+					sb.append(Visitor.processClassInstanceCreation(classInstanceCreation));
 				}
 				this.statement = sb.toString();
 			}
@@ -117,6 +123,11 @@ public class StatementObject extends AbstractStatement {
 	}
 
 	@Override
+	public List<String> getTypes() {
+		return types;
+	}
+
+	@Override
 	public List<VariableDeclaration> getVariableDeclarations() {
 		return variableDeclarations;
 	}
@@ -124,5 +135,15 @@ public class StatementObject extends AbstractStatement {
 	@Override
 	public Map<String, OperationInvocation> getMethodInvocationMap() {
 		return methodInvocationMap;
+	}
+
+	@Override
+	public List<String> getAnonymousClassDeclarations() {
+		return anonymousClassDeclarations;
+	}
+
+	@Override
+	public List<String> getStringLiterals() {
+		return stringLiterals;
 	}
 }

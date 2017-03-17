@@ -38,11 +38,11 @@ public class UMLModel {
     	anonymousClassList.add(anonymousClass);
     }
 
-    public UMLClass getClass(String name) {
+    public UMLClass getClass(UMLClass umlClassFromOtherModel) {
     	ListIterator<UMLClass> it = classList.listIterator();
         while(it.hasNext()) {
             UMLClass umlClass = it.next();
-            if(umlClass.getName().equals(name))
+            if(umlClass.equals(umlClassFromOtherModel))
                 return umlClass;
         }
         return null;
@@ -144,8 +144,7 @@ public class UMLModel {
     	modelDiff.checkForRealizationChanges();
     	for(UMLClass umlClass : classList) {
     		if(umlModel.classList.contains(umlClass)) {
-				int index= umlModel.classList.indexOf(umlClass);
-				UMLClassDiff classDiff = umlClass.diff(umlModel.classList.get(index)); //umlClass.diff(umlModel.getClass(umlClass.getName()));
+    			UMLClassDiff classDiff = umlClass.diff(umlModel.getClass(umlClass));
     			if(!classDiff.isEmpty())
     				modelDiff.addUMLClassDiff(classDiff);
     			else {

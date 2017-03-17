@@ -46,7 +46,7 @@ public class GitHistoryRefactoringMinerImpl implements GitHistoryRefactoringMine
 	private GitHistoryRefactoringMinerImpl(boolean analyzeMethodInvocations) {
 		this.analyzeMethodInvocations = analyzeMethodInvocations;
 		this.setRefactoringTypesToConsider(
-//			RefactoringType.RENAME_CLASS,
+			RefactoringType.RENAME_CLASS,
 //			RefactoringType.MOVE_CLASS,
 //			RefactoringType.MOVE_CLASS_FOLDER,
 //			RefactoringType.RENAME_METHOD,

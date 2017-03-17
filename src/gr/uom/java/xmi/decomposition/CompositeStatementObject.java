@@ -11,6 +11,7 @@ public class CompositeStatementObject extends AbstractStatement {
 
 	private List<AbstractStatement> statementList;
 	private List<AbstractExpression> expressionList;
+	private List<VariableDeclaration> variableDeclaration;
 	private String type;
 
 	public CompositeStatementObject(Statement statement, int depth, String type) {
@@ -19,6 +20,10 @@ public class CompositeStatementObject extends AbstractStatement {
 		this.setDepth(depth);
 		this.statementList = new ArrayList<AbstractStatement>();
 		this.expressionList = new ArrayList<AbstractExpression>();
+		Visitor visitor = new Visitor();
+		statement.accept(visitor);
+
+		variableDeclaration =visitor.getVariableDeclarations();
 	}
 
 	public void addStatement(AbstractStatement statement) {
@@ -69,8 +74,10 @@ public class CompositeStatementObject extends AbstractStatement {
 		sb.append(type);
 		if(expressionList.size() > 0) {
 			sb.append("(");
-			for(AbstractExpression expression : expressionList)
-				sb.append(expression.toString());
+			for(int i=0; i<expressionList.size()-1; i++) {
+				sb.append(expressionList.get(i).toString()).append("; ");
+			}
+			sb.append(expressionList.get(expressionList.size()-1).toString());
 			sb.append(")");
 		}
 		return sb.toString();
@@ -86,11 +93,21 @@ public class CompositeStatementObject extends AbstractStatement {
 	}
 
 	@Override
+	public List<String> getTypes() {
+		List<String> types = new ArrayList<String>();
+		for(AbstractExpression expression : expressionList) {
+			types.addAll(expression.getTypes());
+		}
+		return types;
+	}
+
+	@Override
 	public List<VariableDeclaration> getVariableDeclarations() {
 		List<VariableDeclaration> variableDeclarations = new ArrayList<VariableDeclaration>();
 		for(AbstractStatement expression : getStatements()) {
 			variableDeclarations.addAll(expression.getVariableDeclarations());
 		}
+		variableDeclarations.addAll(this.variableDeclaration);
 		return variableDeclarations;
 	}
 
@@ -101,6 +118,24 @@ public class CompositeStatementObject extends AbstractStatement {
 			map.putAll(expression.getMethodInvocationMap());
 		}
 		return map;
+	}
+
+	@Override
+	public List<String> getAnonymousClassDeclarations() {
+		List<String> anonymousClassDeclarations = new ArrayList<String>();
+		for(AbstractExpression expression : expressionList) {
+			anonymousClassDeclarations.addAll(expression.getAnonymousClassDeclarations());
+		}
+		return anonymousClassDeclarations;
+	}
+
+	@Override
+	public List<String> getStringLiterals() {
+		List<String> stringLiterals = new ArrayList<String>();
+		for(AbstractExpression expression : expressionList) {
+			stringLiterals.addAll(expression.getStringLiterals());
+		}
+		return stringLiterals;
 	}
 
 	public Map<String, OperationInvocation> getAllMethodInvocations() {

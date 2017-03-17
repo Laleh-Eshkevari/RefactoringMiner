@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
+import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.FieldAccess;
@@ -13,23 +15,37 @@ import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.ParameterizedType;
 import org.eclipse.jdt.core.dom.QualifiedName;
+import org.eclipse.jdt.core.dom.QualifiedType;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SimpleType;
+import org.eclipse.jdt.core.dom.StringLiteral;
 import org.eclipse.jdt.core.dom.SuperMethodInvocation;
 import org.eclipse.jdt.core.dom.ThisExpression;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.WildcardType;
 
-public class SimpleNameVisitor extends ASTVisitor {
+public class Visitor extends ASTVisitor {
 
 	private List<String> allIdentifiers = new ArrayList<String>();
 	private List<String> invokedMethodNames = new ArrayList<String>();
 	private List<String> types = new ArrayList<String>();
 	private Map<String, OperationInvocation> methodInvocationMap = new LinkedHashMap<String, OperationInvocation>();
 	private List<VariableDeclaration> variableDeclarations = new ArrayList<VariableDeclaration>();
+	private List<String> anonymousClassDeclarations = new ArrayList<String>();
+	private List<String> stringLiterals = new ArrayList<String>();
 	
 	public boolean visit(VariableDeclarationFragment node) {
 		variableDeclarations.add(new VariableDeclaration(node));
+		return super.visit(node);
+	}
+
+	public boolean visit(AnonymousClassDeclaration node) {
+		anonymousClassDeclarations.add(node.toString());
+		return super.visit(node);
+	}
+
+	public boolean visit(StringLiteral node) {
+		stringLiterals.add(node.toString());
 		return super.visit(node);
 	}
 
@@ -44,20 +60,30 @@ public class SimpleNameVisitor extends ASTVisitor {
 		return super.visit(node);
 	}
 	
+	public boolean visit(ArrayType node) {
+		types.add(node.toString());
+		return false;
+	}
+	
 	public boolean visit(ParameterizedType node) {
 		types.add(node.toString());
-		return super.visit(node);
+		return false;
 	}
 	
 	public boolean visit(WildcardType node) {
 		types.add(node.toString());
-		return super.visit(node);
+		return false;
+	}
+	
+	public boolean visit(QualifiedType node) {
+		types.add(node.toString());
+		return false;
 	}
 	
 	public boolean visit(SimpleType node) {
 		Name name = node.getName();
 		types.add(name.getFullyQualifiedName());
-		return super.visit(node);
+		return false;
 	}
 	
 	public boolean visit(MethodInvocation node) {
@@ -132,6 +158,18 @@ public class SimpleNameVisitor extends ASTVisitor {
 
 	public List<VariableDeclaration>   getVariableDeclarations() {
 		return variableDeclarations;
+	}
+
+	public List<String> getTypes() {
+		return types;
+	}
+
+	public List<String> getAnonymousClassDeclarations() {
+		return anonymousClassDeclarations;
+	}
+
+	public List<String> getStringLiterals() {
+		return stringLiterals;
 	}
 
 	public List<String> getVariables() {
