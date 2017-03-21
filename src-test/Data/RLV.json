@@ -219,6 +219,35 @@
 		  "validation":  "TP",
 		  "comment": "#Verified - Matin",
 		  "description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method private addCacheNS(response Message, cache Cache, name Name) : void in class jnamed"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method private addAdditional2(response Message, section int, flags int) : void in class jnamed"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method package doAXFR(response Message) : void in class dig"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method private lookup(name Name, type short, dclass short, cred byte, iterations int, querysent boolean) : Record[] in class org.xbill.DNS.dns"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method public sectionToString(i int) : String in class org.xbill.DNS.Message"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -229,7 +258,8 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
+			"comment" : "#verified - matin. It is so obvious check!!!",
 			"description": "Rename Local Variable dp : DatagramPacket renamed to indp : DatagramPacket in method public serveUDP(addr InetAddress, port short) : void in class jnamed"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -282,6 +312,11 @@
 			"type": "Rename Local Variable",
 			"validation": "UKN",
 			"description": "Rename Local Variable name : Name renamed to entry : Map.Entry in method public next() : Object in class org.xbill.DNS.Zone.ZoneIterator"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "UKN",
+			"comment":"#SecondIdea - seeem to be TP",
+			"description": "Rename Local Variable name : Name renamed to entry : Map.Entry in method public toMasterFile() : String in class org.xbill.DNS.Zone"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -295,6 +330,16 @@
 			"validation": "TP",
 			"comment":"Seems to be false positive(Me), User defined class Set is renamed to ChacheElement so we lale and davood consider it as TP",
 			"description": "Rename Local Variable set : Set renamed to element : CacheElement in method protected addRecord(r Record, cred byte) : void in class org.xbill.DNS.Cache"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"#Verified - Matin. Refactoring Miner cannot detect cause the method signature is changed and it doesnt match the methods while it shoul!",
+			"description": "Rename Local Variable set : Set renamed to element : CacheElement in method protected addRecord(r Record, cred byte) : void in class DNS.Cache"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"#verified - Lale, Matin",
+			"description": "Rename Local Variable r : RRset renamed to rrset : RRset in method public getSOA() : SOARecord in class DNS.Zone"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -328,6 +373,7 @@
 		},{
 			"type": "Rename Local Variable",
 			"validation": "TP",
+			"comment":"#verified - the mehtod parse renamed and we cannot match it",
 			"description": "Rename Local Variable pos : int renamed to start : int in method protected parse(in CountedDataInputStream, c dnsCompression) : void in class DNS.dnsNXTRecord"
 		},{
 			"type": "Rename Local Variable",
@@ -486,6 +532,12 @@
 			"validation": "TP",
 			"comment":"#verified, Laleh, same as above. Line mappings: 394-> 417. If we check the declarations of PositiveElement and CacheRRset, we see both are inner static class with same logic.",
 			"description": "Rename Local Variable pe : PositiveElement renamed to crrset : CacheRRset in method protected lookup(name Name, type int, minCred int) : SetResponse in class org.xbill.DNS.Cache"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"from address parametere is changed and another method with the same signature is added!",
+			"description": "Rename Local Variable nibbles : int[] renamed to bytes : byte[] in method public fromAddress(addr int[]) : Name in class org.xbill.DNS.ReverseMap"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -513,20 +565,7 @@
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
-	}, {
-		"sha1": "c0c4321c28d3f865fd4e33d156c1b7aaf6297266",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "525 -> 542",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
-			"validation": "TP",
-			"comment":"1-further breakdown the replacement",
-			"description": "Rename Local Variable tcm : TypeClassMap renamed to tm : TypeMap in method public nextElement() : Object in class org.xbill.DNS.Zone"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	}, {
+	},   {
 		"sha1": "deee9d5918787e571e37a997b8090a67bd3be83c",
 		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 		"svnVersionMappings": "1420 -> 1475",
@@ -577,6 +616,24 @@
 		  "validation":  "TP",
 		  "comment": "#Verified - Matin",
 		  "description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method public getTTL() : int in class org.xbill.DNS.RRset"
+		},
+		{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method package doAXFR(response Message) : void in class dig"
+		},
+		{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method private lookup(name Name, type short, dclass short, cred byte, iterations int, querysent boolean) : Record[] in class org.xbill.DNS.dns"
+		},
+		{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method public sectionToString(i int) : String in class org.xbill.DNS.Message"
 		}
 ],
 		"time": "0/0/00 0:00 PM",
@@ -596,6 +653,11 @@
 			"validation": "TP",
 			"comment": "#TypeReplacement",
 			"description": "Rename Local Variable eaddr : Enumeration renamed to iaddr : Iterator in method public jnamed(conffile String) in class jnamed"
+		}, {
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#verfied - Matin",
+			"description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method private addAdditional2(response Message, section int, flags int) : void in class jnamed"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -995,8 +1057,14 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "FP",
+			"comment": "#verified - matin. detected in lale tool! incorrect",
 			"description": "Rename Local Variable rec : Record renamed to recs : Record[] in method public getSectionRRsets(section int) : RRset[] in class org.xbill.DNS.Message"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment": "#verified - matin. detected in lale tool! incorrect",
+			"description": "Rename Local Variable it : Iterator renamed to recs : Record[] in method public getSectionRRsets(section int) : RRset[] in class org.xbill.DNS.Message"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1009,6 +1077,23 @@
 			"type": "Rename Local Variable",
 			"validation": "UKN",
 			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class org.xbill.DNS.SimpleResolver"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class DNS.SimpleResolver"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class dnsResolver"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class org.xbill.DNS.dnsResolver"
+		}, {
+			"type": "Rename Local Variable",
+			"validation": "UKN",
+			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class org.xbill.DNS.Resolver"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1085,6 +1170,24 @@
 			"validation": "FP",
 			"comment":"#verified Laleh and Matin. we have st : MyStringTokenizer as field in the new version ",
 			"description": "Rename Local Variable st : MyStringTokenizer renamed to token : Tokenizer.Token in method public nextRecord() : Record in class org.xbill.DNS.Master"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"#verified Davood and Matin.  sendAXFR(query Message) existed in both revision but in the second one i has changed a lot! So we thing they are not the same anymore!!!",
+			"description": "Rename Local Variable out : byte[] renamed to qname : Name in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"#verified Davood and Matin.  sendAXFR(query Message) existed in both revision but in the second one i has changed a lot! So we thing they are not the same anymore!!!",
+			"description": "Rename Local Variable in : byte[] renamed to it : Iterator in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
+		},
+		{
+			"type": "Rename Local Variable",
+			"validation": "FP",
+			"comment":"#verified - Matin",
+			"description": "Rename Local Variable s : String renamed to b : byte[] in method package rrToWire(out DataByteOutputStream, c Compression, canonical boolean) : void in class org.xbill.DNS.TXTRecord"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1160,36 +1263,7 @@
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
-	}, {
-		"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "4 -> 7",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class org.xbill.DNS.Resolver"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	}, {
-		"sha1": "b91ca10fcfa5cb19dc7f9d98f21d60084bf96407",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "157 -> 159",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"description": "Rename Local Variable set : Set renamed to element : CacheElement in method protected addRecord(r Record, cred byte) : void in class DNS.Cache"
-		},{
-			"type": "Rename Local Variable",
-			"validation": "TP",
-			"comment":"#verified - Lale, Matin",
-			"description": "Rename Local Variable r : RRset renamed to rrset : RRset in method public getSOA() : SOARecord in class DNS.Zone"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	}, {
+	},   {
 		"sha1": "234dffc30deb96a7ba4df8ae218021bd056d5a0b",
 		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 		"svnVersionMappings": "689 -> 704",
@@ -1290,7 +1364,7 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment":"#MethodSignatureChange - the signature change and boies are different ",
+			"comment":"#MethodSignatureChange - since the signature change and bodies are different, bodymapper does not match the methods!",
 			"description": "Rename Local Variable v : Vector renamed to vserver : Vector in method static findUnix() : String[] in class DNS.FindServer"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -1431,11 +1505,13 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
+			"comment":"#scope issue, need to add scope to find this",
 			"description": "Rename Local Variable rrset : RRset renamed to rrsets : RRset[] in method protected generateReply(query Message, in byte[], maxLength int) : Message in class jnamed"
 		}, {
 			"type": "Rename Local Variable",
-			"validation": "UKN",
+			"validation": "TP",
+			"comment":"#scope issue, need to add scope to find this",
 			"description": "Rename Local Variable rrset : RRset renamed to cname : Record in method protected generateReply(query Message, in byte[], maxLength int) : Message in class jnamed"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -1448,8 +1524,8 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment":"#verified - We cannot detect Variable that declared in the for loops body!",
-			"description": "Rename Local Variable pos : int renamed to spos : int in method public toWireCanonical) : byte[] in class org.xbill.DNS.Name"
+			"comment":"#verified - We cannot detect Variable that declared in the for loops body! - > corrected",
+			"description": "Rename Local Variable pos : int renamed to spos : int in method public toWireCanonical() : byte[] in class org.xbill.DNS.Name"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1460,8 +1536,7 @@
 		"author": "",
 		"refactorings": [{
 			"type": "Rename Local Variable",
-			"validation": "TP",
-			"comment": "#verified Laleh, line mapping: 66->141",
+			"validation": "UKN",
 			"description": "Rename Local Variable r : Record renamed to rrset : RRset in method public generateReply(query Message) : Message in class dnsServer"
 		}],
 		"time": "0/0/00 0:00 PM",
@@ -1499,19 +1574,7 @@
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
-	},   {
-		"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "4 -> 7",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
-			"validation": "UKN",
-			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class DNS.dnsResolver"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	}, {
+	},  {
 		"sha1": "18eae05a6d727b05004752984e76909411ed86af",
 		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 		"svnVersionMappings": "675 -> 753",
@@ -1649,6 +1712,29 @@
 		  "validation":  "TP",
 		  "comment": "#Verified - Matin",
 		  "description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method private addCacheNS(response Message, cache Cache, name Name) : void in class jnamed"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method private addAdditional2(response Message, section int, flags int) : void in class jnamed"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method package doAXFR(response Message) : void in class dig"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method private lookup(name Name, type short, dclass short, cred byte, iterations int, querysent boolean) : Record[] in class org.xbill.DNS.dns"
 		}
 ],
 		"time": "0/0/00 0:00 PM",
@@ -1834,6 +1920,16 @@
 			"validation": "FP",
 			"comment": "it mached record with record while the record in the base record renamed to _record and the new method is created in new revision which is called record",
 			"description": "Rename Local Variable token : Tokenizer.Token renamed to rec : Record in method public nextRecord() : Record in class org.xbill.DNS.Master"
+		}, {
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#Verified - Matin, Laleh",
+			"description": "Rename Local Variable i : Integer renamed to opt : Option in method package rrToWire(out DNSOutput, c Compression, canonical boolean) : void in class org.xbill.DNS.OPTRecord"
+		}, {
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment": "#Verified - Matin, Davod",
+			"description": "Rename Local Variable i : Integer renamed to opt : Option in method package rrToWire(out DNSOutput, c Compression, canonical boolean) : void in class org.xbill.DNS.OPTRecord"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -1965,6 +2061,29 @@
 		  "validation":  "UKN",
 		  "comment": "#SecondIdea",
 		  "description": "Rename Local Variable v : Vector renamed to l : List in method public getTSIG() : TSIGRecord in class org.xbill.DNS.Message"
+		},{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method private addAdditional2(response Message, section int, flags int) : void in class jnamed"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method package doAXFR(response Message) : void in class dig"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method private lookup(name Name, type short, dclass short, cred byte, iterations int, querysent boolean) : Record[] in class org.xbill.DNS.dns"
+		}
+,{
+		  "type": "Rename Local Variable",
+		  "validation":  "TP",
+		  "comment": "#Verified - Matin",
+		  "description": "Rename Local Variable e : Enumeration renamed to records : Record[] in method public sectionToString(i int) : String in class org.xbill.DNS.Message"
 		}
 ],
 		"time": "0/0/00 0:00 PM",
@@ -2133,18 +2252,11 @@
 			"validation": "FP",
 			"comment":"FP",
 			"description": "Rename Local Variable nameRecords : Hashtable renamed to cname : Record in method package generateReply(query Message, in byte[], maxLength int) : Message in class jnamed"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	}, {
-		"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "4 -> 7",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
+		}, {
+			"type": "Rename Class",
 			"validation": "TP",
-			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class org.xbill.DNS.dnsResolver"
+			"comment":"#verified - Matin",
+			"description": "Rename Class DNS.Cache.CacheElement renamed to DNS.Cache.Element"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -2281,6 +2393,16 @@
 			"type": "Rename Local Variable",
 			"validation": "TP",
 			"description": "Rename Local Variable tcm : TypeClassMap renamed to tm : TypeMap in method public run() : void in class org.xbill.DNS.Cache.CacheCleaner"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"1-further breakdown the replacement",
+			"description": "Rename Local Variable tcm : TypeClassMap renamed to tm : TypeMap in method public nextElement() : Object in class org.xbill.DNS.Zone"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"comment":"#FeildWithVariable - matin. cache existed in both in first revision it was an Attribute!",
+			"description": "Rename Local Variable e : Enumeration renamed to cache : Cache in method package addAuthority(response Message, name Name, zone Zone) : void in class jnamed"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -2296,19 +2418,7 @@
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
-	}, {
-		"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "4 -> 7",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
-			"validation": "TP",
-			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class dnsResolver"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	}, {
+	} , {
 		"sha1": "bc6e2c53ad744a10c8db5f6d0552a60bd1a0deb2",
 		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 		"svnVersionMappings": "258 -> 266",
@@ -2316,7 +2426,7 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment":"method record is renamed to lookup and new method which called record is added",
+			"comment":"method record is renamed to lookup and new method which is called record is added",
 			"description": "Rename Local Variable i : int renamed to n : int in method getRecords(namestr String, type short, dclass short, cred byte) : public in class dns"
 		},
 		{
@@ -2324,6 +2434,10 @@
 			"validation": "FP",
 			"comment": "#verifed Laleh- based on how the varibales are used I dont consider them as renaming",
 			"description": "Rename Local Variable now : long renamed to bestrcode : byte in method public send(query Message) : Message in class DNS.ExtendedResolver"
+		},{
+			"type": "Rename Local Variable",
+			"validation": "TP",
+			"description": "Rename Local Variable i : int renamed to n : int in method public getRecords(namestr String, type short, dclass short, cred byte) : Record[] in class org.xbill.DNS.dns"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -2462,18 +2576,6 @@
 		"time": "0/0/00 0:00 PM",
 		"id": -1
 	},   {
-		"sha1": "bc6e2c53ad744a10c8db5f6d0552a60bd1a0deb2",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "258 -> 266",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
-			"validation": "TP",
-			"description": "Rename Local Variable i : int renamed to n : int in method public getRecords(namestr String, type short, dclass short, cred byte) : Record[] in class org.xbill.DNS.dns"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	}, {
 		"sha1": "18eae05a6d727b05004752984e76909411ed86af",
 		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 		"svnVersionMappings": "675 -> 753",
@@ -2492,23 +2594,11 @@
 		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 		"svnVersionMappings": "977 -> 996",
 		"author": "",
-		"refactorings": [{
+		"refactorings": [ {
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment":"#TypeReplacement",
-			"description": "Rename Local Variable s : String renamed to b : byte[] in method protected rrToWire(out DataByteOutputStream, c Compression, canonical boolean) : void in class org.xbill.DNS.TXTRecord"
-		},
-		{
-			"type": "Rename Local Variable",
-			"validation": "FP",
-			"comment":"#Verified Laleh, line mappings  340 -> 321",
-			"description": "Rename Local Variable m : Message renamed to it : Iterator in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
-		},
-		{
-			"type": "Rename Local Variable",
-			"validation": "FP",
-			"comment":"#Verified Laleh, line mappings  345 -> 308",
-			"description": "Rename Local Variable header : Header renamed to qname : Name in method private sendAXFR(query Message) : Message in class org.xbill.DNS.SimpleResolver"
+			"comment":"#Verified - Matin",
+			"description": "Rename Local Variable s : String renamed to b : byte[] in method package rrToWire(out DataByteOutputStream, c Compression, canonical boolean) : void in class org.xbill.DNS.TXTRecord"
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
@@ -2548,20 +2638,7 @@
 		}],
 		"time": "0/0/00 0:00 PM",
 		"id": -1
-	}, {
-		"sha1": "51ad574fcfa967e3655bf15ccac133ef1041cdd3",
-		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
-		"svnVersionMappings": "4 -> 7",
-		"author": "",
-		"refactorings": [{
-			"type": "Rename Local Variable",
-			"validation": "TP",
-			"comment": "#verified Laleh, the reason that we missed it is that the mapper content of the send method is wrongly updated during checkForInlineOperation()",
-			"description": "Rename Local Variable outMessage : dnsMessage renamed to response : dnsMessage in method public send(inMessage dnsMessage) : dnsMessage in class DNS.SimpleResolver"
-		}],
-		"time": "0/0/00 0:00 PM",
-		"id": -1
-	},  {
+	},    {
 		"sha1": "deee9d5918787e571e37a997b8090a67bd3be83c",
 		"repository": "https://github.com/MatinMan/RefactoringDatasets.git",
 		"svnVersionMappings": "1420 -> 1475",
@@ -2613,8 +2690,8 @@
 		"refactorings": [{
 			"type": "Rename Local Variable",
 			"validation": "TP",
-			"comment":"bodymapper couldnt match",
-			"description": "Rename Local Variable r : SIGRecord renamed to sig : SIGRecord in method public apply(m Message, old byte) : void in class org.xbill.DNS.security.SIG0Signer"
+			"comment":"#Verified",
+			"description": "Rename Local Variable r : SIGRecord renamed to sig : SIGRecord in method public apply(m Message, old byte[]) : void in class org.xbill.DNS.security.SIG0Signer"
 		},{
 			"type": "Rename Local Variable",
 			"validation": "FP",

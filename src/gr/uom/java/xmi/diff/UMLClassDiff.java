@@ -723,7 +723,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 					if (potentialLVDrenamings.get(key) != "") {
 						RenameLocalVariable lvr = new RenameLocalVariable(getVariable(key, variableDeclarationInOperation1), getVariable(potentialLVDrenamings.get(key), variableDeclarationInOperation2), umlOperationBodyMapper.getOperation1());
 						refactorings.add(lvr);
-						System.out.println("=============== " + lvr);
+//						System.out.println("=============== " + lvr);
 					}
 
 				}

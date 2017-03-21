@@ -113,7 +113,7 @@ StringBuffer sb =new StringBuffer();
 //                                commitId.equals("51ad574fcfa967e3655bf15ccac133ef1041cdd3") ||
 //                                commitId.equals("deee9d5918787e571e37a997b8090a67bd3be83c"))
 //                            continue;
-//                        if (commitId.equals("4f3fd535e42553ed45aca656d68fa141b8bba2ad"))
+                        if (commitId.equals("15263d262fbac32b5924db6b6227097ef0de18f7"))
                             refactoringDetector.detectAtCommit(rep, commitId, m);
                         ProjectMatcher.CommitMatcher matcher;
                         matcher = m.expected.get(commitId);
