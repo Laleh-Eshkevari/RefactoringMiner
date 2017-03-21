@@ -48,4 +48,10 @@ public class MoveAttributeRefactoring implements Refactoring {
     return targetClassName;
   }
 
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
+	}
+
 }

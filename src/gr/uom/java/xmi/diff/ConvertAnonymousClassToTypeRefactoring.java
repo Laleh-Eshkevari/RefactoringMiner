@@ -32,4 +32,10 @@ public class ConvertAnonymousClassToTypeRefactoring implements Refactoring {
 		return RefactoringType.CONVERT_ANONYMOUS_CLASS_TO_TYPE;
 	}
 
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
+	}
+
 }

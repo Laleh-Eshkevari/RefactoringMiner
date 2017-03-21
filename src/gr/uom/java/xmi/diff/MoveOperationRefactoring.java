@@ -20,10 +20,14 @@ public class MoveOperationRefactoring implements Refactoring {
 		sb.append(originalOperation);
 		sb.append(" from class ");
 		sb.append(originalOperation.getClassName());
+		sb.append(" in file ");
+		sb.append(originalOperation.getSourceFile());
 		sb.append(" to ");
 		sb.append(movedOperation);
 		sb.append(" from class ");
 		sb.append(movedOperation.getClassName());
+		sb.append(" in file ");
+		sb.append(movedOperation.getSourceFile());
 		return sb.toString();
 	}
 
@@ -41,6 +45,12 @@ public class MoveOperationRefactoring implements Refactoring {
 
 	public UMLOperation getMovedOperation() {
 		return movedOperation;
+	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
 	}
 
 }

@@ -44,6 +44,14 @@ public class RenameLocalVariable implements Refactoring {
         sb.append(renamedVariable.display());
         sb.append(" in method ").append(originalVariableOperation);
         sb.append(" in class ").append(originalVariableOperation.getClassName());
+        sb.append(" in file ");
+        sb.append(originalVariableOperation.getSourceFile());
         return sb.toString();
     }
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
+	}
 }

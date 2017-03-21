@@ -21,10 +21,14 @@ public class InlineOperationRefactoring implements Refactoring {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getName()).append("\t");
 		sb.append(inlinedOperation);
+		sb.append(" in file ");
+		sb.append(inlinedOperation.getSourceFile());
 		sb.append(" inlined to ");
 		sb.append(inlinedToOperation);
 		sb.append(" in class ");
 		sb.append(sourceClassName);
+		sb.append(" in file ");
+		sb.append(inlinedToOperation.getSourceFile());
 		return sb.toString();
 	}
 
@@ -43,5 +47,11 @@ public class InlineOperationRefactoring implements Refactoring {
   public UMLOperation getInlinedToOperation() {
     return inlinedToOperation;
   }
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
+	}
 	
 }

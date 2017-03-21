@@ -11,4 +11,6 @@ public interface Refactoring extends Serializable {
 
 	public String toString();	
 	
+	public boolean isPureRefactoring();
+	
 }

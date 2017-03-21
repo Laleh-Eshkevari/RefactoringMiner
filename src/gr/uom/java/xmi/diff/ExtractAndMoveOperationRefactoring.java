@@ -23,8 +23,12 @@ public class ExtractAndMoveOperationRefactoring implements Refactoring {
 		sb.append(extractedFromOperation);
 		sb.append(" in class ");
 		sb.append(extractedFromOperation.getClassName());
+		sb.append(" in file ");
+		sb.append( extractedFromOperation.getSourceFile());
 		sb.append(" & moved to class ");
 		sb.append(extractedOperation.getClassName());
+		sb.append(" in file ");
+		sb.append( extractedOperation.getSourceFile());
 		return sb.toString();
 	}
 	
@@ -42,6 +46,12 @@ public class ExtractAndMoveOperationRefactoring implements Refactoring {
 
 	public UMLOperation getExtractedFromOperation() {
 		return extractedFromOperation;
+	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
 	}
 	
 }

@@ -27,6 +27,9 @@ public class MoveClassRefactoring implements Refactoring {
 		sb.append(originalClassName);
 		sb.append(" moved to ");
 		sb.append(movedClassName);
+		sb.append(" in file ");
+		sb.append(movedClass.getSourceFile());
+
 		return sb.toString();
 	}
 
@@ -68,6 +71,12 @@ public class MoveClassRefactoring implements Refactoring {
 
 	public String getMovedClassName() {
 		return movedClassName;
+	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
 	}
 	
 }

@@ -467,6 +467,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 								UMLOperation extractedFromOperationInNewVersion= this.findExistingMappingInOperationBodyMapperFor(operationBodyMapper.getOperation1());
 								ExtractOperationRefactoring extractOperationRefactoring =
 										new ExtractOperationRefactoring(addedOperation, operationBodyMapper.getOperation1(), extractedFromOperationInNewVersion,operationBodyMapper.getOperation1().getClassName());
+								extractOperationRefactoring.analyzeRefgranularity(mapper , operationBodyMapper);
 								refactorings.add(extractOperationRefactoring);
 								operationsToBeRemoved.add(addedOperation);
 							}
@@ -481,7 +482,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 		}
 		addedOperations.removeAll(operationsToBeRemoved);
 	}
-	
+
 	private UMLOperation findExistingMappingInOperationBodyMapperFor(UMLOperation operation1) {
 		for(UMLOperationBodyMapper umlOperationBodyMapper : this.operationBodyMapperList){
 			if(umlOperationBodyMapper.getOperation1().equals(operation1)){

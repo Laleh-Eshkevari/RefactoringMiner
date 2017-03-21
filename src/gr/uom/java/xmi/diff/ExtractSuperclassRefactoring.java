@@ -21,8 +21,7 @@ public class ExtractSuperclassRefactoring implements Refactoring {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getName()).append("\t");
 		sb.append(extractedClass);
-		//sb.append("line range: ["+ extractedClass.getStartLine() + ", " + extractedClass.getEndLine()+"]");
-		//sb.append(" in file: " + this.extractedClass.getSourceFile() );
+		sb.append(" in file: " + this.extractedClass.getSourceFile() );
 		sb.append(" from classes ");
 		sb.append(subclassSet);
 		return sb.toString();
@@ -49,6 +48,12 @@ public class ExtractSuperclassRefactoring implements Refactoring {
 			subclassSet.add(umlClass.getName());
 		}
 		return subclassSet;
+	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
 	}
 
 }

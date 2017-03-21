@@ -21,6 +21,7 @@ public class RenameOperationRefactoring implements Refactoring {
 		sb.append(" renamed to ");
 		sb.append(renamedOperation);
 		sb.append(" in class ").append(originalOperation.getClassName());
+		sb.append(" in file ").append(renamedOperation.getSourceFile());
 		return sb.toString();
 	}
 
@@ -38,6 +39,12 @@ public class RenameOperationRefactoring implements Refactoring {
 
 	public UMLOperation getRenamedOperation() {
 		return renamedOperation;
+	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
 	}
 
 }

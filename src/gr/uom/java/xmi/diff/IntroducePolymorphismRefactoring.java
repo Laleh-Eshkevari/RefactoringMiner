@@ -37,4 +37,10 @@ public class IntroducePolymorphismRefactoring implements Refactoring {
 	public RefactoringType getRefactoringType() {
 		return RefactoringType.INTRODUCE_POLYMORPHISM;
 	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
+	}
 }

@@ -26,6 +26,8 @@ public class RenameClassRefactoring implements Refactoring {
 		sb.append(originalClassName);
 		sb.append(" renamed to ");
 		sb.append(renamedClassName);
+		sb.append(" in file ");
+		sb.append(renamedUMlClass.getSourceFile());
 		return sb.toString();
 	}
 
@@ -43,6 +45,12 @@ public class RenameClassRefactoring implements Refactoring {
 
 	public String getRenamedClassName() {
 		return renamedClassName;
+	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
 	}
 	
 }

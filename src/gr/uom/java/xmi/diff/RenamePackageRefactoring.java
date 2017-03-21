@@ -52,4 +52,10 @@ public class RenamePackageRefactoring implements Refactoring {
 		sb.append(movedPath);
 		return sb.toString();
 	}
+
+	@Override
+	public boolean isPureRefactoring() {
+		// to be implemented
+		return false;
+	}
 }
