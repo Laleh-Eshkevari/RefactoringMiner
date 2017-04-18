@@ -24,6 +24,8 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     private UMLType superclass;
     private int startLine;
     private int endLine;
+    private List<UMLAnonymousClass> anonymousClassList;
+
 
     public UMLClass(String packageName, String name, boolean topLevel) {
     	this(packageName, name, packageName.replace('.', '/') + '/' + name + ".java", topLevel);
@@ -72,6 +74,11 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
         this.operations = new ArrayList<UMLOperation>();
         this.attributes = new ArrayList<UMLAttribute>();
         this.superclass = null;
+        this.anonymousClassList = new ArrayList<UMLAnonymousClass>();
+    }
+
+    public void addAnonymousClass(UMLAnonymousClass anonymousClass) {
+    	anonymousClassList.add(anonymousClass);
     }
 
     public String getPackageName() {
@@ -355,6 +362,15 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     			UMLOperationBodyMapper operationBodyMapper = new UMLOperationBodyMapper(operation, umlClass.operations.get(index));
     			classDiff.addOperationBodyMapper(operationBodyMapper);
     		}
+    	}
+    	
+    	for(UMLAnonymousClass umlAnonymousClass : this.anonymousClassList) {
+    		if(!umlClass.anonymousClassList.contains(umlAnonymousClass))
+    			classDiff.reportRemovedAnonymousClass(umlAnonymousClass);
+    	}
+    	for(UMLAnonymousClass umlAnonymousClass : umlClass.anonymousClassList) {
+    		if(!this.anonymousClassList.contains(umlAnonymousClass))
+    			classDiff.reportAddedAnonymousClass(umlAnonymousClass);
     	}
     	classDiff.checkForOperationSignatureChanges();
     	classDiff.checkForInlinedOperations();

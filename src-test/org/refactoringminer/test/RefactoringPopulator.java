@@ -16,55 +16,56 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class RefactoringPopulator {
 
-    public enum Systems {
-        aTunes(1), argoUML(2), jUnit(4), ANTLR4(8), FSE(16), All(31);
-        private int value;
+	public enum Systems {
+		aTunes(1), argoUML(2), jUnit(4), ANTLR4(8), FSE(16), All(31);
+		private int value;
 
-        private Systems(int value) {
-            this.value = value;
-        }
+		private Systems(int value) {
+			this.value = value;
+		}
 
-        public int getValue() {
-            return value;
-        }
-    }
+		public int getValue() {
+			return value;
+		}
+	}
 
-    public enum Refactorings {
-        MoveMethod(1), MoveAttribute(2), InlineMethod(4), ExtractMethod(8), PushDownMethod(16), PushDownAttribute(
-                32), PullUpMethod(64), PullUpAttribute(128), ExtractInterface(                                                    //RENAMELOCALVARIABLE
-                256), ExtractSuperclass(512), MoveClass(1024), RenamePackage(2048), RenameMethod(4096), ExtractAndMoveMethod(8192), RenameLocalVariable(16384), All(32767);
-        private int value;
+	public enum Refactorings {
+		MoveMethod(1), MoveAttribute(2), InlineMethod(4), ExtractMethod(8), PushDownMethod(16), PushDownAttribute(
+				32), PullUpMethod(64), PullUpAttribute(128), ExtractInterface(
+						256), ExtractSuperclass(512), MoveClass(1024), RenamePackage(2048),RenameMethod(4096), ExtractAndMoveMethod(8192), RenameClass(16384), MoveSourceFolder(32768),  RenameLocalVariable(65536),All(131071);
+		private int value;
 
-        private Refactorings(int value) {
-            this.value = value;
-        }
+		private Refactorings(int value) {
+			this.value = value;
+		}
 
-        public int getValue() {
-            return value;
-        }
-    }
+		public int getValue() {
+			return value;
+		}
+	}
 
-    public static void feedRefactoringsInstances(int refactoringsFlag, int systemsFlag, TestBuilder test) throws JsonParseException, JsonMappingException, IOException {
+	public static void feedRefactoringsInstances(int refactoringsFlag, int systemsFlag, TestBuilder test) throws JsonParseException, JsonMappingException, IOException {
+	
+		if((systemsFlag & Systems.FSE.getValue()) > 0) {
+			prepareFSERefactorings(test, refactoringsFlag);
+		}
+		
+		if ((systemsFlag & Systems.aTunes.getValue()) > 0) {
+			aTunesRefactorings(test, refactoringsFlag);
+		}
 
-        if ((systemsFlag & Systems.FSE.getValue()) > 0) {
-            prepareFSERefactorings(test, refactoringsFlag);
-        }
+		if ((systemsFlag & Systems.argoUML.getValue()) > 0) {
+			argoRefactorings(test, refactoringsFlag);
+		}
 
-        if ((systemsFlag & Systems.aTunes.getValue()) > 0) {
-            aTunesRefactorings(test, refactoringsFlag);
-        }
+		// if ((systemsFlag & Systems.ANTLER4.getValue())>0){
+		// antlrRefactorings(test, systemsFlag);
+		// }
 
-        if ((systemsFlag & Systems.argoUML.getValue()) > 0) {
-            argoRefactorings(test, refactoringsFlag);
-        }
+		if ((systemsFlag & Systems.jUnit.getValue()) > 0) {
+			jUnitRefactorings(test, systemsFlag);
+		}
 
-        // if ((systemsFlag & Systems.ANTLER4.getValue())>0){
-        // antlrRefactorings(test, systemsFlag);
-        // }
-
-        if ((systemsFlag & Systems.jUnit.getValue()) > 0) {
-            jUnitRefactorings(test, systemsFlag);
-        }
 
 //		if ((systemsFlag & Systems.FSE.getValue()) > 0) {
 //			FSE_ExtractMethodRefactorings(test, systemsFlag);

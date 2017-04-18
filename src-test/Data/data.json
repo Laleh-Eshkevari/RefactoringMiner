@@ -162,7 +162,7 @@
 			"description": "Extract Method protected failedSubscribe(s Subscription) : void extracted from public onSubscribe(s Subscription) : void in class co.paralleluniverse.strands.channels.reactivestreams.ChannelSubscriber"
 		}, {
 			"type": "Extract Method",
-			"description": "Extract Method protected failedSubscribe(s Subscriber, t Throwable) : void extracted from public subscribe(s Subscriber) : void in class co.paralleluniverse.strands.channels.reactivestreams.ChannelPublisher"
+			"description": "Extract Method protected failedSubscribe(s Subscriber<? super T>, t Throwable) : void extracted from public subscribe(s Subscriber<? super T>) : void in class co.paralleluniverse.strands.channels.reactivestreams.ChannelPublisher"
 		}
 
 	],
@@ -557,6 +557,9 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public getLoggingHandler() : LoggingHandlerImpl renamed to public getComponent() : JComponent in class com.intellij.remoteServer.impl.runtime.ui.tree.ServersTreeStructure.DeploymentLogNode"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public dispose() : void from class com.intellij.remoteServer.impl.runtime.log.LoggingHandlerImpl to public dispose() : void from class com.intellij.remoteServer.impl.runtime.log.LoggingHandlerBase"
 	}],
 	"time": "6/10/15 4:04 PM",
 	"id": 1107345
@@ -703,16 +706,16 @@
 			"description": "Move Method private isOperator(op String) : boolean from class io.undertow.server.handlers.builder.HandlerParser to class io.undertow.server.handlers.builder.PredicatedHandlersParser"
 		},{
 			"type":"Move Method",
-			"description":"Move Method private coerceToType(string String, token Token, type Class, attributeParser ExchangeAttributeParser) : Object from class io.undertow.predicate.PredicateParser to private coerceToType(string String, token Token, type Class, attributeParser ExchangeAttributeParser) : Object from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
+			"description":"Move Method private coerceToType(string String, token Token, type Class<?>, attributeParser ExchangeAttributeParser) : Object from class io.undertow.predicate.PredicateParser to private coerceToType(string String, token Token, type Class<?>, attributeParser ExchangeAttributeParser) : Object from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
 		},{
 			"type":"Move Method",
-			"description":"Move Method package tokenize(string String) : Deque from class io.undertow.server.handlers.builder.HandlerParser to public tokenize(string String) : Deque from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
+			"description":"Move Method package tokenize(string String) : Deque<Token> from class io.undertow.server.handlers.builder.HandlerParser to public tokenize(string String) : Deque<Token> from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
 		},{
 			"type":"Move Method",
 			"description":"Move Method private isSpecialChar(token String) : boolean from class io.undertow.predicate.PredicateParser to private isSpecialChar(token String) : boolean from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
 		},{
 			"type":"Move Method",
-			"description":"Move Method private coerceToType(string String, token Token, type Class, attributeParser ExchangeAttributeParser) : Object from class io.undertow.server.handlers.builder.HandlerParser to private coerceToType(string String, token Token, type Class, attributeParser ExchangeAttributeParser) : Object from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
+			"description":"Move Method private coerceToType(string String, token Token, type Class<?>, attributeParser ExchangeAttributeParser) : Object from class io.undertow.server.handlers.builder.HandlerParser to private coerceToType(string String, token Token, type Class<?>, attributeParser ExchangeAttributeParser) : Object from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
 		},{
 			"type":"Move Method",
 			"description":"Move Method private precedence(operator String) : int from class io.undertow.server.handlers.builder.HandlerParser to private precedence(operator String) : int from class io.undertow.server.handlers.builder.PredicatedHandlersParser"
@@ -980,6 +983,114 @@
 	"refactorings": [{
 		"type": "Extract Superclass",
 		"description": "Extract Superclass com.netflix.discovery.BaseDiscoveryClientTester from class com.netflix.discovery.AbstractDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected setupDiscoveryClient() : void from class com.netflix.discovery.AbstractDiscoveryClientTester to protected setupDiscoveryClient() : void from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private createLocalAppsDelta() : List<Application> from class com.netflix.discovery.AbstractDiscoveryClientTester to protected createLocalAppsDelta() : List<Application> from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected newInstanceInfoBuilder(renewalIntervalInSecs int) : Builder from class com.netflix.discovery.AbstractDiscoveryClientTester to protected newInstanceInfoBuilder(renewalIntervalInSecs int) : Builder from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private createRemoteApps() : List<Application> from class com.netflix.discovery.AbstractDiscoveryClientTester to protected createRemoteApps() : List<Application> from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private createInstance(appName String, vipAddress String, instanceHostName String, zone String) : InstanceInfo from class com.netflix.discovery.AbstractDiscoveryClientTester to protected createInstance(appName String, vipAddress String, instanceHostName String, zone String) : InstanceInfo from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected addLocalAppDelta() : void from class com.netflix.discovery.AbstractDiscoveryClientTester to protected addLocalAppDelta() : void from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private populateRemoteRegistryAtStartup() : void from class com.netflix.discovery.AbstractDiscoveryClientTester to protected populateRemoteRegistryAtStartup() : void from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private createLocalApps() : List<Application> from class com.netflix.discovery.AbstractDiscoveryClientTester to protected createLocalApps() : List<Application> from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private getAmazonInfo(availabilityZone String, instanceHostName String) : AmazonInfo from class com.netflix.discovery.AbstractDiscoveryClientTester to protected getAmazonInfo(availabilityZone String, instanceHostName String) : AmazonInfo from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected setupDiscoveryClient(renewalIntervalInSecs int) : void from class com.netflix.discovery.AbstractDiscoveryClientTester to protected setupDiscoveryClient(renewalIntervalInSecs int) : void from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected shutdownDiscoveryClient() : void from class com.netflix.discovery.AbstractDiscoveryClientTester to protected shutdownDiscoveryClient() : void from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected setupProperties() : void from class com.netflix.discovery.AbstractDiscoveryClientTester to protected setupProperties() : void from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private createRemoteAppsDelta() : List<Application> from class com.netflix.discovery.AbstractDiscoveryClientTester to protected createRemoteAppsDelta() : List<Application> from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private populateLocalRegistryAtStartup() : void from class com.netflix.discovery.AbstractDiscoveryClientTester to protected populateLocalRegistryAtStartup() : void from class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_REGION_APP2_INSTANCE1_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_ZONE : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP1_NAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public ALL_REGIONS_VIP3_ADDR : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_REGION : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_REGION_APP1_INSTANCE2_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_REGION_APP2_INSTANCE2_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_REGION_APP1_INSTANCE1_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_REGION_APP1_NAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public ALL_REGIONS_VIP2_ADDR : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP3_NAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP1_INSTANCE2_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected client : EurekaClient from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public REMOTE_REGION_APP2_NAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public mockLocalEurekaServer : MockRemoteEurekaServer from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP2_INSTANCE2_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public ALL_REGIONS_VIP1_ADDR : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP1_INSTANCE1_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP2_INSTANCE1_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP2_NAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public LOCAL_REGION_APP3_INSTANCE1_HOSTNAME : String from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute public CLIENT_REFRESH_RATE : int from class com.netflix.discovery.AbstractDiscoveryClientTester to class com.netflix.discovery.BaseDiscoveryClientTester"
 	}],
 	"time": "6/15/15 10:22 PM",
 	"id": 1117875
@@ -1204,7 +1315,7 @@
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getMakerPentaxData() : CFDictionary in class org.robovm.apple.imageio.CGImageProperties"
 	}, {
 		"type": "Extract Method",
-		"description": "Extract Method public has(key NSString) : boolean extracted from public getSolicitedServiceUUIDs() : NSArray in class org.robovm.apple.corebluetooth.CBCentralManagerScanOptions"
+		"description": "Extract Method public has(key NSString) : boolean extracted from public getSolicitedServiceUUIDs() : NSArray<CBUUID> in class org.robovm.apple.corebluetooth.CBCentralManagerScanOptions"
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getMakerNikonData() : CGImagePropertyNikonData in class org.robovm.apple.imageio.CGImageProperties"
@@ -1237,10 +1348,10 @@
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getMakerCanonData() : CGImagePropertyCanonData in class org.robovm.apple.imageio.CGImageProperties"
 	}, {
 		"type": "Extract Method",
-		"description": "Extract Method public has(key NSString) : boolean extracted from public getSolicitedServiceUUIDs() : NSArray in class org.robovm.apple.corebluetooth.CBAdvertisementData"
+		"description": "Extract Method public has(key NSString) : boolean extracted from public getSolicitedServiceUUIDs() : NSArray<CBUUID> in class org.robovm.apple.corebluetooth.CBAdvertisementData"
 	}, {
 		"type": "Extract Method",
-		"description": "Extract Method public has(key NSString) : boolean extracted from public getOverflowServiceUUIDs() : NSArray in class org.robovm.apple.corebluetooth.CBAdvertisementData"
+		"description": "Extract Method public has(key NSString) : boolean extracted from public getOverflowServiceUUIDs() : NSArray<CBUUID> in class org.robovm.apple.corebluetooth.CBAdvertisementData"
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getFileSize() : long in class org.robovm.apple.imageio.CGImageProperties"
@@ -1255,7 +1366,7 @@
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getBackgroundColor() : CGColor in class org.robovm.apple.imageio.CGImageDestinationProperties"
 	}, {
 		"type": "Extract Method",
-		"description": "Extract Method public has(key NSString) : boolean extracted from public getPeripherals() : NSArray in class org.robovm.apple.corebluetooth.CBCentralManagerRestoredState"
+		"description": "Extract Method public has(key NSString) : boolean extracted from public getPeripherals() : NSArray<CBPeripheral> in class org.robovm.apple.corebluetooth.CBCentralManagerRestoredState"
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getDPIHeight() : long in class org.robovm.apple.imageio.CGImageProperties"
@@ -1330,7 +1441,7 @@
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getMetadata() : CGImageMetadata in class org.robovm.apple.imageio.CGImageDestinationCopySourceOptions"
 	}, {
 		"type": "Extract Method",
-		"description": "Extract Method public has(key NSString) : boolean extracted from public getScanServices() : NSArray in class org.robovm.apple.corebluetooth.CBCentralManagerRestoredState"
+		"description": "Extract Method public has(key NSString) : boolean extracted from public getScanServices() : NSArray<CBUUID> in class org.robovm.apple.corebluetooth.CBCentralManagerRestoredState"
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method public has(key CFString) : boolean extracted from public getTIFFData() : CGImagePropertyTIFFData in class org.robovm.apple.imageio.CGImageProperties"
@@ -1591,10 +1702,10 @@
 		"description": "Move Class com.facebook.buck.cxx.AbstractCxxPreprocessorInput.ConflictingHeadersException moved to com.facebook.buck.cxx.AbstractCxxHeaders.ConflictingHeadersException"
 	}, {
 		"type": "Move Method",
-		"description": "Move Method private addAllEntriesToIncludeMap(destination Map, source Map) : void from class com.facebook.buck.cxx.AbstractCxxPreprocessorInput to public addAllEntriesToIncludeMap(destination Map, source Map) : void from class com.facebook.buck.cxx.AbstractCxxHeaders"
+		"description": "Move Method private addAllEntriesToIncludeMap(destination Map<Path,SourcePath>, source Map<Path,SourcePath>) : void from class com.facebook.buck.cxx.AbstractCxxPreprocessorInput to public addAllEntriesToIncludeMap(destination Map<Path,SourcePath>, source Map<Path,SourcePath>) : void from class com.facebook.buck.cxx.AbstractCxxHeaders"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public combineCxxPreprocessorInput(params BuildRuleParams, cxxPlatform CxxPlatform, preprocessorFlags ImmutableMultimap<CxxSource.Type, String>, prefixHeaders ImmutableList<SourcePath>, headerSymlinkTrees ImmutableList<SymlinkTree>, frameworkSearchPaths ImmutableList<Path>, cxxPreprocessorInputFromDeps Iterable<CxxPreprocessorInput>) : CxxPreprocessorInput renamed to public collectCxxPreprocessorInput(params BuildRuleParams, cxxPlatform CxxPlatform, preprocessorFlags ImmutableMultimap<CxxSource.Type, String>, prefixHeaders ImmutableList<SourcePath>, headerSymlinkTrees ImmutableList<SymlinkTree>, frameworkSearchPaths ImmutableList<Path>, cxxPreprocessorInputFromDeps Iterable<CxxPreprocessorInput>) : ImmutableList<CxxPreprocessorInput> in class com.facebook.buck.cxx.CxxDescriptionEnhancer"
+		"description": "Rename Method public combineCxxPreprocessorInput(params BuildRuleParams, cxxPlatform CxxPlatform, preprocessorFlags ImmutableMultimap<CxxSource.Type,String>, prefixHeaders ImmutableList<SourcePath>, headerSymlinkTrees ImmutableList<SymlinkTree>, frameworkSearchPaths ImmutableList<Path>, cxxPreprocessorInputFromDeps Iterable<CxxPreprocessorInput>) : CxxPreprocessorInput renamed to public collectCxxPreprocessorInput(params BuildRuleParams, cxxPlatform CxxPlatform, preprocessorFlags ImmutableMultimap<CxxSource.Type,String>, prefixHeaders ImmutableList<SourcePath>, headerSymlinkTrees ImmutableList<SymlinkTree>, frameworkSearchPaths ImmutableList<Path>, cxxPreprocessorInputFromDeps Iterable<CxxPreprocessorInput>) : ImmutableList<CxxPreprocessorInput> in class com.facebook.buck.cxx.CxxDescriptionEnhancer"
 	}],
 	"time": "6/16/15 4:55 PM",
 	"id": 1117640
@@ -1638,6 +1749,9 @@
 		}, {
 			"type": "Inline Method",
 			"description": "Inline Method private verifyPublicationClosed(times VerificationMode) : void inlined to public shouldNotTimeoutPublicationOnKeepAlive() : void in class uk.co.real_logic.aeron.driver.DriverConductorTest"
+		}, {
+			"type": "Inline Method",
+			"description": "Inline Method private verifyPublicationClosed(times VerificationMode) : void inlined to public shouldTimeoutPublication() : void in class uk.co.real_logic.aeron.driver.DriverConductorTest"
 		}, {
 			"type": "Inline Method",
 			"description": "Inline Method private verifyExceptionLogged() : void inlined to public shouldErrorOnRemoveChannelOnUnknownSessionId() : void in class uk.co.real_logic.aeron.driver.DriverConductorTest"
@@ -2306,10 +2420,10 @@
 		"description": "Move Attribute private configuration : Configuration from class org.infinispan.tx.TransactionXaAdapterTmIntegrationTest to class org.infinispan.partitionhandling.impl.PartitionHandlingManagerImpl"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public removeRecoveryInformationFromCluster(where Collection, xid Xid, sync boolean, gtx GlobalTransaction) : void renamed to public removeRecoveryInformation(where Collection, xid Xid, sync boolean, gtx GlobalTransaction, fromCluster boolean) : void in class org.infinispan.tx.recovery.PostCommitRecoveryStateTest.RecoveryManagerDelegate"
+		"description": "Rename Method public removeRecoveryInformationFromCluster(where Collection<Address>, xid Xid, sync boolean, gtx GlobalTransaction) : void renamed to public removeRecoveryInformation(where Collection<Address>, xid Xid, sync boolean, gtx GlobalTransaction, fromCluster boolean) : void in class org.infinispan.tx.recovery.PostCommitRecoveryStateTest.RecoveryManagerDelegate"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public removeRecoveryInformationFromCluster(lockOwners Collection, xid Xid, sync boolean, gtx GlobalTransaction) : void renamed to public removeRecoveryInformation(lockOwners Collection, xid Xid, sync boolean, gtx GlobalTransaction, fromCluster boolean) : void in class org.infinispan.transaction.xa.recovery.RecoveryManagerImpl"
+		"description": "Rename Method public removeRecoveryInformationFromCluster(lockOwners Collection<Address>, xid Xid, sync boolean, gtx GlobalTransaction) : void renamed to public removeRecoveryInformation(lockOwners Collection<Address>, xid Xid, sync boolean, gtx GlobalTransaction, fromCluster boolean) : void in class org.infinispan.transaction.xa.recovery.RecoveryManagerImpl"
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method protected assertNotLocked(cache Cache, key Object) : void renamed to protected assertEventuallyNotLocked(cache Cache, key Object) : void in class org.infinispan.test.AbstractCacheTest"
@@ -2345,6 +2459,9 @@
 	}, {
 		"type": "Rename Class",
 		"description": "Rename Class com.jfinal.plugin.activerecord.tx.TxByActionMethods renamed to com.jfinal.plugin.activerecord.tx.TxByMethods"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public findById(id Object, columns String) : M renamed to public findByIdLoadColumns(idValues Object[], columns String) : M in class com.jfinal.plugin.activerecord.Model"
 	}],
 	"time": "6/18/15 5:57 AM",
 	"id": 1118473
@@ -2354,19 +2471,19 @@
 	"author": "Simon Brandhof",
 	"refactorings": [{
 		"type": "Extract Method",
-		"description": "Extract Method package getPluginMetrics() : List<Metric> extracted from public start() : void in class org.sonar.server.startup.RegisterMetrics"
-	}, {
-		"type": "Extract Method",
-		"description": "Extract Method package register(metrics Iterable) : void extracted from public start() : void in class org.sonar.server.startup.RegisterMetrics"
+		"description": "Extract Method package register(metrics Iterable<Metric>) : void extracted from public start() : void in class org.sonar.server.startup.RegisterMetrics"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method package getMetricsRepositories() : List renamed to package getPluginMetrics() : List in class org.sonar.server.startup.RegisterMetrics"
+		"description": "Rename Method package getMetricsRepositories() : List<Metric> renamed to package getPluginMetrics() : List<Metric> in class org.sonar.server.startup.RegisterMetrics"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public disable(session DbSession, ids List) : void renamed to public disableByIds(session DbSession, ids List) : void in class org.sonar.server.metric.persistence.MetricDao"
+		"description": "Rename Method public disable(session DbSession, ids List<Integer>) : void renamed to public disableByIds(session DbSession, ids List<Integer>) : void in class org.sonar.server.metric.persistence.MetricDao"
 	}, {
 		"type": "Move Class",
 		"description": "Move Class org.sonar.core.metric.DefaultMetricFinderTest moved to org.sonar.server.metric.DefaultMetricFinderTest"
+	}, {
+		"type": "Inline Method",
+		"description": "Inline Method private removeExistingUserManagedMetrics(metrics List<Metric>) : List<Metric> inlined to package getPluginMetrics() : List<Metric> in class org.sonar.server.startup.RegisterMetrics"
 	}],
 	"time": "6/18/15 6:52 AM",
 	"id": 1118403
@@ -2404,10 +2521,40 @@
 		"description":"Rename Method public newQuery(value Object) : Query renamed to public newValueQuery(value Object) : Query in class org.neo4j.kernel.api.impl.index.LuceneDocumentStructure"
 	}, {
 		"type": "Rename Method",
-		"description":"Rename Method protected getAllNodes(propertyValue String) : List renamed to protected getAllNodesWithProperty(propertyValue String) : List in class org.neo4j.kernel.api.index.IndexAccessorCompatibility"
+		"description":"Rename Method protected getAllNodes(propertyValue String) : List<Long> renamed to protected getAllNodesWithProperty(propertyValue String) : List<Long> in class org.neo4j.kernel.api.index.IndexAccessorCompatibility"
 	}, {
 		"type": "Rename Method",
 		"description":"Rename Method public newQueryForChangeOrRemove(nodeId long) : Term renamed to public newTermForChangeOrRemove(nodeId long) : Term in class org.neo4j.kernel.api.impl.index.LuceneDocumentStructure"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected documentLogic : LuceneDocumentStructure from class org.neo4j.kernel.api.impl.index.LuceneIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected documentLogic : LuceneDocumentStructure from class org.neo4j.kernel.api.impl.index.LuceneUniqueIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected closeable : Closeable from class org.neo4j.kernel.api.impl.index.LuceneIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected reader : IndexReader from class org.neo4j.kernel.api.impl.index.LuceneIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected closeable : Closeable from class org.neo4j.kernel.api.impl.index.LuceneUniqueIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected reader : IndexReader from class org.neo4j.kernel.api.impl.index.LuceneUniqueIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected searcher : IndexSearcher from class org.neo4j.kernel.api.impl.index.LuceneUniqueIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected terms : TermEnum from class org.neo4j.kernel.api.impl.index.LuceneIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected searcher : IndexSearcher from class org.neo4j.kernel.api.impl.index.LuceneIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
+	}, {
+		"type": "Pull Up Attribute",
+		"description":"Pull Up Attribute protected BUFFER_SIZE_LIMIT : int from class org.neo4j.kernel.api.impl.index.LuceneIndexAccessorReaderTest to class org.neo4j.kernel.api.impl.index.AbstractLuceneIndexAccessorReaderTest"
 	}],
 	"time": "6/18/15 7:27 AM",
 	"id": 1119504
@@ -2587,7 +2734,7 @@
 		"description": "Extract Method private assertMissingTextAttribute(attributes Map<String,Object>) : void extracted from public synthesizeAnnotationFromMapWithNullAttributeValue() : void in class org.springframework.core.annotation.AnnotationUtilsTests"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method private validateAttributes(attributes Map<String, Object>, annotationType Class<? extends Annotation>) : void renamed to private enrichAndValidateAttributes(attributes Map<String, Object>, annotationType Class<? extends Annotation>) : Map<String, Object> in class org.springframework.core.annotation.MapAnnotationAttributeExtractor"
+		"description": "Rename Method private validateAttributes(attributes Map<String,Object>, annotationType Class<? extends Annotation>) : void renamed to private enrichAndValidateAttributes(attributes Map<String,Object>, annotationType Class<? extends Annotation>) : Map<String,Object> in class org.springframework.core.annotation.MapAnnotationAttributeExtractor"
 	}],
 	"time": "6/19/15 10:27 AM",
 	"id": 1120106
@@ -2881,6 +3028,303 @@
 	"refactorings": [{
 		"type": "Extract Superclass",
 		"description": "Extract Superclass org.assertj.core.api.StrictAssertions from class org.assertj.core.api.Assertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(optional Optional<T>) : OptionalAssert<T> from class org.assertj.core.api.Assertions to public assertThat(optional Optional<T>) : OptionalAssert<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(optionalDouble OptionalDouble) : OptionalDoubleAssert from class org.assertj.core.api.Assertions to public assertThat(optionalDouble OptionalDouble) : OptionalDoubleAssert from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(optionalInt OptionalInt) : OptionalIntAssert from class org.assertj.core.api.Assertions to public assertThat(optionalInt OptionalInt) : OptionalIntAssert from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(optionalLong OptionalLong) : OptionalLongAssert from class org.assertj.core.api.Assertions to public assertThat(optionalLong OptionalLong) : OptionalLongAssert from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual BigDecimal) : AbstractBigDecimalAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual BigDecimal) : AbstractBigDecimalAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual URI) : AbstractUriAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual URI) : AbstractUriAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual URL) : AbstractUrlAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual URL) : AbstractUrlAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual boolean) : AbstractBooleanAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual boolean) : AbstractBooleanAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Boolean) : AbstractBooleanAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Boolean) : AbstractBooleanAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual boolean[]) : AbstractBooleanArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual boolean[]) : AbstractBooleanArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual byte) : AbstractByteAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual byte) : AbstractByteAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Byte) : AbstractByteAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Byte) : AbstractByteAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual byte[]) : AbstractByteArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual byte[]) : AbstractByteArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual char) : AbstractCharacterAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual char) : AbstractCharacterAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual char[]) : AbstractCharArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual char[]) : AbstractCharArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Character) : AbstractCharacterAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Character) : AbstractCharacterAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Class<?>) : AbstractClassAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Class<?>) : AbstractClassAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual double) : AbstractDoubleAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual double) : AbstractDoubleAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Double) : AbstractDoubleAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Double) : AbstractDoubleAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual double[]) : AbstractDoubleArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual double[]) : AbstractDoubleArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual File) : AbstractFileAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual File) : AbstractFileAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual InputStream) : AbstractInputStreamAssert<?,? extends InputStream> from class org.assertj.core.api.Assertions to public assertThat(actual InputStream) : AbstractInputStreamAssert<?,? extends InputStream> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual float) : AbstractFloatAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual float) : AbstractFloatAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Float) : AbstractFloatAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Float) : AbstractFloatAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual float[]) : AbstractFloatArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual float[]) : AbstractFloatArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual int) : AbstractIntegerAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual int) : AbstractIntegerAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual int[]) : AbstractIntArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual int[]) : AbstractIntArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Integer) : AbstractIntegerAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Integer) : AbstractIntegerAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual long) : AbstractLongAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual long) : AbstractLongAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Long) : AbstractLongAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Long) : AbstractLongAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual long[]) : AbstractLongArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual long[]) : AbstractLongArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual T) : AbstractObjectAssert<?,T> from class org.assertj.core.api.Assertions to public assertThat(actual T) : AbstractObjectAssert<?,T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual T[]) : AbstractObjectArrayAssert<?,T> from class org.assertj.core.api.Assertions to public assertThat(actual T[]) : AbstractObjectArrayAssert<?,T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual short) : AbstractShortAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual short) : AbstractShortAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Short) : AbstractShortAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Short) : AbstractShortAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual short[]) : AbstractShortArrayAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual short[]) : AbstractShortArrayAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual String) : AbstractCharSequenceAssert<?,String> from class org.assertj.core.api.Assertions to public assertThat(actual String) : AbstractCharSequenceAssert<?,String> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Date) : AbstractDateAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual Date) : AbstractDateAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(date ZonedDateTime) : AbstractZonedDateTimeAssert<?> from class org.assertj.core.api.Assertions to public assertThat(date ZonedDateTime) : AbstractZonedDateTimeAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(localDateTime LocalDateTime) : AbstractLocalDateTimeAssert<?> from class org.assertj.core.api.Assertions to public assertThat(localDateTime LocalDateTime) : AbstractLocalDateTimeAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual OffsetDateTime) : AbstractOffsetDateTimeAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual OffsetDateTime) : AbstractOffsetDateTimeAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(offsetTime OffsetTime) : AbstractOffsetTimeAssert<?> from class org.assertj.core.api.Assertions to public assertThat(offsetTime OffsetTime) : AbstractOffsetTimeAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual LocalTime) : AbstractLocalTimeAssert<?> from class org.assertj.core.api.Assertions to public assertThat(actual LocalTime) : AbstractLocalTimeAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(localDate LocalDate) : AbstractLocalDateAssert<?> from class org.assertj.core.api.Assertions to public assertThat(localDate LocalDate) : AbstractLocalDateAssert<?> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThat(actual Throwable) : AbstractThrowableAssert<?,? extends Throwable> from class org.assertj.core.api.Assertions to public assertThat(actual Throwable) : AbstractThrowableAssert<?,? extends Throwable> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public assertThatThrownBy(shouldRaiseThrowable ThrowingCallable) : AbstractThrowableAssert<?,? extends Throwable> from class org.assertj.core.api.Assertions to public assertThatThrownBy(shouldRaiseThrowable ThrowingCallable) : AbstractThrowableAssert<?,? extends Throwable> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public catchThrowable(shouldRaiseThrowable ThrowingCallable) : Throwable from class org.assertj.core.api.Assertions to public catchThrowable(shouldRaiseThrowable ThrowingCallable) : Throwable from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setRemoveAssertJRelatedElementsFromStackTrace(removeAssertJRelatedElementsFromStackTrace boolean) : void from class org.assertj.core.api.Assertions to public setRemoveAssertJRelatedElementsFromStackTrace(removeAssertJRelatedElementsFromStackTrace boolean) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public fail(failureMessage String) : void from class org.assertj.core.api.Assertions to public fail(failureMessage String) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public fail(failureMessage String, realCause Throwable) : void from class org.assertj.core.api.Assertions to public fail(failureMessage String, realCause Throwable) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public failBecauseExceptionWasNotThrown(exceptionClass Class<? extends Throwable>) : void from class org.assertj.core.api.Assertions to public failBecauseExceptionWasNotThrown(exceptionClass Class<? extends Throwable>) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public shouldHaveThrown(exceptionClass Class<? extends Throwable>) : void from class org.assertj.core.api.Assertions to public shouldHaveThrown(exceptionClass Class<? extends Throwable>) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setMaxLengthForSingleLineDescription(maxLengthForSingleLineDescription int) : void from class org.assertj.core.api.Assertions to public setMaxLengthForSingleLineDescription(maxLengthForSingleLineDescription int) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public extractProperty(propertyName String, propertyType Class<T>) : Properties<T> from class org.assertj.core.api.Assertions to public extractProperty(propertyName String, propertyType Class<T>) : Properties<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public extractProperty(propertyName String) : Properties<Object> from class org.assertj.core.api.Assertions to public extractProperty(propertyName String) : Properties<Object> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public tuple(values Object[]) : Tuple from class org.assertj.core.api.Assertions to public tuple(values Object[]) : Tuple from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setAllowExtractingPrivateFields(allowExtractingPrivateFields boolean) : void from class org.assertj.core.api.Assertions to public setAllowExtractingPrivateFields(allowExtractingPrivateFields boolean) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setAllowComparingPrivateFields(allowComparingPrivateFields boolean) : void from class org.assertj.core.api.Assertions to public setAllowComparingPrivateFields(allowComparingPrivateFields boolean) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public entry(key K, value V) : MapEntry<K,V> from class org.assertj.core.api.Assertions to public entry(key K, value V) : MapEntry<K,V> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public atIndex(index int) : Index from class org.assertj.core.api.Assertions to public atIndex(index int) : Index from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public offset(value Double) : Offset<Double> from class org.assertj.core.api.Assertions to public offset(value Double) : Offset<Double> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public offset(value Float) : Offset<Float> from class org.assertj.core.api.Assertions to public offset(value Float) : Offset<Float> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public within(value Double) : Offset<Double> from class org.assertj.core.api.Assertions to public within(value Double) : Offset<Double> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public within(value Float) : Offset<Float> from class org.assertj.core.api.Assertions to public within(value Float) : Offset<Float> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public within(value BigDecimal) : Offset<BigDecimal> from class org.assertj.core.api.Assertions to public within(value BigDecimal) : Offset<BigDecimal> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public within(value Byte) : Offset<Byte> from class org.assertj.core.api.Assertions to public within(value Byte) : Offset<Byte> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public within(value Integer) : Offset<Integer> from class org.assertj.core.api.Assertions to public within(value Integer) : Offset<Integer> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public within(value Short) : Offset<Short> from class org.assertj.core.api.Assertions to public within(value Short) : Offset<Short> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public within(value Long) : Offset<Long> from class org.assertj.core.api.Assertions to public within(value Long) : Offset<Long> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public withinPercentage(value Double) : Percentage from class org.assertj.core.api.Assertions to public withinPercentage(value Double) : Percentage from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public withinPercentage(value Integer) : Percentage from class org.assertj.core.api.Assertions to public withinPercentage(value Integer) : Percentage from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public withinPercentage(value Long) : Percentage from class org.assertj.core.api.Assertions to public withinPercentage(value Long) : Percentage from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public allOf(conditions Condition<? super T>[]) : Condition<T> from class org.assertj.core.api.Assertions to public allOf(conditions Condition<? super T>[]) : Condition<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public allOf(conditions Iterable<? extends Condition<? super T>>) : Condition<T> from class org.assertj.core.api.Assertions to public allOf(conditions Iterable<? extends Condition<? super T>>) : Condition<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public anyOf(conditions Condition<? super T>[]) : Condition<T> from class org.assertj.core.api.Assertions to public anyOf(conditions Condition<? super T>[]) : Condition<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public anyOf(conditions Iterable<? extends Condition<? super T>>) : Condition<T> from class org.assertj.core.api.Assertions to public anyOf(conditions Iterable<? extends Condition<? super T>>) : Condition<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public doesNotHave(condition Condition<? super T>) : DoesNotHave<T> from class org.assertj.core.api.Assertions to public doesNotHave(condition Condition<? super T>) : DoesNotHave<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public not(condition Condition<? super T>) : Not<T> from class org.assertj.core.api.Assertions to public not(condition Condition<? super T>) : Not<T> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public filter(array E[]) : Filters<E> from class org.assertj.core.api.Assertions to public filter(array E[]) : Filters<E> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public filter(iterableToFilter Iterable<E>) : Filters<E> from class org.assertj.core.api.Assertions to public filter(iterableToFilter Iterable<E>) : Filters<E> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public in(values Object[]) : InFilter from class org.assertj.core.api.Assertions to public in(values Object[]) : InFilter from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public notIn(valuesNotToMatch Object[]) : NotInFilter from class org.assertj.core.api.Assertions to public notIn(valuesNotToMatch Object[]) : NotInFilter from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public not(valueNotToMatch Object) : NotFilter from class org.assertj.core.api.Assertions to public not(valueNotToMatch Object) : NotFilter from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public contentOf(file File, charset Charset) : String from class org.assertj.core.api.Assertions to public contentOf(file File, charset Charset) : String from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public contentOf(file File, charsetName String) : String from class org.assertj.core.api.Assertions to public contentOf(file File, charsetName String) : String from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public contentOf(file File) : String from class org.assertj.core.api.Assertions to public contentOf(file File) : String from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public linesOf(file File) : List<String> from class org.assertj.core.api.Assertions to public linesOf(file File) : List<String> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public linesOf(file File, charset Charset) : List<String> from class org.assertj.core.api.Assertions to public linesOf(file File, charset Charset) : List<String> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public linesOf(file File, charsetName String) : List<String> from class org.assertj.core.api.Assertions to public linesOf(file File, charsetName String) : List<String> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public contentOf(url URL, charset Charset) : String from class org.assertj.core.api.Assertions to public contentOf(url URL, charset Charset) : String from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public contentOf(url URL, charsetName String) : String from class org.assertj.core.api.Assertions to public contentOf(url URL, charsetName String) : String from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public contentOf(url URL) : String from class org.assertj.core.api.Assertions to public contentOf(url URL) : String from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public linesOf(url URL) : List<String> from class org.assertj.core.api.Assertions to public linesOf(url URL) : List<String> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public linesOf(url URL, charset Charset) : List<String> from class org.assertj.core.api.Assertions to public linesOf(url URL, charset Charset) : List<String> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public linesOf(url URL, charsetName String) : List<String> from class org.assertj.core.api.Assertions to public linesOf(url URL, charsetName String) : List<String> from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setLenientDateParsing(value boolean) : void from class org.assertj.core.api.Assertions to public setLenientDateParsing(value boolean) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public registerCustomDateFormat(userCustomDateFormat DateFormat) : void from class org.assertj.core.api.Assertions to public registerCustomDateFormat(userCustomDateFormat DateFormat) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public registerCustomDateFormat(userCustomDateFormatPattern String) : void from class org.assertj.core.api.Assertions to public registerCustomDateFormat(userCustomDateFormatPattern String) : void from class org.assertj.core.api.StrictAssertions"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public useDefaultDateFormatsOnly() : void from class org.assertj.core.api.Assertions to public useDefaultDateFormatsOnly() : void from class org.assertj.core.api.StrictAssertions"
 	}],
 	"time": "6/21/15 2:25 AM",
 	"id": 1120898
@@ -2890,10 +3334,10 @@
 	"author": "Andriy Rysin",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute public VIDMINKY_MAP : Map from class org.languagetool.tagging.uk.UkrainianTagger to class org.languagetool.tagging.uk.PosTagHelper"
+		"description": "Move Attribute public VIDMINKY_MAP : Map<String,String> from class org.languagetool.tagging.uk.UkrainianTagger to class org.languagetool.tagging.uk.PosTagHelper"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method private hasRequiredPosTag(posTagsToFind Collection, tokenReadings AnalyzedTokenReadings) : boolean renamed to private getReadingWithVidmPosTag(posTagsToFind Collection, tokenReadings AnalyzedTokenReadings) : boolean in class org.languagetool.rules.uk.TokenAgreementRule"
+		"description": "Rename Method private hasRequiredPosTag(posTagsToFind Collection<String>, tokenReadings AnalyzedTokenReadings) : boolean renamed to private getReadingWithVidmPosTag(posTagsToFind Collection<String>, tokenReadings AnalyzedTokenReadings) : boolean in class org.languagetool.rules.uk.TokenAgreementRule"
 	}],
 	"time": "6/21/15 12:33 PM",
 	"id": 1121417
@@ -3220,6 +3664,87 @@
 	"refactorings": [{
 		"type": "Extract Superclass",
 		"description": "Extract Superclass org.springframework.web.socket.server.support.AbstractHandshakeHandler from class org.springframework.web.socket.server.support.DefaultHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private initRequestUpgradeStrategy() : RequestUpgradeStrategy from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to private initRequestUpgradeStrategy() : RequestUpgradeStrategy from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setSupportedProtocols(protocols String[]) : void from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to public setSupportedProtocols(protocols String[]) : void from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getSupportedProtocols() : String[] from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to public getSupportedProtocols() : String[] from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public isRunning() : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to public isRunning() : boolean from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public start() : void from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to public start() : void from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public stop() : void from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to public stop() : void from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public doHandshake(request ServerHttpRequest, response ServerHttpResponse, wsHandler WebSocketHandler, attributes Map<String,Object>) : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to public doHandshake(request ServerHttpRequest, response ServerHttpResponse, wsHandler WebSocketHandler, attributes Map<String,Object>) : boolean from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected handleInvalidUpgradeHeader(request ServerHttpRequest, response ServerHttpResponse) : void from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected handleInvalidUpgradeHeader(request ServerHttpRequest, response ServerHttpResponse) : void from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected handleInvalidConnectHeader(request ServerHttpRequest, response ServerHttpResponse) : void from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected handleInvalidConnectHeader(request ServerHttpRequest, response ServerHttpResponse) : void from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected isWebSocketVersionSupported(httpHeaders WebSocketHttpHeaders) : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected isWebSocketVersionSupported(httpHeaders WebSocketHttpHeaders) : boolean from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected getSupportedVersions() : String[] from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected getSupportedVersions() : String[] from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected handleWebSocketVersionNotSupported(request ServerHttpRequest, response ServerHttpResponse) : void from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected handleWebSocketVersionNotSupported(request ServerHttpRequest, response ServerHttpResponse) : void from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected isValidOrigin(request ServerHttpRequest) : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected isValidOrigin(request ServerHttpRequest) : boolean from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected selectProtocol(requestedProtocols List<String>, webSocketHandler WebSocketHandler) : String from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected selectProtocol(requestedProtocols List<String>, webSocketHandler WebSocketHandler) : String from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected determineHandlerSupportedProtocols(handler WebSocketHandler) : List<String> from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected determineHandlerSupportedProtocols(handler WebSocketHandler) : List<String> from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected filterRequestedExtensions(request ServerHttpRequest, requestedExtensions List<WebSocketExtension>, supportedExtensions List<WebSocketExtension>) : List<WebSocketExtension> from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected filterRequestedExtensions(request ServerHttpRequest, requestedExtensions List<WebSocketExtension>, supportedExtensions List<WebSocketExtension>) : List<WebSocketExtension> from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected determineUser(request ServerHttpRequest, wsHandler WebSocketHandler, attributes Map<String,Object>) : Principal from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to protected determineUser(request ServerHttpRequest, wsHandler WebSocketHandler, attributes Map<String,Object>) : Principal from class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private UTF8_CHARSET : Charset from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private jettyWsPresent : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private tomcatWsPresent : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private undertowWsPresent : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private glassFishWsPresent : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private webLogicWsPresent : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected logger : Log from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private requestUpgradeStrategy : RequestUpgradeStrategy from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private supportedProtocols : List<String> from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private running : boolean from class org.springframework.web.socket.server.support.DefaultHandshakeHandler to class org.springframework.web.socket.server.support.AbstractHandshakeHandler"
 	}],
 	"time": "6/22/15 11:30 PM",
 	"id": 1122508
@@ -3617,6 +4142,9 @@
 		"type": "Extract Method",
 		"description": "Extract Method private getTestPathPredicate(enableStringWhitelisting boolean, whitelistedStringDirs ImmutableSet<Path>, locales ImmutableSet<String>) : Predicate<Path> extracted from public testFilterStrings() : void in class com.facebook.buck.android.FilterResourcesStepTest"
 	}, {
+		"type": "Extract Method",
+		"description": "Extract Method private assertNotMatchesRegex(path String) : void extracted from public testNonEnglishStringsPathRegex() : void in class com.facebook.buck.android.FilterResourcesStepTest"
+	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public enableStringsFilter() : Builder renamed to public enableStringWhitelisting() : Builder in class com.facebook.buck.android.FilterResourcesStep.Builder"
 	}, {
@@ -3866,10 +4394,10 @@
 		"description": "Inline Method private assertCancelled(controls String, testQuery String, listener WaitUntilCompleteListener) : void inlined to private assertCancelledWithoutException(controls String, listener WaitUntilCompleteListener, query String) : void in class org.apache.drill.exec.server.TestDrillbitResilience"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method private assertCompleteState(result Pair, expectedState QueryState) : void renamed to private assertStateCompleted(result Pair, expectedState QueryState) : void in class org.apache.drill.exec.server.TestDrillbitResilience"
+		"description": "Rename Method private assertCompleteState(result Pair<QueryState,Exception>, expectedState QueryState) : void renamed to private assertStateCompleted(result Pair<QueryState,Exception>, expectedState QueryState) : void in class org.apache.drill.exec.server.TestDrillbitResilience"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public resumeFragment(outcomeListener RpcOutcomeListener, handle FragmentHandle) : void renamed to public unpauseFragment(outcomeListener RpcOutcomeListener, handle FragmentHandle) : void in class org.apache.drill.exec.rpc.control.ControlTunnel"
+		"description": "Rename Method public resumeFragment(outcomeListener RpcOutcomeListener<Ack>, handle FragmentHandle) : void renamed to public unpauseFragment(outcomeListener RpcOutcomeListener<Ack>, handle FragmentHandle) : void in class org.apache.drill.exec.rpc.control.ControlTunnel"
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public cancelBeforeAnyResultsArrive() : void renamed to public cancelWhenQueryIdArrives() : void in class org.apache.drill.exec.server.TestDrillbitResilience"
@@ -3887,7 +4415,7 @@
 		"description": "Rename Method private testInterruptingBlockedFragmentsWaitingForData(control String) : void renamed to private interruptingBlockedFragmentsWaitingForData(control String) : void in class org.apache.drill.exec.server.TestDrillbitResilience"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method private assertExceptionInjected(throwable Throwable, exceptionClass Class, desc String) : void renamed to private assertExceptionMessage(throwable Throwable, exceptionClass Class, desc String) : void in class org.apache.drill.exec.server.TestDrillbitResilience"
+		"description": "Rename Method private assertExceptionInjected(throwable Throwable, exceptionClass Class<? extends Throwable>, desc String) : void renamed to private assertExceptionMessage(throwable Throwable, exceptionClass Class<? extends Throwable>, desc String) : void in class org.apache.drill.exec.server.TestDrillbitResilience"
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public settingNoopInjectionsAndQuery() : void renamed to public settingNoOpInjectionsAndQuery() : void in class org.apache.drill.exec.server.TestDrillbitResilience"
@@ -3916,7 +4444,7 @@
 		"description": "Extract Method private pause(delay long) : void extracted from private pauseExponentially(retries int) : void in class com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method private callUntilCompletion(batch Map) : FailedBatch renamed to private doBatchWriteItemWithRetry(batch Map, batchWriteRetryStrategy BatchWriteRetryStrategy) : FailedBatch in class com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper"
+		"description": "Rename Method private callUntilCompletion(batch Map<String,List<WriteRequest>>) : FailedBatch renamed to private doBatchWriteItemWithRetry(batch Map<String,List<WriteRequest>>, batchWriteRetryStrategy BatchWriteRetryStrategy) : FailedBatch in class com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper"
 	}, {
 		"type": "Rename Class",
 		"description": "Rename Class com.amazonaws.services.elasticfilesystem.model.transform.BadRequestExceptionUnmarshaller renamed to com.amazonaws.services.config.model.transform.InvalidRecordingGroupExceptionUnmarshaller"
@@ -4068,13 +4596,13 @@
 		"description": "Inline Method public createFileSystem(proxyUserName String, fsConf Configuration, stats OperatorStats) : DrillFileSystem inlined to public createFileSystem(proxyUserName String, fsConf Configuration) : DrillFileSystem in class org.apache.drill.exec.util.ImpersonationUtil"
 	},{
 		"type": "Pull Up Method",
-		"description": "Pull Up Method public addMiniDfsBasedStorage() : void from class org.apache.drill.exec.impersonation.TestImpersonationMetadata to protected addMiniDfsBasedStorage(workspaces Map) : void from class org.apache.drill.exec.impersonation.BaseTestImpersonation"
+		"description": "Pull Up Method public addMiniDfsBasedStorage() : void from class org.apache.drill.exec.impersonation.TestImpersonationMetadata to protected addMiniDfsBasedStorage(workspaces Map<String,WorkspaceConfig>) : void from class org.apache.drill.exec.impersonation.BaseTestImpersonation"
 	},{
 		"type": "Pull Up Method",
-		"description": "Pull Up Method public addMiniDfsBasedStorage() : void from class org.apache.drill.exec.impersonation.TestImpersonationDisabledWithMiniDFS to protected addMiniDfsBasedStorage(workspaces Map) : void from class org.apache.drill.exec.impersonation.BaseTestImpersonation"
+		"description": "Pull Up Method public addMiniDfsBasedStorage() : void from class org.apache.drill.exec.impersonation.TestImpersonationDisabledWithMiniDFS to protected addMiniDfsBasedStorage(workspaces Map<String,WorkspaceConfig>) : void from class org.apache.drill.exec.impersonation.BaseTestImpersonation"
 	},{
 		"type": "Pull Up Method",
-		"description": "Pull Up Method public addMiniDfsBasedStorageAndGenerateTestData() : void from class org.apache.drill.exec.impersonation.TestImpersonationQueries to protected addMiniDfsBasedStorage(workspaces Map) : void from class org.apache.drill.exec.impersonation.BaseTestImpersonation"
+		"description": "Pull Up Method public addMiniDfsBasedStorageAndGenerateTestData() : void from class org.apache.drill.exec.impersonation.TestImpersonationQueries to protected addMiniDfsBasedStorage(workspaces Map<String,WorkspaceConfig>) : void from class org.apache.drill.exec.impersonation.BaseTestImpersonation"
 	}
 ],
 	"time": "6/25/15 11:53 AM",
@@ -4085,10 +4613,10 @@
 	"author": "Simon Stewart",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute private PATH_TO_URL : Function from class com.facebook.buck.util.ClassLoaderCache to class com.facebook.buck.java.JarBackedJavac"
+		"description": "Move Attribute private PATH_TO_URL : Function<Path,URL> from class com.facebook.buck.util.ClassLoaderCache to class com.facebook.buck.java.JarBackedJavac"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private PATH_TO_URL : Function from class com.facebook.buck.util.ClassLoaderCacheTest to class com.facebook.buck.java.JarBackedJavac"
+		"description": "Move Attribute private PATH_TO_URL : Function<Path,URL> from class com.facebook.buck.util.ClassLoaderCacheTest to class com.facebook.buck.java.JarBackedJavac"
 	}],
 	"time": "6/25/15 3:55 PM",
 	"id": 1124975
@@ -4353,6 +4881,21 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method package getPartitionHashBucket(partitionCount int, position int, page Page) : int renamed to package getPartitionBucket(partitionCount int, position int, page Page) : int in class com.facebook.presto.operator.HashGenerator"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public setHashPartitionedOutput(partitionKeys List<Symbol>, hash Optional<Symbol>) : FragmentProperties renamed to public setPartitionedOutput(partitionKeys Optional<List<Symbol>>, hash Optional<Symbol>) : FragmentProperties in class com.facebook.presto.sql.planner.PlanFragmenter.FragmentProperties"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getPartition() : int from class com.facebook.presto.HashPagePartitionFunction to public getPartition() : int from class com.facebook.presto.PartitionedPagePartitionFunction"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getPartitionCount() : int from class com.facebook.presto.HashPagePartitionFunction to public getPartitionCount() : int from class com.facebook.presto.PartitionedPagePartitionFunction"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected partitionCount : int from class com.facebook.presto.HashPagePartitionFunction to class com.facebook.presto.PartitionedPagePartitionFunction"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected partition : int from class com.facebook.presto.HashPagePartitionFunction to class com.facebook.presto.PartitionedPagePartitionFunction"
 	}],
 	"time": "6/30/15 12:08 AM",
 	"id": 1127907
@@ -4461,7 +5004,7 @@
 	"author": "Jochen Schalanda",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute package COMPARATOR : Comparator from class org.graylog2.indexer.ranges.MongoIndexRangeService to class org.graylog2.indexer.ranges.IndexRange"
+		"description": "Move Attribute package COMPARATOR : Comparator<IndexRange> from class org.graylog2.indexer.ranges.MongoIndexRangeService to class org.graylog2.indexer.ranges.IndexRange"
 	}],
 	"time": "6/30/15 8:11 AM",
 	"id": 1130163
@@ -4594,7 +5137,7 @@
 	"author": "Jonathan McPherson",
 	"refactorings": [{
 		"type": "Move Method",
-		"description": "Move Method public checkForExistingApp(account RSConnectAccount, appName String, onValidated OperationWithInput) : void from class org.rstudio.studio.client.rsconnect.RSConnect to private checkForExistingApp(account RSConnectAccount, appName String, onValidated OperationWithInput) : void from class org.rstudio.studio.client.rsconnect.ui.RSConnectDeploy"
+		"description": "Move Method public checkForExistingApp(account RSConnectAccount, appName String, onValidated OperationWithInput<Boolean>) : void from class org.rstudio.studio.client.rsconnect.RSConnect to private checkForExistingApp(account RSConnectAccount, appName String, onValidated OperationWithInput<Boolean>) : void from class org.rstudio.studio.client.rsconnect.ui.RSConnectDeploy"
 	}, {
 		"type": "Inline Method",
 		"description": "Inline Method private fireValidatedRSconnectPublish(result RSConnectPublishResult, launchBrowser boolean) : void inlined to public fireRSConnectPublishEvent(result RSConnectPublishResult, launchBrowser boolean) : void in class org.rstudio.studio.client.rsconnect.RSConnect"
@@ -4671,6 +5214,30 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public uniquenessConstraint(labelId int, propertyKeyId int) : UniquenessConstraintRule renamed to private propertyConstraint(type Class<Rule>, labelId int, propertyKeyId int) : Rule in class org.neo4j.kernel.impl.store.SchemaStorage"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public toString() : String from class org.neo4j.kernel.api.constraints.UniquenessConstraint to public toString() : String from class org.neo4j.kernel.api.constraints.PropertyConstraint"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public label() : int from class org.neo4j.kernel.api.constraints.UniquenessConstraint to public label() : int from class org.neo4j.kernel.api.constraints.PropertyConstraint"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public equals(obj Object) : boolean from class org.neo4j.kernel.api.constraints.UniquenessConstraint to public equals(obj Object) : boolean from class org.neo4j.kernel.api.constraints.PropertyConstraint"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public propertyKeyId() : int from class org.neo4j.kernel.api.constraints.UniquenessConstraint to public propertyKeyId() : int from class org.neo4j.kernel.api.constraints.PropertyConstraint"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public hashCode() : int from class org.neo4j.kernel.api.constraints.UniquenessConstraint to public hashCode() : int from class org.neo4j.kernel.api.constraints.PropertyConstraint"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public userDescription(tokenNameLookup TokenNameLookup) : String from class org.neo4j.kernel.api.constraints.UniquenessConstraint to public userDescription(tokenNameLookup TokenNameLookup) : String from class org.neo4j.kernel.api.constraints.PropertyConstraint"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private propertyKeyId : int from class org.neo4j.kernel.api.constraints.UniquenessConstraint to class org.neo4j.kernel.api.constraints.PropertyConstraint"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private labelId : int from class org.neo4j.kernel.api.constraints.UniquenessConstraint to class org.neo4j.kernel.api.constraints.PropertyConstraint"
 	}],
 	"time": "7/2/15 2:23 AM",
 	"id": 1130638
@@ -4760,16 +5327,16 @@
 	"author": "Chen Mulong",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute package CASTING_TYPES : Map from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
+		"description": "Move Attribute package CASTING_TYPES : Map<String,String> from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute package NULLABLE_JAVA_TYPES : Map from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
+		"description": "Move Attribute package NULLABLE_JAVA_TYPES : Map<String,String> from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute package JAVA_TO_COLUMN_TYPES : Map from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
+		"description": "Move Attribute package JAVA_TO_COLUMN_TYPES : Map<String,String> from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute package JAVA_TO_REALM_TYPES : Map from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
+		"description": "Move Attribute package JAVA_TO_REALM_TYPES : Map<String,String> from class io.realm.processor.RealmProxyClassGenerator to class io.realm.processor.Constants"
 	}],
 	"time": "7/3/15 5:44 AM",
 	"id": 1131658
@@ -4801,7 +5368,7 @@
 		"description": "Move Method private writeScriptInclude(builder StringBuilder, scriptName String) : void from class com.gh4a.utils.StringUtils to protected writeScriptInclude(builder StringBuilder, scriptName String) : void from class com.gh4a.activities.WebViewerActivity"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private SKIP_PRETTIFY_EXT : List from class com.gh4a.Constants to class com.gh4a.activities.WebViewerActivity"
+		"description": "Move Attribute private SKIP_PRETTIFY_EXT : List<String> from class com.gh4a.Constants to class com.gh4a.activities.WebViewerActivity"
 	}],
 	"time": "7/6/15 4:56 AM",
 	"id": 1133259
@@ -5244,6 +5811,9 @@
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method private getNewScore(oldParameters INDArray) : double extracted from public optimize(initialStep double, parameters INDArray, gradients INDArray) : double in class org.deeplearning4j.optimize.solvers.BackTrackLineSearch"
+	}, {
+		"type": "Extract Method",
+		"description": "Extract Method private getIrisLogisticLayerConfig(activationFunction String, iterations int) : OutputLayer extracted from public testLineSearch() : void in class org.deeplearning4j.optimize.solver.BackTrackLineSearchTest"
 	}],
 	"time": "7/7/15 8:06 PM",
 	"id": 1135604
@@ -5677,6 +6247,9 @@
 			"description": "Extract Method protected getBoltPointsArrayResource() : int extracted from private loadBoltPoints(res Resources) : float[] in class com.android.systemui.BatteryMeterView.NormalBatteryMeterDrawable"
 		}, {
 			"type": "Extract Method",
+			"description": "Extract Method protected getBoltPointsArrayResource() : int extracted from private loadBoltPoints(res Resources) : float[] in class com.android.systemui.BatteryMeterView.CircleBatteryMeterDrawable"
+		}, {
+			"type": "Extract Method",
 			"description": "Extract Method public internalStoreStatsHistoryInFile(stats BatteryStats, fname String) : void extracted from public storeStatsHistoryInFile(fname String) : void in class com.android.internal.os.BatteryStatsHelper"
 		}, {
 			"type": "Extract Method",
@@ -5818,6 +6391,66 @@
 	}, {
 		"type": "Extract Superclass",
 		"description": "Extract Superclass com.squareup.javapoet.AbstractTypesTest from class com.squareup.javapoet.TypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private getElement(clazz Class<?>) : TypeElement from class com.squareup.javapoet.TypesTest to private getElement(clazz Class<?>) : TypeElement from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private getMirror(clazz Class<?>) : TypeMirror from class com.squareup.javapoet.TypesTest to private getMirror(clazz Class<?>) : TypeMirror from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getBasicTypeMirror() : void from class com.squareup.javapoet.TypesTest to public getBasicTypeMirror() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getParameterizedTypeMirror() : void from class com.squareup.javapoet.TypesTest to public getParameterizedTypeMirror() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getTypeVariableTypeMirror() : void from class com.squareup.javapoet.TypesTest to public getTypeVariableTypeMirror() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getPrimitiveTypeMirror() : void from class com.squareup.javapoet.TypesTest to public getPrimitiveTypeMirror() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getArrayTypeMirror() : void from class com.squareup.javapoet.TypesTest to public getArrayTypeMirror() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getVoidTypeMirror() : void from class com.squareup.javapoet.TypesTest to public getVoidTypeMirror() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getNullTypeMirror() : void from class com.squareup.javapoet.TypesTest to public getNullTypeMirror() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public parameterizedType() : void from class com.squareup.javapoet.TypesTest to public parameterizedType() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public arrayType() : void from class com.squareup.javapoet.TypesTest to public arrayType() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public wildcardExtendsType() : void from class com.squareup.javapoet.TypesTest to public wildcardExtendsType() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public wildcardExtendsObject() : void from class com.squareup.javapoet.TypesTest to public wildcardExtendsObject() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public wildcardSuperType() : void from class com.squareup.javapoet.TypesTest to public wildcardSuperType() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public wildcardMirrorNoBounds() : void from class com.squareup.javapoet.TypesTest to public wildcardMirrorNoBounds() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public wildcardMirrorExtendsType() : void from class com.squareup.javapoet.TypesTest to public wildcardMirrorExtendsType() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public wildcardMirrorSuperType() : void from class com.squareup.javapoet.TypesTest to public wildcardMirrorSuperType() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public typeVariable() : void from class com.squareup.javapoet.TypesTest to public typeVariable() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public box() : void from class com.squareup.javapoet.TypesTest to public box() : void from class com.squareup.javapoet.AbstractTypesTest"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public unbox() : void from class com.squareup.javapoet.TypesTest to public unbox() : void from class com.squareup.javapoet.AbstractTypesTest"
 	}],
 	"time": "7/10/15 11:56 AM",
 	"id": 1139380
@@ -5931,6 +6564,9 @@
 	"refactorings": [{
 		"type": "Extract Method",
 		"description": "Extract Method private printNotifyInsert(writer JavaWriter, uri UriContract) : void extracted from public write(filer Filer) : void in class net.simonvt.schematic.compiler.ContentProviderWriter"
+	}, {
+		"type": "Extract Method",
+		"description": "Extract Method private printNotifyBulkInsert(writer JavaWriter, uri UriContract) : void extracted from public write(filer Filer) : void in class net.simonvt.schematic.compiler.ContentProviderWriter"
 	}],
 	"time": "7/12/15 10:27 AM",
 	"id": 1139075
@@ -6013,9 +6649,12 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public toKeyMethodFormatsAsExpected() : void renamed to public configKeyFormatsAsExpected() : void in class feign.FeignTest"
-	},{
+	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public parseAndValidatateMetadata(method Method) : MethodMetadata renamed to protected parseAndValidateMetadata(targetType Class<?>, method Method) : MethodMetadata in class feign.jaxrs.JAXRSContract"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public parseAndValidatateMetadata(method Method) : MethodMetadata renamed to protected parseAndValidateMetadata(targetType Class<?>, method Method) : MethodMetadata in class feign.Contract.Default"
 	}],
 	"time": "7/13/15 1:49 PM",
 	"id": 1140131
@@ -6874,7 +7513,7 @@
 	"author": "Mattias Persson",
 	"refactorings": [{
 		"type": "Move Method",
-		"description": "Move Method public arrayAsCollection(arrayValue Object) : Collection from class org.neo4j.kernel.impl.util.IoPrimitiveUtils to public arrayAsCollection(arrayValue Object) : Collection from class org.neo4j.graphdb.Neo4jMatchers"
+		"description": "Move Method public arrayAsCollection(arrayValue Object) : Collection<Object> from class org.neo4j.kernel.impl.util.IoPrimitiveUtils to public arrayAsCollection(arrayValue Object) : Collection<Object> from class org.neo4j.graphdb.Neo4jMatchers"
 	}],
 	"time": "7/14/15 5:14 AM",
 	"id": 1140028
@@ -7107,7 +7746,7 @@
 		"description": "Move Class org.antlr.v4.runtime.tree.gui.PostScriptDocument moved to org.antlr.v4.gui.PostScriptDocument"
 	}, {
 		"type": "Inline Method",
-		"description": "Inline Method public toStringTree(t Tree, nodeTextProvider TreeTextProvider) : String inlined to public toStringTree(t Tree, ruleNames List) : String in class org.antlr.v4.runtime.tree.Trees"
+		"description": "Inline Method public toStringTree(t Tree, nodeTextProvider TreeTextProvider) : String inlined to public toStringTree(t Tree, ruleNames List<String>) : String in class org.antlr.v4.runtime.tree.Trees"
 	}
 ],
 	"time": "7/14/15 6:29 PM",
@@ -7190,7 +7829,7 @@
 	"author": "nik",
 	"refactorings": [{
 		"type": "Move Method",
-		"description": "Move Method private getJUnit4JarPaths() : List from class com.intellij.codeInsight.daemon.impl.quickfix.OrderEntryFix to public getJUnit4JarPaths() : List from class com.intellij.openapi.projectRoots.ex.JavaSdkUtil"
+		"description": "Move Method private getJUnit4JarPaths() : List<String> from class com.intellij.codeInsight.daemon.impl.quickfix.OrderEntryFix to public getJUnit4JarPaths() : List<String> from class com.intellij.openapi.projectRoots.ex.JavaSdkUtil"
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method public getLibraryPaths() : List<String> extracted from public getLibraryPath() : String in class com.intellij.execution.junit.JUnit4Framework"
@@ -7236,7 +7875,7 @@
 	"author": "Owen O'Malley",
 	"refactorings": [{
 		"type": "Move Method",
-		"description": "Move Method public getAcidEventFields() : List from class org.apache.hadoop.hive.ql.io.orc.OrcRecordUpdater to package getAcidEventFields() : List from class org.apache.hadoop.hive.ql.io.orc.RecordReaderFactory"
+		"description": "Move Method public getAcidEventFields() : List<String> from class org.apache.hadoop.hive.ql.io.orc.OrcRecordUpdater to package getAcidEventFields() : List<String> from class org.apache.hadoop.hive.ql.io.orc.RecordReaderFactory"
 	}],
 	"time": "7/15/15 6:41 PM",
 	"id": 1142783
@@ -7351,6 +7990,9 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method package getLastHandle() : long renamed to package getLastReadTime() : long in class com.hazelcast.nio.tcp.ReadHandler"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public toString() : String renamed to public render() : String in class com.hazelcast.internal.monitors.HealthMonitor.HealthMetrics"
 	}],
 	"time": "7/16/15 1:56 AM",
 	"id": 1143042
@@ -7400,6 +8042,21 @@
 	}, {
 		"type": "Rename Class",
 		"description": "Rename Class org.glassfish.jersey.tests.cdi.resources.MyApplication renamed to org.glassfish.jersey.tests.cdi.resources.MainApplication"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public registerLocator(locator ServiceLocator) : void from class org.glassfish.jersey.ext.cdi1x.servlet.internal.ServletHk2LocatorManager to public registerLocator(locator ServiceLocator) : void from class org.glassfish.jersey.ext.cdi1x.internal.GenericHk2LocatorManager"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getEffectiveLocator() : ServiceLocator from class org.glassfish.jersey.ext.cdi1x.servlet.internal.ServletHk2LocatorManager to public getEffectiveLocator() : ServiceLocator from class org.glassfish.jersey.ext.cdi1x.internal.GenericHk2LocatorManager"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public notify(target Hk2InjectedTarget) : void from class org.glassfish.jersey.ext.cdi1x.servlet.internal.ServletHk2LocatorManager to public notify(target Hk2InjectedTarget) : void from class org.glassfish.jersey.ext.cdi1x.internal.GenericHk2LocatorManager"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private locator : ServiceLocator from class org.glassfish.jersey.ext.cdi1x.servlet.internal.ServletHk2LocatorManager to class org.glassfish.jersey.ext.cdi1x.internal.GenericHk2LocatorManager"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private multipleLocators : boolean from class org.glassfish.jersey.ext.cdi1x.servlet.internal.ServletHk2LocatorManager to class org.glassfish.jersey.ext.cdi1x.internal.GenericHk2LocatorManager"
 	}],
 	"time": "7/16/15 4:51 AM",
 	"id": 1143365
@@ -7521,7 +8178,7 @@
 	"author": "Marek Sebera",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute private TAG : WeakReference from class com.loopj.android.http.RequestHandle to class com.loopj.android.http.AsyncHttpResponseHandler"
+		"description": "Move Attribute private TAG : WeakReference<Object> from class com.loopj.android.http.RequestHandle to class com.loopj.android.http.AsyncHttpResponseHandler"
 	}],
 	"time": "7/16/15 7:18 PM",
 	"id": 1143208
@@ -7683,11 +8340,11 @@
 	},
 	{
 		"type": "Rename Method",
-		"description": "Rename Method private getIndexUpdates(label int, propertyKeyId int) : DiffSets renamed to private getIndexUpdatesForScanOrSeek(label int, propertyKeyId int) : DiffSets in class org.neo4j.kernel.impl.api.state.TxState"
+		"description": "Rename Method private getIndexUpdates(label int, propertyKeyId int) : DiffSets<Long> renamed to private getIndexUpdatesForScanOrSeek(label int, propertyKeyId int) : DiffSets<Long> in class org.neo4j.kernel.impl.api.state.TxState"
 	},
 	{
 		"type": "Rename Method",
-		"description": "Rename Method private getIndexUpdates(label int, create boolean, property DefinedProperty) : DiffSets renamed to private getIndexUpdatesForScanOrSeek(label int, create boolean, property DefinedProperty) : DiffSets in class org.neo4j.kernel.impl.api.state.TxState"
+		"description": "Rename Method private getIndexUpdates(label int, create boolean, property DefinedProperty) : DiffSets<Long> renamed to private getIndexUpdatesForScanOrSeek(label int, create boolean, property DefinedProperty) : DiffSets<Long> in class org.neo4j.kernel.impl.api.state.TxState"
 	},
 	{
 		"type": "Rename Method",
@@ -7708,6 +8365,10 @@
 	{
 		"type": "Rename Method",
 		"description": "Rename Method private getIndexUpdatesForPrefix(descriptor IndexDescriptor, prefix String) : ReadableDiffSets<Long> renamed to private getIndexUpdatesForRangeSeekByPrefix(descriptor IndexDescriptor, prefix String) : ReadableDiffSets<Long> in class org.neo4j.kernel.impl.api.state.TxState"
+	},
+	{
+		"type": "Rename Method",
+		"description": "Rename Method private addToIndex(labelId int, propertyKeyId int, nodeIds long[]) : void renamed to public withStringProperties(nodesWithValues Collection<Pair<Long,String>>) : void in class org.neo4j.kernel.impl.api.state.TxStateTest"
 	}],
 	"time": "7/20/15 6:24 AM",
 	"id": 1144559
@@ -7760,7 +8421,10 @@
 	"author": "David Phillips",
 	"refactorings": [{
 		"type": "Move Class",
-		"description": "Move Class TestJmxSplitManager moved from com.facebook.presto.split to com.facebook.presto.connector.jmx"
+		"description": "Move Class com.facebook.presto.split.TestJmxSplitManager moved to com.facebook.presto.connector.jmx.TestJmxSplitManager"
+	}, {
+		"type": "Move Source Folder",
+		"description": "Move Source Folder presto-main to presto-jmx"
 	}],
 	"time": "7/20/15 1:54 PM",
 	"id": 1144535
@@ -7912,7 +8576,7 @@
 	"author": "jfarcand",
 	"refactorings": [{
 		"type": "Move Method",
-		"description": "Move Method private getInheritedPrivateFields(type Class) : Set from class org.atmosphere.inject.InjectableObjectFactory to public getInheritedPrivateFields(type Class) : Set from class org.atmosphere.util.Utils"
+		"description": "Move Method private getInheritedPrivateFields(type Class<?>) : Set<Field> from class org.atmosphere.inject.InjectableObjectFactory to public getInheritedPrivateFields(type Class<?>) : Set<Field> from class org.atmosphere.util.Utils"
 	}],
 	"time": "7/22/15 3:38 PM",
 	"id": 1149312
@@ -7932,10 +8596,10 @@
 	"author": "Nikolay Mikhaylov",
 	"refactorings": [{
 		"type": "Pull Up Method",
-		"description": "Pull Up Method public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List<String> from class org.jetbrains.idea.maven.server.Maven30ServerEmbedderImpl to public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List from class org.jetbrains.idea.maven.server.Maven3ServerEmbedder"
+		"description": "Pull Up Method public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List<String> from class org.jetbrains.idea.maven.server.Maven30ServerEmbedderImpl to public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List<String> from class org.jetbrains.idea.maven.server.Maven3ServerEmbedder"
 	}, {
 		"type": "Pull Up Method",
-		"description": "Pull Up Method public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List<String> from class org.jetbrains.idea.maven.server.Maven32ServerEmbedderImpl to public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List from class org.jetbrains.idea.maven.server.Maven3ServerEmbedder"
+		"description": "Pull Up Method public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List<String> from class org.jetbrains.idea.maven.server.Maven32ServerEmbedderImpl to public retrieveAvailableVersions(groupId String, artifactId String, remoteRepositoryUrl String) : List<String> from class org.jetbrains.idea.maven.server.Maven3ServerEmbedder"
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method public customizeComponents() : void extracted from public customize(workspaceMap MavenWorkspaceMap, failOnUnresolvedDependency boolean, console MavenServerConsole, indicator MavenServerProgressIndicator, alwaysUpdateSnapshots boolean) : void in class org.jetbrains.idea.maven.server.Maven32ServerEmbedderImpl"
@@ -7988,6 +8652,117 @@
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method protected runInternalArnoldi(iterations int) : int renamed to protected runInternalIteration() : int in class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected relationDirection : Direction from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected relationshipSet : Set<Relationship> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected nodeSet : Set<Node> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected values : Map<Node,Double> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected nodeSet : Set<Node> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected relationshipSet : Set<Relationship> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected doneCalculation : boolean from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected totalIterations : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected costEvaluator : CostEvaluator<Double> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected precision : double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected relationDirection : Direction from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected totalIterations : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected costEvaluator : CostEvaluator<Double> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected maxIterations : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected maxIterations : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected values : Map<Node,Double> from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected precision : double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected doneCalculation : boolean from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setMaxIterations(maxIterations int) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to public setMaxIterations(maxIterations int) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getCentrality(node Node) : Double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to public getCentrality(node Node) : Double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getMaxIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to public getMaxIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public reset() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to public reset() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected processRelationship(newValues Map<Node,Double>, relationship Relationship, backwards boolean) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to protected processRelationship(newValues Map<Node,Double>, relationship Relationship, backwards boolean) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected normalize(vector Map<Node,Double>) : double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to protected normalize(vector Map<Node,Double>) : double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public calculate() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to public calculate() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getMaxIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to public getMaxIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public reset() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to public reset() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public runIterations(maxNrIterations int) : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to public runIterations(maxNrIterations int) : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getTotalIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to public getTotalIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setMaxIterations(maxIterations int) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to public setMaxIterations(maxIterations int) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public runIterations(maxNrIterations int) : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to public runIterations(maxNrIterations int) : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private timeToStop(oldValues Map<Node,Double>, newValues Map<Node,Double>) : boolean from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to private timeToStop(oldValues Map<Node,Double>, newValues Map<Node,Double>) : boolean from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getTotalIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to public getTotalIterations() : int from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getCentrality(node Node) : Double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to public getCentrality(node Node) : Double from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public calculate() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to public calculate() : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private timeToStop(oldValues Map<Node,Double>, newValues Map<Node,Double>) : boolean from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityArnoldi to private timeToStop(oldValues Map<Node,Double>, newValues Map<Node,Double>) : boolean from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method protected processRelationship(newValues Map<Node,Double>, relationship Relationship, backwards boolean) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityPower to protected processRelationship(newValues Map<Node,Double>, relationship Relationship, backwards boolean) : void from class org.neo4j.graphalgo.impl.centrality.EigenvectorCentralityBase"
 	}],
 	"time": "7/23/15 10:19 AM",
 	"id": 1149802
@@ -8010,7 +8785,7 @@
 		"description": "Inline Method public generate(schema DataSchema) : ClassTemplateSpec inlined to private generateRecord(schema RecordDataSchema) : RecordTemplateSpec in class com.linkedin.pegasus.generator.TemplateSpecGenerator"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public getSchemaAndNames() : Collection<CodeUtil.Pair<DataSchema, String>> renamed to public getSchemaAndLocations() : Collection<CodeUtil.Pair<DataSchema, DataSchemaLocation>> in class com.linkedin.pegasus.generator.DataSchemaParser.ParseResult"
+		"description": "Rename Method public getSchemaAndNames() : Collection<CodeUtil.Pair<DataSchema,String>> renamed to public getSchemaAndLocations() : Collection<CodeUtil.Pair<DataSchema,DataSchemaLocation>> in class com.linkedin.pegasus.generator.DataSchemaParser.ParseResult"
 	}],
 	"time": "7/23/15 6:42 PM",
 	"id": 1147644
@@ -8093,6 +8868,9 @@
 	"refactorings": [{
 		"type": "Rename Package",
 		"description": "Rename Package org.robobinding.codegen.presentationmodel.nestedIPMexample to org.robobinding.codegen.presentationmodel.nestedIPM"
+	}, {
+		"type": "Extract Method",
+		"description": "Extract Method private removeItemPresentationModelFactoryMethod(dataSetProperties Collection<DataSetPropertyInfoImpl>) : void extracted from private processDataSetProperties() : void in class org.robobinding.codegen.presentationmodel.processor.PresentationModelInfoBuilder"
 	}],
 	"time": "7/24/15 8:26 AM",
 	"id": 1147192
@@ -8194,10 +8972,10 @@
 	"author": "Rickard O?berg",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute private singlePropertyCursor : InstanceCache from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
+		"description": "Move Attribute private singlePropertyCursor : InstanceCache<StoreSinglePropertyCursor> from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private allPropertyCursor : InstanceCache from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
+		"description": "Move Attribute private allPropertyCursor : InstanceCache<StorePropertyCursor> from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
 	}, {
 		"type": "Move Method",
 		"description": "Move Method private nodeDegreeByDirection(nodeId long, group RelationshipGroupRecord, direction Direction) : long from class org.neo4j.kernel.impl.api.store.DiskLayer to private nodeDegreeByDirection(group RelationshipGroupRecord, direction Direction) : long from class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
@@ -8206,7 +8984,7 @@
 		"description": "Move Class org.neo4j.kernel.impl.api.store.DiskLayer.AllStoreIdIterator moved to org.neo4j.kernel.impl.api.store.StoreStatement.AllStoreIdIterator"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private singleLabelCursor : InstanceCache from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
+		"description": "Move Attribute private singleLabelCursor : InstanceCache<StoreSingleLabelCursor> from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
 	}, {
 		"type": "Move Method",
 		"description": "Move Method public nodesGetAllCursor(statement StoreStatement) : Cursor from class org.neo4j.kernel.impl.api.store.DiskLayer to class org.neo4j.kernel.impl.api.store.StoreStatement"
@@ -8218,25 +8996,25 @@
 		"description": "Extract Method private assertHasRelationships(node long) : void extracted from private deleteNode2(node long, prop1 DefinedProperty, prop2 DefinedProperty, prop3 DefinedProperty) : void in class org.neo4j.kernel.impl.store.TestNeoStore"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute package GET_LABEL : ToIntFunction from class org.neo4j.kernel.api.cursor.LabelItem to class org.neo4j.kernel.api.cursor.NodeItem"
+		"description": "Move Attribute package GET_LABEL : ToIntFunction<LabelItem> from class org.neo4j.kernel.api.cursor.LabelItem to class org.neo4j.kernel.api.cursor.NodeItem"
 	}, {
 		"type": "Move Method",
 		"description": "Move Method private directionOf(nodeId long, relationshipId long, startNode long, endNode long) : Direction from class org.neo4j.kernel.impl.api.store.DiskLayer to private directionOf(nodeId long, relationshipId long, startNode long, endNode long) : Direction from class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private singlePropertyCursor : InstanceCache from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractRelationshipCursor"
+		"description": "Move Attribute private singlePropertyCursor : InstanceCache<StoreSinglePropertyCursor> from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractRelationshipCursor"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private allPropertyCursor : InstanceCache from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractRelationshipCursor"
+		"description": "Move Attribute private allPropertyCursor : InstanceCache<StorePropertyCursor> from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractRelationshipCursor"
 	}, {
 		"type": "Move Method",
 		"description": "Move Method private countByFirstPrevPointer(nodeId long, relationshipId long) : long from class org.neo4j.kernel.impl.api.store.DiskLayer to private countByFirstPrevPointer(relationshipId long) : long from class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private labelCursor : InstanceCache from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
+		"description": "Move Attribute private labelCursor : InstanceCache<StoreLabelCursor> from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
 	}, {
 		"type": "Move Attribute",
-		"description": "Move Attribute private nodeRelationshipCursor : InstanceCache from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
+		"description": "Move Attribute private nodeRelationshipCursor : InstanceCache<StoreNodeRelationshipCursor> from class org.neo4j.kernel.impl.api.store.StoreStatement to class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
 	}, {
 		"type": "Extract Superclass",
 		"description": "Extract Superclass org.neo4j.kernel.api.cursor.NodeItem.NodeItemHelper from class org.neo4j.kernel.impl.api.store.StoreAbstractNodeCursor"
@@ -8261,7 +9039,7 @@
 		"description": "Move Method private formatDomain(table TableHandle, column ColumnHandle, domain Domain) : String from class com.facebook.presto.sql.planner.PlanPrinter to private formatDomain(table TableHandle, column ColumnHandle, domain Domain) : String from class com.facebook.presto.sql.planner.PlanPrinter.Visitor"
 	}, {
 		"type": "Move Method",
-		"description": "Move Method private printConstraint(indent int, table TableHandle, column ColumnHandle, constraint TupleDomain) : void from class com.facebook.presto.sql.planner.PlanPrinter to private printConstraint(indent int, table TableHandle, column ColumnHandle, constraint TupleDomain) : void from class com.facebook.presto.sql.planner.PlanPrinter.Visitor"
+		"description": "Move Method private printConstraint(indent int, table TableHandle, column ColumnHandle, constraint TupleDomain<ColumnHandle>) : void from class com.facebook.presto.sql.planner.PlanPrinter to private printConstraint(indent int, table TableHandle, column ColumnHandle, constraint TupleDomain<ColumnHandle>) : void from class com.facebook.presto.sql.planner.PlanPrinter.Visitor"
 	}],
 	"time": "7/25/15 2:59 PM",
 	"id": 1149788
@@ -8511,7 +9289,7 @@
 	"author": "Hassan Eslami",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute private edgeStore : EdgeStore from class org.apache.giraph.comm.ServerData to class org.apache.giraph.partition.SimplePartitionStore"
+		"description": "Move Attribute private edgeStore : EdgeStore<I,V,E> from class org.apache.giraph.comm.ServerData to class org.apache.giraph.partition.SimplePartitionStore"
 	}],
 	"time": "7/27/15 4:20 PM",
 	"id": 1151028
@@ -8574,6 +9352,9 @@
 	}, {
 		"type": "Extract Method",
 		"description": "Extract Method protected isSubtype(other JSType, implicitImplCache ImplCache) : boolean extracted from public isSubtype(other JSType) : boolean in class com.google.javascript.rhino.jstype.ArrowType"
+	}, {
+		"type": "Extract Method",
+		"description": "Extract Method protected implicitMatch(rightType JSType, leftType JSType, implicitImplCache ImplCache) : boolean extracted from package isSubtypeHelper(thisType JSType, thatType JSType) : boolean in class com.google.javascript.rhino.jstype.JSType"
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public usesImplicitMatch() : boolean renamed to public isStructuralInterface() : boolean in class com.google.javascript.rhino.jstype.FunctionType"
@@ -8841,7 +9622,16 @@
 	"author": "Paul Ferraro",
 	"refactorings": [{
 		"type": "Move Class",
-		"description": "Move Class GroupServiceNameFactory moved from org.wildfly.clustering.spi to org.wildfly.clustering.service"
+		"description": "Move Class org.wildfly.clustering.spi.GroupServiceNameFactory moved to org.wildfly.clustering.service.GroupServiceNameFactory"
+	}, {
+		"type": "Rename Class",
+		"description": "Rename Class org.wildfly.clustering.server.singleton.SingletonService renamed to org.wildfly.clustering.server.singleton.CacheSingletonServiceBuilder"
+	}, {
+		"type": "Rename Class",
+		"description": "Rename Class org.wildfly.clustering.infinispan.spi.service.CacheContainerServiceNameFactory renamed to org.wildfly.clustering.service.SubGroupServiceNameFactory"
+	}, {
+		"type": "Move Source Folder",
+		"description": "Move Source Folder clustering/singleton to clustering/singleton/api"
 	}],
 	"time": "7/28/15 7:18 PM",
 	"id": 1152936
@@ -8899,7 +9689,7 @@
 		"description": "Move Method protected logInfo(message String, arguments Object[]) : void from class cascading.stats.tez.TezNodeStats to protected logInfo(message String, arguments Object[]) : void from class cascading.stats.CascadingStats"
 	}, {
 		"type": "Move Method",
-		"description": "Move Method protected logWarn(message String, arguments Object[]) : void from class cascading.stats.tez.TezNodeStats to class cascading.stats.CascadingStats"
+		"description": "Move Method protected logWarn(message String, arguments Object[]) : void from class cascading.stats.tez.TezNodeStats to protected logWarn(message String, arguments Object[]) : void from class cascading.stats.CascadingStats"
 	}, {
 		"type": "Move Attribute",
 		"description": "Move Attribute private prefixID : String from class cascading.stats.tez.TezNodeStats to class cascading.stats.CascadingStats"
@@ -8919,6 +9709,9 @@
 	"refactorings": [{
 		"type": "Move Class",
 		"description": "Move Class com.google.devtools.j2objc.translate.LambdaExpressionTest moved to com.google.devtools.j2objc.ast.LambdaExpressionTest"
+	}, {
+		"type": "Extract Method",
+		"description": "Extract Method public printLambdaCall(functionalInterface IMethodBinding, functionalTypeBinding ITypeBinding, methodBinding IMethodBinding, parameters List<VariableDeclaration>, isCapturing boolean) : void extracted from public visit(node LambdaExpression) : boolean in class com.google.devtools.j2objc.gen.StatementGenerator"
 	}],
 	"time": "7/29/15 9:03 PM",
 	"id": 1153111
@@ -8980,10 +9773,10 @@
 		"description": "Rename Method public getInt(name T, defaultValue short) : short renamed to public getShort(name T, defaultValue short) : short in class io.netty.handler.codec.EmptyHeaders"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public visit(entry Entry<ByteString, ByteString>) : boolean renamed to public translate(entry Entry<ByteString, ByteString>) : void in class io.netty.handler.codec.http2.HttpUtil.Http2ToHttpHeaderTranslator"
+		"description": "Rename Method public visit(entry Entry<ByteString,ByteString>) : boolean renamed to public translate(entry Entry<ByteString,ByteString>) : void in class io.netty.handler.codec.http2.HttpUtil.Http2ToHttpHeaderTranslator"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public visit(entry Entry<CharSequence, CharSequence>) : boolean renamed to public encode(entry Entry<CharSequence, CharSequence>) : void in class io.netty.handler.codec.AsciiHeadersEncoder"
+		"description": "Rename Method public visit(entry Entry<CharSequence,CharSequence>) : boolean renamed to public encode(entry Entry<CharSequence,CharSequence>) : void in class io.netty.handler.codec.AsciiHeadersEncoder"
 	}],
 	"time": "7/30/15 2:38 PM",
 	"id": 1153762
@@ -9159,6 +9952,63 @@
 	"refactorings": [{
 		"type": "Extract Superclass",
 		"description": "Extract Superclass org.jbpm.process.audit.JPAService from class org.jbpm.process.audit.JPAAuditLogService"
+	}, {
+		"type": "Rename Class",
+		"description": "Rename Class org.jbpm.services.task.commands.TaskQueryDataCommand renamed to org.jbpm.services.task.commands.TaskQueryWhereCommand"
+	}, {
+		"type": "Move Source Folder",
+		"description": "Move Source Folder jbpm-human-task/jbpm-human-task-core to jbpm-human-task/jbpm-human-task-jpa"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public initiator(createdById String[]) : TaskQueryBuilder renamed to public createdBy(createdById String[]) : TaskQueryBuilder in class org.jbpm.services.task.impl.TaskQueryBuilderImpl"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public taskOwner(taskOwnerId String[]) : TaskQueryBuilder renamed to public actualOwner(taskOwnerId String[]) : TaskQueryBuilder in class org.jbpm.services.task.impl.TaskQueryBuilderImpl"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public buildQuery() : ParametrizedQuery<TaskSummary> renamed to public build() : ParametrizedQuery<TaskSummary> in class org.jbpm.services.task.impl.TaskQueryBuilderImpl"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public addAppropriateParam(listId String, param T[]) : QueryCriteria renamed to public addParameter(listId String, param T[]) : QueryCriteria in class org.jbpm.query.jpa.data.QueryWhere"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method public getQueryData() : QueryData renamed to public getQueryWhere() : QueryWhere in class org.jbpm.query.jpa.builder.impl.AbstractQueryBuilderImpl"
+	}, {
+		"type": "Inline Method",
+		"description": "Inline Method private getAppropriateQueryCriteria(listId String, valueListSize int) : QueryCriteria inlined to public addParameter(listId String, param T[]) : QueryCriteria in class org.jbpm.query.jpa.data.QueryWhere"
+	}, {
+		"type": "Inline Method",
+		"description": "Inline Method private getAppropriateQueryCriteria(listId String, valueListSize int) : QueryCriteria inlined to public addRangeParameter(listId String, param T, start boolean) : void in class org.jbpm.query.jpa.data.QueryWhere"
+	}, {
+		"type": "Inline Method",
+		"description": "Inline Method private resetGroup() : void inlined to public clear() : void in class org.jbpm.query.jpa.data.QueryWhere"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private getEntityManager() : EntityManager from class org.jbpm.process.audit.JPAAuditLogService to protected getEntityManager() : EntityManager from class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private closeEntityManager(em EntityManager, transaction Object) : void from class org.jbpm.process.audit.JPAAuditLogService to protected closeEntityManager(em EntityManager, transaction Object) : void from class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private executeQuery(query Query, em EntityManager, type Class<T>) : List<T> from class org.jbpm.process.audit.JPAAuditLogService to public executeQuery(query Query, em EntityManager, type Class<T>) : List<T> from class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public dispose() : void from class org.jbpm.process.audit.JPAAuditLogService to public dispose() : void from class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public setPersistenceUnitName(persistenceUnitName String) : void from class org.jbpm.process.audit.JPAAuditLogService to public setPersistenceUnitName(persistenceUnitName String) : void from class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method private joinTransaction(em EntityManager) : Object from class org.jbpm.process.audit.JPAAuditLogService to protected joinTransaction(em EntityManager) : Object from class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public getPersistenceUnitName() : String from class org.jbpm.process.audit.JPAAuditLogService to public getPersistenceUnitName() : String from class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected persistenceUnitName : String from class org.jbpm.process.audit.JPAAuditLogService to class org.jbpm.process.audit.JPAService"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected persistenceStrategy : PersistenceStrategy from class org.jbpm.process.audit.JPAAuditLogService to class org.jbpm.process.audit.JPAService"
 	}],
 	"time": "8/1/15 7:38 PM",
 	"id": 1155451
@@ -9184,7 +10034,7 @@
 			"description": "Extract Method private ignoreRehashIteration(consumer Consumer<R>, supplier IteratorSupplier<R>, iteratorParallelDistribute boolean) : void extracted from package remoteIterator() : Iterator<R> in class org.infinispan.stream.impl.DistributedCacheStream"
 		}, {
 			"type": "Extract Method",
-			"description": "Extract Method protected supplierForSegments(ch ConsistentHash, targetSegments Set, excludedKeys Set, primaryOwnerOnly boolean) : Supplier extracted from protected supplierForSegments(ch ConsistentHash, targetSegments Set, excludedKeys Set) : Supplier in class org.infinispan.stream.impl.AbstractCacheStream"
+			"description": "Extract Method protected supplierForSegments(ch ConsistentHash, targetSegments Set<Integer>, excludedKeys Set<Object>, primaryOwnerOnly boolean) : Supplier<Stream<CacheEntry>> extracted from protected supplierForSegments(ch ConsistentHash, targetSegments Set<Integer>, excludedKeys Set<Object>) : Supplier<Stream<CacheEntry>> in class org.infinispan.stream.impl.AbstractCacheStream"
 		}
 
 	],
@@ -9294,7 +10144,7 @@
 		},
 		{
 			"type": "Inline Method",
-			"description": "Inline Method public createServer(engine Engine, port int, supportedCompression String, useAsyncServletApi boolean, asyncTimeOut int, requestFilters List, responseFilters List) : HttpServer inlined to public createServer(engine Engine, port int, supportedCompression String, useAsyncServletApi boolean, asyncTimeOut int) : HttpServer in class com.linkedin.restli.examples.RestLiIntTestServer"
+			"description": "Inline Method public createServer(engine Engine, port int, supportedCompression String, useAsyncServletApi boolean, asyncTimeOut int, requestFilters List<? extends RequestFilter>, responseFilters List<? extends ResponseFilter>) : HttpServer inlined to public createServer(engine Engine, port int, supportedCompression String, useAsyncServletApi boolean, asyncTimeOut int) : HttpServer in class com.linkedin.restli.examples.RestLiIntTestServer"
 		}, {
 			"type": "Rename Method",
 			"description": "Rename Method private shouldCompressResponse(operation String) : boolean renamed to private shouldCompressResponseForOperation(operation String) : boolean in class com.linkedin.r2.filter.compression.ClientCompressionFilter"
@@ -9343,9 +10193,6 @@
 	"refactorings": [{
 		"type": "Extract Method",
 		"description": "Extract Method public minorWasTriggered(keyspace String, cf String) : boolean extracted from public testTriggerMinorCompaction() : void in class org.apache.cassandra.db.compaction.CompactionsCQLTest"
-	}, {
-		"type": "Rename Method",
-		"description": "Rename Method public testTriggerMinorCompaction() : void renamed to public testTriggerMinorCompactionDTCS() : void in class org.apache.cassandra.db.compaction.CompactionsCQLTest"
 	}],
 	"time": "8/4/15 4:51 AM",
 	"id": 1156431
@@ -9378,7 +10225,7 @@
 	"author": "Aleksey Pivovarov",
 	"refactorings": [{
 		"type": "Move Attribute",
-		"description": "Move Attribute public ORIGINAL_DOCUMENT : Key from class com.intellij.diff.actions.DocumentFragmentContent to class com.intellij.openapi.command.undo.UndoManager"
+		"description": "Move Attribute public ORIGINAL_DOCUMENT : Key<Document> from class com.intellij.diff.actions.DocumentFragmentContent to class com.intellij.openapi.command.undo.UndoManager"
 	}],
 	"time": "8/4/15 10:40 AM",
 	"id": 1156821
@@ -9467,8 +10314,14 @@
 		"type": "Extract Method",
 		"description": "Extract Method private unpackBytesHeader() : int extracted from public unpackBytes() : byte[] in class org.neo4j.packstream.PackStream.Unpacker"
 	}, {
+		"type": "Extract Method",
+		"description": "Extract Method private unpackRawBytesInto(buffer byte[], offset int, size int) : void extracted from private unpackBytes(size int) : byte[] in class org.neo4j.packstream.PackStream.Unpacker"
+	}, {
 		"type": "Rename Method",
 		"description": "Rename Method public unpackString() : String renamed to public unpackText() : String in class org.neo4j.packstream.PackStream.Unpacker"
+	}, {
+		"type": "Rename Method",
+		"description": "Rename Method private unpackBytes(size int) : byte[] renamed to private unpackRawBytes(size int) : byte[] in class org.neo4j.packstream.PackStream.Unpacker"
 	}, {
 		"type": "Rename Class",
 		"description": "Rename Class org.neo4j.packstream.PackStream.PackstreamException renamed to org.neo4j.packstream.PackStream.PackStreamException"
@@ -9529,7 +10382,37 @@
 		"description": "Rename Method public setOgrExecutable(ogrExecutable String) : void renamed to public setExecutable(ogrExecutable String) : void in class org.geoserver.wfs.response.Ogr2OgrOutputFormat"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method public getGdalData() : String renamed to public getEnvironment() : Map<String, String> in class org.geoserver.wfs.response.Ogr2OgrOutputFormat"
+		"description": "Rename Method public getGdalData() : String renamed to public getEnvironment() : Map<String,String> in class org.geoserver.wfs.response.Ogr2OgrOutputFormat"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method package run(cmd List<String>, sb StringBuilder) : int from class org.geoserver.wfs.response.OGRWrapper to protected run(cmd List<String>, sb StringBuilder) : int from class org.geoserver.ogr.core.AbstractToolWrapper"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public onApplicationEvent(event ContextClosedEvent) : void from class org.geoserver.wfs.response.Ogr2OgrConfigurator to public onApplicationEvent(event ContextClosedEvent) : void from class org.geoserver.ogr.core.AbstractToolConfigurator"
+	}, {
+		"type": "Pull Up Method",
+		"description": "Pull Up Method public loadConfiguration() : void from class org.geoserver.wfs.response.Ogr2OgrConfigurator to public loadConfiguration() : void from class org.geoserver.ogr.core.AbstractToolConfigurator"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private options : List<String> from class org.geoserver.wfs.response.OgrFormat to class org.geoserver.ogr.core.Format"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private fileExtension : String from class org.geoserver.wfs.response.OgrFormat to class org.geoserver.ogr.core.Format"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private LOGGER : Logger from class org.geoserver.wfs.response.Ogr2OgrConfigurator to class org.geoserver.ogr.core.AbstractToolConfigurator"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private singleFile : boolean from class org.geoserver.wfs.response.OgrFormat to class org.geoserver.ogr.core.Format"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected listener : ResourceListener from class org.geoserver.wfs.response.Ogr2OgrConfigurator to class org.geoserver.ogr.core.AbstractToolConfigurator"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute private mimeType : String from class org.geoserver.wfs.response.OgrFormat to class org.geoserver.ogr.core.Format"
+	}, {
+		"type": "Pull Up Attribute",
+		"description": "Pull Up Attribute protected configFile : Resource from class org.geoserver.wfs.response.Ogr2OgrConfigurator to class org.geoserver.ogr.core.AbstractToolConfigurator"
 	}],
 	"time": "8/5/15 7:22 PM",
 	"id": 1158913
@@ -9591,10 +10474,10 @@
 		"description": "Extract Method private addSourceRoot(module Module, sourceRootName String, rootType JpsModuleSourceRootType<?>) : VirtualFile extracted from private addSourceRoot(module Module, sourceRootName String, isTestSourceRoot boolean) : VirtualFile in class org.intellij.erlang.compilation.ErlangCompilationTestBase"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method private getErlangModuleDescriptorFromConfig(target ErlangTarget, context CompileContext, isTests boolean) : List renamed to private getErlangFileDescriptorFromConfig(target ErlangTarget, context CompileContext, isTests boolean) : List in class org.intellij.erlang.jps.builder.ErlangBuilder"
+		"description": "Rename Method private getErlangModuleDescriptorFromConfig(target ErlangTarget, context CompileContext, isTests boolean) : List<ErlangFileDescriptor> renamed to private getErlangFileDescriptorFromConfig(target ErlangTarget, context CompileContext, isTests boolean) : List<ErlangFileDescriptor> in class org.intellij.erlang.jps.builder.ErlangBuilder"
 	}, {
 		"type": "Rename Method",
-		"description": "Rename Method private assertSameErlangModules(moduleDescriptors List, expectedModules String[]) : void renamed to private assertSameErlangFiles(moduleDescriptors List, expectedModules String[]) : void in class org.intellij.erlang.compilation.ErlangDependenciesResolutionTest"
+		"description": "Rename Method private assertSameErlangModules(moduleDescriptors List<ErlangFileDescriptor>, expectedModules String[]) : void renamed to private assertSameErlangFiles(moduleDescriptors List<ErlangFileDescriptor>, expectedModules String[]) : void in class org.intellij.erlang.compilation.ErlangDependenciesResolutionTest"
 	}, {
 		"type": "Rename Method",
 		"description": "Rename Method private addErlangModules(module Module, onlyTestModules boolean, erlangModules Collection<ErlangFile>) : Collection<ErlangFile> renamed to private addErlangFiles(module Module, onlyTestModules boolean, erlangModules Collection<ErlangFile>, type ErlangFileType) : Collection<ErlangFile> in class org.intellij.erlang.utils.ErlangModulesUtil"

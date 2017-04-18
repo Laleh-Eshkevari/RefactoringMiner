@@ -201,7 +201,8 @@ public class UMLModelASTReader {
     		if(node.getUserObject() != null) {
     			AnonymousClassDeclaration anonymous = (AnonymousClassDeclaration)node.getUserObject();
     			String anonymousName = getAnonymousName(node);
-    			processAnonymousClassDeclaration(anonymous, packageName + "." + className, anonymousName, sourceFile);
+    			UMLAnonymousClass anonymousClass = processAnonymousClassDeclaration(anonymous, packageName + "." + className, anonymousName, sourceFile);
+    			umlClass.addAnonymousClass(anonymousClass);
     		}
     	}
     	
@@ -307,7 +308,7 @@ public class UMLModelASTReader {
 		return attributes;
 	}
 	
-	private void processAnonymousClassDeclaration(AnonymousClassDeclaration anonymous, String packageName, String className, String sourceFile) {
+	private UMLAnonymousClass processAnonymousClassDeclaration(AnonymousClassDeclaration anonymous, String packageName, String className, String sourceFile) {
 		List<BodyDeclaration> bodyDeclarations = anonymous.bodyDeclarations();
 		
 		UMLAnonymousClass anonymousClass = new UMLAnonymousClass(packageName, className, sourceFile);
@@ -330,7 +331,7 @@ public class UMLModelASTReader {
 			}
 		}
 		
-		this.getUmlModel().addAnonymousClass(anonymousClass);
+		return anonymousClass;
 	}
 	
 	private void insertNode(AnonymousClassDeclaration childAnonymous, DefaultMutableTreeNode root) {
