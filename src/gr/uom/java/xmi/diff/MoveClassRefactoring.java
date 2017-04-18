@@ -9,10 +9,12 @@ public class MoveClassRefactoring implements Refactoring {
 	private String originalClassName;
 	private String movedClassName;
 	private UMLClass movedClass;
+	private UMLClass originalClass;
 	
-	public MoveClassRefactoring(String originalClassName,  String movedClassName, UMLClass movedClass) {
+	public MoveClassRefactoring(String originalClassName,  String movedClassName, UMLClass originalClass, UMLClass movedClass) {
 		this.originalClassName = originalClassName;
 		this.movedClassName = movedClassName;
+		this.originalClass = originalClass;
 		this.movedClass=movedClass;
 	}
 
@@ -73,10 +75,8 @@ public class MoveClassRefactoring implements Refactoring {
 		return movedClassName;
 	}
 
-	@Override
-	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
+	public UMLClass getOriginalClass() {
+		return originalClass;
 	}
 	
 }

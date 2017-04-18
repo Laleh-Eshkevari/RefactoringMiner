@@ -9,10 +9,12 @@ public class RenameClassRefactoring implements Refactoring {
 	private String originalClassName;
 	private String renamedClassName;
 	private UMLClass renamedUMlClass;
+	private UMLClass originalClass;
 	
-	public RenameClassRefactoring(String originalClassName,  String renamedClassName, UMLClass renamedUMlClass) {
+	public RenameClassRefactoring(String originalClassName,  String renamedClassName, UMLClass originalClass ,UMLClass renamedUMlClass) {
 		this.originalClassName = originalClassName;
 		this.renamedClassName = renamedClassName;
+		this.originalClass =  originalClass;
 		this.renamedUMlClass=renamedUMlClass;
 	}
 
@@ -47,10 +49,8 @@ public class RenameClassRefactoring implements Refactoring {
 		return renamedClassName;
 	}
 
-	@Override
-	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
+	public UMLClass getOriginalClass() {
+		return originalClass;
 	}
 	
 }

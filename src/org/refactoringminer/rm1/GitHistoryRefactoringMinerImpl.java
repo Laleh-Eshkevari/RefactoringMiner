@@ -1,7 +1,9 @@
 package org.refactoringminer.rm1;
 
+import gr.uom.java.xmi.UMLClass;
 import gr.uom.java.xmi.UMLModel;
 import gr.uom.java.xmi.UMLModelASTReader;
+import gr.uom.java.xmi.diff.UMLModelDiff;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +28,9 @@ import org.refactoringminer.api.RefactoringType;
 import org.refactoringminer.util.GitServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import buginducingcommitanalyzer.DetectedRefactoring;
+import buginducingcommitanalyzer.repowrapper.RepositoryAnalyzer;
 
 public class GitHistoryRefactoringMinerImpl implements GitHistoryRefactoringMiner {
 
@@ -127,6 +132,7 @@ public class GitHistoryRefactoringMinerImpl implements GitHistoryRefactoringMine
 			
 			// Diff between currentModel e parentModel
 			refactoringsAtRevision = parentUMLModel.diff(currentUMLModel, renamedFilesHint).getRefactorings();
+			RepositoryAnalyzer.getCommitUmlModels().put(currentCommit.getId().getName(), currentUMLModel);
 			//refactoringsAtRevision = filter(refactoringsAtRevision); for AIKO we don't need it
 			
 		} else {

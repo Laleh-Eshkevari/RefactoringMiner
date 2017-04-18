@@ -13,6 +13,8 @@ import gr.uom.java.xmi.decomposition.UMLOperationBodyMapper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -23,6 +25,10 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.refactoringminer.api.Refactoring;
+import org.refactoringminer.api.RefactoringType;
+
+import buginducingcommitanalyzer.RefactoringGranularityAnalysis;
+import buginducingcommitanalyzer.RefactoringSourceTargets;
 
 public class UMLModelDiff {
    private List<UMLClass> addedClasses;
@@ -343,28 +349,52 @@ public class UMLModelDiff {
          for(UMLAttribute removedAttribute : removedAttributes) {
             if(addedAttribute.getName().equals(removedAttribute.getName()) &&
                   addedAttribute.getType().equals(removedAttribute.getType())) {
+            	Refactoring ref = null;
                if(isSubclassOf(removedAttribute.getClassName(), addedAttribute.getClassName())) {
-                  PullUpAttributeRefactoring pullUpAttribute = new PullUpAttributeRefactoring(addedAttribute,
+                  PullUpAttributeRefactoring pullUpAttribute = new PullUpAttributeRefactoring(addedAttribute, removedAttribute,
                         removedAttribute.getClassName(), addedAttribute.getClassName());
                   refactorings.add(pullUpAttribute);
+                  ref = pullUpAttribute;
                }
                else if(isSubclassOf(addedAttribute.getClassName(), removedAttribute.getClassName())) {
-                  PushDownAttributeRefactoring pushDownAttribute = new PushDownAttributeRefactoring(addedAttribute,
+                  PushDownAttributeRefactoring pushDownAttribute = new PushDownAttributeRefactoring(addedAttribute, removedAttribute,
                         removedAttribute.getClassName(), addedAttribute.getClassName());
                   refactorings.add(pushDownAttribute);
+                  ref = pushDownAttribute;
                }
                else {
-                  MoveAttributeRefactoring moveAttribute = new MoveAttributeRefactoring(addedAttribute,
-                        removedAttribute.getClassName(), addedAttribute.getClassName());
+                  MoveAttributeRefactoring moveAttribute = new MoveAttributeRefactoring(addedAttribute, removedAttribute,
+                        removedAttribute.getClassName(), addedAttribute.getClassName()); 
                   refactorings.add(moveAttribute);
+                  ref = moveAttribute;
                }
+               if(ref != null){
+            	   UMLClassDiff umlClassDiffOfSource=this.getUMLClassDiff(removedAttribute.getClassName());
+                   UMLClassDiff umlClassDiffOfTarget=this.getUMLClassDiff(addedAttribute.getClassName());
+                   RefactoringSourceTargets refactoringSourceTargets= RefactoringGranularityAnalysis.containsSourceBeforeRef(umlClassDiffOfSource.getOriginalClass());
+	               if(refactoringSourceTargets == null){
+	            	   refactoringSourceTargets= new RefactoringSourceTargets(umlClassDiffOfSource.getOriginalClass());
+	            	   RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+	               }
+	               umlClassDiffOfSource.getRemovedAttributes().remove(removedAttribute);
+	               umlClassDiffOfTarget.getAddedAttributes().remove(addedAttribute);
+                   Set<UMLClass> aSet= new HashSet<UMLClass>();
+                   aSet.add(umlClassDiffOfTarget.getNextClass());
+                   refactoringSourceTargets.populateMap(ref, aSet);
+                   RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+                   RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(umlClassDiffOfSource.getOriginalClass(), umlClassDiffOfSource);
+                   RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(umlClassDiffOfTarget.getOriginalClass(), umlClassDiffOfTarget);
+                   RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(umlClassDiffOfSource.getOriginalClass(), umlClassDiffOfSource.getNextClass());
+                   RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(umlClassDiffOfTarget.getOriginalClass(),umlClassDiffOfTarget.getNextClass());
+               }
+               
             }
          }
       }
       return refactorings;
    }
 
-   private List<UMLAttribute> getAddedAttributesInCommonClasses() {
+  private List<UMLAttribute> getAddedAttributesInCommonClasses() {
       List<UMLAttribute> addedAttributes = new ArrayList<UMLAttribute>();
       for(UMLClassDiff classDiff : commonClassDiffList) {
          addedAttributes.addAll(classDiff.getAddedAttributes());
@@ -448,6 +478,11 @@ public class UMLModelDiff {
          }
          if(subclassSet.size() > 0) {
             ExtractSuperclassRefactoring extractSuperclassRefactoring = new ExtractSuperclassRefactoring(addedClass, subclassSet);
+            for(UMLClass subClass: subclassSet){
+//            	this.populateSourceClassRefactoringMaps(this.getUMLClassDiff(subClass.getName()).getOriginalClass(), extractSuperclassRefactoring);
+//            	this.populateTargetClassRefactoringMaps(subClass, extractSuperclassRefactoring);
+            }
+          //  this.populateTargetClassRefactoringMaps(addedClass, extractSuperclassRefactoring);
             refactorings.add(extractSuperclassRefactoring);
          }
       }
@@ -483,6 +518,8 @@ public class UMLModelDiff {
             if(addedClass.getAttributes().containsAll(anonymousClass.getAttributes()) &&
                   addedClass.getOperations().containsAll(anonymousClass.getOperations())) {
                ConvertAnonymousClassToTypeRefactoring refactoring = new ConvertAnonymousClassToTypeRefactoring(anonymousClass, addedClass);
+              // this.populateSourceClassRefactoringMaps(anonymousClass, refactoring);
+             //  this.populateTargetClassRefactoringMaps(addedClass, refactoring);
                refactorings.add(refactoring);
             }
          }
@@ -505,8 +542,9 @@ public class UMLModelDiff {
 		   
 		   if (!originalName.equals(movedName)) {
 			   if (!pathIsTheSame) {
-				   MoveClassRefactoring refactoring = new MoveClassRefactoring(originalName, movedName, movedClass );
-				   
+				   MoveClassRefactoring refactoring = new MoveClassRefactoring(originalName, movedName, originalClass ,movedClass );
+				  // this.populateSourceClassRefactoringMaps(originalClass, refactoring);
+				   //this.populateTargetClassRefactoringMaps(movedClass, refactoring);
 				   RenamePattern renamePattern = refactoring.getRenamePattern();
 				   //check if the the original path is a substring of the moved path and vice versa
 				   if(renamePattern.getOriginalPath().contains(renamePattern.getMovedPath()) ||
@@ -531,6 +569,8 @@ public class UMLModelDiff {
 		   } else {
 			   if (!pathIsTheSame) {
 				   MoveClassFolderRefactoring refactoring = new MoveClassFolderRefactoring(originalName, originalPath, movedPath);
+				   //this.populateSourceClassRefactoringMaps(originalClass, refactoring);
+				   //this.populateTargetClassRefactoringMaps(movedClass, refactoring);
 				   refactorings.add(refactoring);
 			   }
 		   }
@@ -550,7 +590,10 @@ public class UMLModelDiff {
    private List<RenameClassRefactoring> getRenameClassRefactorings() {
       List<RenameClassRefactoring> refactorings = new ArrayList<RenameClassRefactoring>();
       for(UMLClassRenameDiff classRenameDiff : classRenameDiffList) {
-         RenameClassRefactoring refactoring = new RenameClassRefactoring(classRenameDiff.getOriginalClass().getName(), classRenameDiff.getRenamedClass().getName(),classRenameDiff.getRenamedClass() );
+    	  UMLClass originalClass = classRenameDiff.getOriginalClass();
+         RenameClassRefactoring refactoring = new RenameClassRefactoring(originalClass.getName(), classRenameDiff.getRenamedClass().getName(), originalClass ,classRenameDiff.getRenamedClass() );
+        // this.populateSourceClassRefactoringMaps(classRenameDiff.getOriginalClass(), refactoring);
+        // this.populateTargetClassRefactoringMaps(classRenameDiff.getRenamedClass(), refactoring);
          refactorings.add(refactoring);
       }
       return refactorings;
@@ -567,7 +610,6 @@ public class UMLModelDiff {
       for(UMLClassDiff classDiff : commonClassDiffList) {
          refactorings.addAll(classDiff.getRefactorings());
       }
-
       refactorings.addAll(this.refactorings);
       return refactorings;
    }
@@ -671,11 +713,33 @@ public class UMLModelDiff {
 	               }
 	               else if(isSubclassOf(addedOperation.getClassName(), removedOperation.getClassName()) && (addedOperation.equalParameters(removedOperation) || addedOperation.overloadedParameters(removedOperation))) {
 	                  refactoring = new PushDownOperationRefactoring(removedOperation, addedOperation);
+	               
 	               }
 	               else if(movedMethodSignature(removedOperation, addedOperation) && !refactoringListContainsAnotherMoveRefactoringWithTheSameOperations(removedOperation, addedOperation)) {
 	                  refactoring = new MoveOperationRefactoring(removedOperation, addedOperation);
+	                  ((MoveOperationRefactoring)refactoring).analyzeRefGranularity(firstMapper); 
 	               }
 	               if(refactoring != null) {
+	            	   UMLClassDiff umlClassDiffSource = this.getUMLClassDiff(removedOperation.getClassName());
+		               UMLClassDiff umlClassDiffTarget =  this.getUMLClassDiff(addedOperation.getClassName());   
+		               UMLClass sourceBeforeRef = umlClassDiffSource.getOriginalClass();
+		               UMLClass sourceAfterRef = umlClassDiffSource.getNextClass();   
+		               UMLClass targetBeforeRef = umlClassDiffTarget.getOriginalClass();
+		               UMLClass targetAfterRef = umlClassDiffTarget.getNextClass();	
+		               RefactoringSourceTargets refactoringSourceTargets= RefactoringGranularityAnalysis.containsSourceBeforeRef(sourceBeforeRef);
+						if(refactoringSourceTargets == null){
+							refactoringSourceTargets= new RefactoringSourceTargets(sourceBeforeRef);
+							RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+						}
+		               Set<UMLClass> aSet= new HashSet<UMLClass>();
+		               aSet.add(targetAfterRef);
+		               refactoringSourceTargets.populateMap(refactoring, aSet);
+		               RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+		               RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(sourceBeforeRef , umlClassDiffSource);
+		               RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(sourceAfterRef , umlClassDiffTarget);
+		               RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(sourceBeforeRef , sourceAfterRef);
+		               RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(targetBeforeRef, targetAfterRef);   
+	            	   
 	                  deleteRemovedOperation(removedOperation);
 	                  deleteAddedOperation(addedOperation);
 	                  refactorings.add(refactoring);
@@ -730,8 +794,28 @@ public class UMLModelDiff {
 	               }
 	               else if(movedMethodSignature(removedOperation, addedOperation) && !refactoringListContainsAnotherMoveRefactoringWithTheSameOperations(removedOperation, addedOperation)) {
 	                  refactoring = new MoveOperationRefactoring(removedOperation, addedOperation);
+	                  ((MoveOperationRefactoring)refactoring).analyzeRefGranularity(firstMapper);
 	               }
 	               if(refactoring != null) {
+	            	   UMLClassDiff umlClassDiffSource = this.getUMLClassDiff(removedOperation.getClassName());
+		               UMLClassDiff umlClassDiffTarget =  this.getUMLClassDiff(addedOperation.getClassName());   
+		               UMLClass sourceBeforeRef = umlClassDiffSource.getOriginalClass();
+		               UMLClass sourceAfterRef = umlClassDiffSource.getNextClass();   
+		               UMLClass targetBeforeRef = umlClassDiffTarget.getOriginalClass();
+		               UMLClass targetAfterRef = umlClassDiffTarget.getNextClass();		                  
+		               RefactoringSourceTargets refactoringSourceTargets= RefactoringGranularityAnalysis.containsSourceBeforeRef(sourceBeforeRef);
+		               if(refactoringSourceTargets == null){
+		            	   refactoringSourceTargets= new RefactoringSourceTargets(sourceBeforeRef);
+		            	   RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+		               }
+		               Set<UMLClass> aSet= new HashSet<UMLClass>();
+		               aSet.add(targetAfterRef);
+		               refactoringSourceTargets.populateMap(refactoring, aSet);
+		               RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+		               RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(sourceBeforeRef , umlClassDiffSource);
+		               RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(sourceAfterRef , umlClassDiffTarget);
+		               RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(sourceBeforeRef , sourceAfterRef);
+		               RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(targetBeforeRef, targetAfterRef);   
 	                  deleteRemovedOperation(removedOperation);
 	                  deleteAddedOperation(addedOperation);
 	                  refactorings.add(refactoring);
@@ -796,4 +880,5 @@ public class UMLModelDiff {
       UMLClassDiff classDiff = getUMLClassDiff(operation.getClassName());
       classDiff.getAddedOperations().remove(operation);
    }
+
 }

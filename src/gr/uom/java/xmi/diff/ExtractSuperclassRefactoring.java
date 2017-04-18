@@ -49,11 +49,11 @@ public class ExtractSuperclassRefactoring implements Refactoring {
 		}
 		return subclassSet;
 	}
-
-	@Override
-	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
+	
+	
+	public Set<UMLClass> getSubclasses() {
+		return this.subclassSet;
 	}
+	
 
 }

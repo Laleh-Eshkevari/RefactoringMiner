@@ -6,9 +6,9 @@ import gr.uom.java.xmi.UMLAttribute;
 
 public class PushDownAttributeRefactoring extends MoveAttributeRefactoring {
 
-	public PushDownAttributeRefactoring(UMLAttribute movedAttribute,
+	public PushDownAttributeRefactoring(UMLAttribute movedAttribute,UMLAttribute originalAttribute,
 			String sourceClassName, String targetClassName) {
-		super(movedAttribute, sourceClassName, targetClassName);
+		super(movedAttribute, originalAttribute, sourceClassName, targetClassName);
 	}
 
 	public String toString() {

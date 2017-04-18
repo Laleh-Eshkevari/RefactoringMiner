@@ -53,9 +53,4 @@ public class RenamePackageRefactoring implements Refactoring {
 		return sb.toString();
 	}
 
-	@Override
-	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
-	}
 }

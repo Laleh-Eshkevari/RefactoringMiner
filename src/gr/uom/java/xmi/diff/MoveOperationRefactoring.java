@@ -4,10 +4,16 @@ import org.refactoringminer.api.Refactoring;
 import org.refactoringminer.api.RefactoringType;
 
 import gr.uom.java.xmi.UMLOperation;
+import gr.uom.java.xmi.decomposition.AbstractCodeMapping;
+import gr.uom.java.xmi.decomposition.UMLOperationBodyMapper;
+import gr.uom.java.xmi.decomposition.replacement.Replacement;
+import gr.uom.java.xmi.decomposition.replacement.StringLiteralReplacement;
+import gr.uom.java.xmi.decomposition.replacement.VariableRename;
 
 public class MoveOperationRefactoring implements Refactoring {
 	protected UMLOperation originalOperation;
 	protected UMLOperation movedOperation;
+	private boolean isPureRefactoring=false;
 
 	public MoveOperationRefactoring(UMLOperation originalOperation, UMLOperation movedOperation) {
 		this.originalOperation = originalOperation;
@@ -16,7 +22,11 @@ public class MoveOperationRefactoring implements Refactoring {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(getName()).append("\t");
+		String isPure="";
+		if(this.isPureRefactoring){
+			isPure="(p)";
+		}
+		sb.append(getName()).append(" " + isPure).append("\t");
 		sb.append(originalOperation);
 		sb.append(" from class ");
 		sb.append(originalOperation.getClassName());
@@ -47,10 +57,49 @@ public class MoveOperationRefactoring implements Refactoring {
 		return movedOperation;
 	}
 
-	@Override
 	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
+		return this.isPureRefactoring;
+	}
+
+	public void analyzeRefGranularity(UMLOperationBodyMapper umlOperationBodyMapper) {
+		
+		System.out.println("=======> " + this.toString());
+		boolean cond1=false;
+		if(umlOperationBodyMapper.getNonMappedInnerNodesT1().size()==0 &&
+			    umlOperationBodyMapper.getNonMappedInnerNodesT2().size()==0	&&
+			    umlOperationBodyMapper.getNonMappedLeavesT1().size()==0  &&
+			    umlOperationBodyMapper.getNonMappedLeavesT2().size()==0 ){
+				System.out.println("All nonMapped are empty");
+				 cond1 = true;
+			}else{
+				System.out.println("There are some nonMapped statements");
+			}
+			
+			// now we check the mapped statements between originalOperation and movedOperation
+			int complexChange = 0;
+			if(umlOperationBodyMapper.getMappings().size()>0){
+				for(AbstractCodeMapping codeMapping : umlOperationBodyMapper.getMappings()){
+					if(!codeMapping.getReplacements().isEmpty() || !codeMapping.getFragment1().equalFragment(codeMapping.getFragment2())) {
+						for(Replacement r : codeMapping.getReplacements()){
+							if(!(r instanceof StringLiteralReplacement)){
+								complexChange ++ ;
+							}
+						}
+					}
+				}
+			}
+			boolean cond2=false;
+			if(complexChange == 0){
+				System.out.println("The mapping between removed and added are Simple");
+				cond2= true;
+			}else{
+				System.out.println("The mapping between removed and added are complex, complexChange: " 
+						+ complexChange );
+			}
+			
+			if(cond1 && cond2){
+				this.isPureRefactoring=true;
+			}
 	}
 
 }

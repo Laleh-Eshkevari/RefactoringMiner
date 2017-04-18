@@ -48,10 +48,4 @@ public class SDRefactoring implements Refactoring {
 //		}
 		return sb.toString();
 	}
-
-@Override
-public boolean isPureRefactoring() {
-	// TODO Auto-generated method stub
-	return false;
-}
 }

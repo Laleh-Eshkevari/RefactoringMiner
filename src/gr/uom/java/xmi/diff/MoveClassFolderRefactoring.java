@@ -50,11 +50,5 @@ public class MoveClassFolderRefactoring implements Refactoring {
 		}
 		return separatorPos;
 	}
-
-	@Override
-	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
-	}
 	
 }

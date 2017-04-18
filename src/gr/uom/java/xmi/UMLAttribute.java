@@ -14,6 +14,7 @@ public class UMLAttribute implements Comparable<UMLAttribute>, Serializable {
 	private Object value;
 	private int startLine;
 	private int endLine;
+	private String sourceFile;
 
 	public UMLAttribute(String name, UMLType type) {
 		this.name = name;
@@ -134,5 +135,13 @@ public class UMLAttribute implements Comparable<UMLAttribute>, Serializable {
 		int distance = StringDistance.editDistance(s1, s2);
 		double normalized = (double)distance/(double)Math.max(s1.length(), s2.length());
 		return normalized;
+	}
+
+	public void setSourceFile(String sourceFile) {
+		this.sourceFile = sourceFile;
+	}
+	
+	public String getSourceFile() {
+		return this.sourceFile;
 	}
 }

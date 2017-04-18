@@ -1,6 +1,7 @@
 package buginducingcommitanalyzer.repowrapper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -8,9 +9,10 @@ import java.util.Set;
 
 import org.refactoringminer.api.Refactoring;
 
-public class Commit {
+public class Commit implements Comparable<Commit>{
 	
 	private String commitHash;
+	private Commit parent; // previous 
 	private List<Refactoring> refs;
 	private boolean isBugInducingCommit;
 	private boolean hasFix; // if it is fixed in the following commits
@@ -20,7 +22,8 @@ public class Commit {
 	// key: a hash that is already in fixedIn 
 	// value: the overlap of a refactoring in refs with the changed files of the key
 	private HashMap<Commit, Set<OverlapInfo>> refactoingsAndFixOverlap; 
-	private String date;
+	private String dateAsString;
+	private Date date;
 	
 	public Commit(String commitHash){
 		this.commitHash = commitHash;
@@ -70,11 +73,19 @@ public class Commit {
 		
 	}
 
-	public String getDate() {
+	public String getDateInString() {
+		return dateAsString;
+	}
+
+	public void setDateInString(String date) {
+		this.dateAsString = date;
+	}
+
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -88,13 +99,13 @@ public class Commit {
 
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.commitHash +  "  date: " +this.date +"\n");
+		sb.append(this.commitHash +  "  date: " +this.dateAsString +"\n");
 		if(isBugInducingCommit)
 			sb.append("\t is bug inducing commit\n");
 		if(hasFix){	
 			sb.append("\t it is fixed in the following commit(s):\n");
 			for(Commit fix:this.fixedIn){
-				sb.append("\t\t"+ fix.getCommitHash() + "  date: " + fix.getDate() +"\n");
+				sb.append("\t\t"+ fix.getCommitHash() + "  date: " + fix.getDateInString() +"  with distance: "+ RepositoryAnalyzer.getCommitDistance(this, fix) + "\n");
 			}
 		}
 		if(this.isFixingCommit){
@@ -113,7 +124,7 @@ public class Commit {
 				if(c.getRefactorings().size()>0)
 					sb.append("\t\t fixesd in: " + c.getCommitHash()+ "  with "+ c.getRefactorings().size()+" refactoring(s) \n");
 				else
-					sb.append("\t\t fixesd in: " + c.getCommitHash()+ "\n");
+					sb.append("\t\t fixesd in: " + c.getCommitHash()+ "\n" );
 				for(OverlapInfo info: refactoingsAndFixOverlap.get(c)){
 					sb.append("\t\t\t" +  info.getOverlap() +",  "+info.getRef().toString()+ "\n");
 					sb.append("\n");
@@ -121,7 +132,7 @@ public class Commit {
 			}
 		}
 		if( changedFiles.size()>0)
-			sb.append("\t Java files changed: "+  changedFiles.size());
+			sb.append("\t Java files changed: "+  changedFiles.size()+"\n");
 		return sb.toString();
 	}
 	
@@ -136,4 +147,25 @@ public class Commit {
 			}
 		}
 	}
+
+	@Override
+	public int compareTo(Commit o) {
+		if(o.getDate().before(this.date)){
+			return -1;
+		}else if(o.getDate().after(this.date)){
+			return +1;
+		}else{
+			return 0;
+		}
+	}
+
+	public Commit getParent() {
+		return this.parent;
+	}
+
+	public void setParent(Commit commit) {
+		this.parent = commit;  
+		
+	}
+
 }

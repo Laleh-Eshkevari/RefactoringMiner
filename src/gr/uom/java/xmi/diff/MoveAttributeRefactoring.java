@@ -4,15 +4,18 @@ import org.refactoringminer.api.Refactoring;
 import org.refactoringminer.api.RefactoringType;
 
 import gr.uom.java.xmi.UMLAttribute;
+import gr.uom.java.xmi.UMLClass;
 
 public class MoveAttributeRefactoring implements Refactoring {
 	protected UMLAttribute movedAttribute;
+	protected UMLAttribute originalAttribute;
 	protected String sourceClassName;
 	protected String targetClassName;
 	
-	public MoveAttributeRefactoring(UMLAttribute movedAttribute,
+	public MoveAttributeRefactoring(UMLAttribute movedAttribute, UMLAttribute originalAttribute,
 			String sourceClassName, String targetClassName) {
 		this.movedAttribute = movedAttribute;
+		this.originalAttribute= originalAttribute;
 		this.sourceClassName = sourceClassName;
 		this.targetClassName = targetClassName;
 	}
@@ -48,10 +51,8 @@ public class MoveAttributeRefactoring implements Refactoring {
     return targetClassName;
   }
 
-	@Override
-	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
+	public UMLAttribute getOriginalAttribute() {
+		return originalAttribute;
 	}
 
 }

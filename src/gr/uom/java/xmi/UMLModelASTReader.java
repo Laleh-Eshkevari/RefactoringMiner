@@ -171,6 +171,7 @@ public class UMLModelASTReader {
     		List<UMLAttribute> attributes = processFieldDeclaration(fieldDeclaration/*, bytecodeClass*/);
     		for(UMLAttribute attribute : attributes) {
     			attribute.setClassName(umlClass.getName());
+    			attribute.setSourceFile(sourceFile);
     			umlClass.addAttribute(attribute);
     		}
     	}
@@ -317,6 +318,7 @@ public class UMLModelASTReader {
 				List<UMLAttribute> attributes = processFieldDeclaration(fieldDeclaration/*, bytecodeClass*/);
 	    		for(UMLAttribute attribute : attributes) {
 	    			attribute.setClassName(anonymousClass.getName());
+	    			attribute.setSourceFile(sourceFile);
 	    			anonymousClass.addAttribute(attribute);
 	    		}
 			}

@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import buginducingcommitanalyzer.repowrapper.Commit;
 
@@ -35,6 +38,7 @@ public class BugInducingCommitLoader {
 				//String author_date_unix_timestamp = info[2];
 				//String author_email = info[3];
 				String author_date = info[4];
+				Date d = this.getDate(author_date);
 				//String commit_message = info[5];
 				//String fix = info[6];
 				//String classification = info[7];
@@ -77,7 +81,8 @@ public class BugInducingCommitLoader {
 					commits.put(commit_hash, commit);
 					//System.out.println("ERROR: NO SUCH COMMIT: "+ commit_hash + "  author: "+ author_name);
 				}
-				commit.setDate(author_date);
+				commit.setDateInString(author_date);
+				commit.setDate(d);
 				commit.setBugInducingCommit(isBugInducingCommit);
 				commit.setHasFix(hasFix);
 				if(fixedInCommits.size() != 0){
@@ -92,6 +97,8 @@ public class BugInducingCommitLoader {
 					for(String fc:changed){
 						if(fc.endsWith(".java")){
 							commit.getChangedFiles().add(fc);
+						}else if(fc.endsWith(".java,CAS_DELIMITER")){
+							commit.getChangedFiles().add(fc.replace(".java,CAS_DELIMITER", ".java"));
 						}
 					}
 					if(commit.getChangedFiles().size() == 0){
@@ -106,6 +113,71 @@ public class BugInducingCommitLoader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+
+	private Date getDate(String author_date) {
+		// Wed Nov 5 21:56:58 2008 +0000
+		String[] details =  author_date.split(" ");
+		int date = Integer.valueOf(details[2]);
+		int month = getMonthInNumber(details[1])-1;
+		int year = Integer.valueOf(details[4]);
+		String[] time = details[3].split(":");
+		int hourOfDay = Integer.valueOf(time[0]) ;
+		int minute = Integer.valueOf(time[1]) ;
+		int second = Integer.valueOf(time[2]) ;
+		
+		
+		Calendar calendar = new GregorianCalendar(year, month, date, hourOfDay, minute, second);
+		//Calendar cal = Calendar.getInstance();
+		//cal.set(year, month, date, hourOfDay, minute, second);
+		return calendar.getTime();
+	}
+
+	private int getMonthInNumber(String month) {
+		int m=-1;
+		switch (month){
+			case "Jan": 
+				m = 1;
+				break;
+			case "Fev": 
+				m = 2;
+				break;
+			case 
+				"Mar": m = 3;
+				break;
+			case "Apr": 
+				m = 4;
+				break;
+			case "May": 
+				m = 5;
+				break;
+			case "Jun":
+				m = 6;
+				break;
+			case "Jul": 
+				m = 7;
+				break;
+			case "Aug": 
+				m = 8;
+				break;
+			case "Sep": 
+				m = 9;
+				break;
+			case "Oct": 
+				m = 10;
+				break;
+			case "Nov": 
+				m = 11;
+				break;
+			case "Dec": 
+				m = 12;
+				break;
+			default:
+                m = -1;
+                break;
+		}
+		return m;
 		
 	}
 	

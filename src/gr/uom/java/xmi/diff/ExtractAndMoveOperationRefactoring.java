@@ -47,11 +47,5 @@ public class ExtractAndMoveOperationRefactoring implements Refactoring {
 	public UMLOperation getExtractedFromOperation() {
 		return extractedFromOperation;
 	}
-
-	@Override
-	public boolean isPureRefactoring() {
-		// to be implemented
-		return false;
-	}
 	
 }

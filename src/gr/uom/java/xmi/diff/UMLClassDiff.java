@@ -10,15 +10,6 @@ import gr.uom.java.xmi.decomposition.OperationInvocation;
 import gr.uom.java.xmi.decomposition.UMLOperationBodyMapper;
 
 import java.util.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import gr.uom.java.xmi.decomposition.VariableDeclaration;
 import gr.uom.java.xmi.decomposition.replacement.MethodInvocationReplacement;
@@ -26,6 +17,9 @@ import gr.uom.java.xmi.decomposition.replacement.Replacement;
 import gr.uom.java.xmi.decomposition.replacement.VariableRename;
 import gr.uom.java.xmi.decomposition.replacement.VariableReplacementWithMethodInvocation;
 import org.refactoringminer.api.Refactoring;
+
+import buginducingcommitanalyzer.RefactoringGranularityAnalysis;
+import buginducingcommitanalyzer.RefactoringSourceTargets;
 
 public class UMLClassDiff implements Comparable<UMLClassDiff> {
 
@@ -211,6 +205,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 	}
 
 	public void checkForOperationSignatureChanges() {
+		RenameOperationRefactoring rename = null;
 		if(removedOperations.size() <= addedOperations.size()) {
 			for(Iterator<UMLOperation> removedOperationIterator = removedOperations.iterator(); removedOperationIterator.hasNext();) {
 				UMLOperation removedOperation = removedOperationIterator.next();
@@ -247,7 +242,8 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 					UMLOperationDiff operationDiff = new UMLOperationDiff(removedOperation, addedOperation);
 					operationDiffList.add(operationDiff);
 					if(!removedOperation.getName().equals(addedOperation.getName())) {
-						RenameOperationRefactoring rename = new RenameOperationRefactoring(removedOperation, addedOperation);
+						rename = new RenameOperationRefactoring(removedOperation, addedOperation);
+						rename.analyzeRefGranularity(bestMapper);
 						refactorings.add(rename);
 					}
 					this.addOperationBodyMapper(bestMapper);
@@ -290,12 +286,26 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 					UMLOperationDiff operationDiff = new UMLOperationDiff(removedOperation, addedOperation);
 					operationDiffList.add(operationDiff);
 					if(!removedOperation.getName().equals(addedOperation.getName())) {
-						RenameOperationRefactoring rename = new RenameOperationRefactoring(removedOperation, addedOperation);
+						rename = new RenameOperationRefactoring(removedOperation, addedOperation);
+						rename.analyzeRefGranularity(bestMapper);
 						refactorings.add(rename);
 					}
 					this.addOperationBodyMapper(bestMapper);
 				}
 			}
+		}
+		if( rename != null){
+			RefactoringSourceTargets refactoringSourceTargets= RefactoringGranularityAnalysis.containsSourceBeforeRef(this.getOriginalClass());
+			if(refactoringSourceTargets == null){
+				refactoringSourceTargets = new RefactoringSourceTargets(this.getOriginalClass());
+				RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+			}
+			Set<UMLClass> aSet = new HashSet<UMLClass> ();
+			aSet.add(this.getNextClass());
+			refactoringSourceTargets.populateMap(rename, aSet);
+			RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+			RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(this.getOriginalClass() , this.getNextClass());
+			RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(this.getOriginalClass(), this);
 		}
 	}
 
@@ -448,6 +458,19 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 							}
 							InlineOperationRefactoring inlineOperationRefactoring =
 									new InlineOperationRefactoring(removedOperation, operationBodyMapper.getOperation2(), operationBodyMapper.getOperation2().getClassName());
+							inlineOperationRefactoring.analyzeRefGranularity(mapper, operationBodyMapper);
+							
+							RefactoringSourceTargets refactoringSourceTargets= RefactoringGranularityAnalysis.containsSourceBeforeRef(this.getOriginalClass());
+							if(refactoringSourceTargets == null){
+								refactoringSourceTargets= new RefactoringSourceTargets(this.getOriginalClass());
+								RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+							}
+							Set<UMLClass> aSet = new HashSet<UMLClass> ();
+							aSet.add(this.getNextClass());
+							refactoringSourceTargets.populateMap(inlineOperationRefactoring, aSet);
+							RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+							RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(this.getOriginalClass() , this.getNextClass());
+							RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(this.getOriginalClass(), this);
 							refactorings.add(inlineOperationRefactoring);
 							operationsToBeRemoved.add(removedOperation);
 						}
@@ -497,9 +520,20 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 								UMLOperation extractedFromOperationInNewVersion= this.findExistingMappingInOperationBodyMapperFor(operationBodyMapper.getOperation1());
 								ExtractOperationRefactoring extractOperationRefactoring =
 										new ExtractOperationRefactoring(addedOperation, operationBodyMapper.getOperation1(), extractedFromOperationInNewVersion,operationBodyMapper.getOperation1().getClassName());
-								extractOperationRefactoring.analyzeRefgranularity(mapper , operationBodyMapper);
+								extractOperationRefactoring.analyzeRefGranularity(mapper , operationBodyMapper);
+								
+								RefactoringSourceTargets refactoringSourceTargets= RefactoringGranularityAnalysis.containsSourceBeforeRef(this.getOriginalClass());
+								if(refactoringSourceTargets == null){
+									refactoringSourceTargets= new RefactoringSourceTargets(this.getOriginalClass());
+									RefactoringGranularityAnalysis.getRefSourceTargets().add(refactoringSourceTargets);
+								}
+								Set<UMLClass> aSet = new HashSet<UMLClass> ();
+								aSet.add(this.getNextClass());
+								refactoringSourceTargets.populateMap(extractOperationRefactoring, aSet);
+								RefactoringGranularityAnalysis.getBeforeToAfterUMLclass().put(this.getOriginalClass() , this.getNextClass());
+								RefactoringGranularityAnalysis.getUmlClassToDiffMap().put(this.getOriginalClass(), this);
 								refactorings.add(extractOperationRefactoring);
-								operationsToBeRemoved.add(addedOperation);
+								operationsToBeRemoved.add(addedOperation);;
 							}
 							else if(addedOperation.isDelegate() != null) {
 								extractedDelegateOperations.put(addedOperation, addedOperation.isDelegate());
@@ -902,4 +936,14 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 			}
 		}
 	}
+
+	public UMLClass getOriginalClass() {
+		return originalClass;
+	}
+
+	public UMLClass getNextClass() {
+		return nextClass;
+	}
+	
+	
 }

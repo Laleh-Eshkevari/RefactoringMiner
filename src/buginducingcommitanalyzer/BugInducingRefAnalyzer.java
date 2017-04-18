@@ -17,21 +17,28 @@ public class BugInducingRefAnalyzer {
         Repository repo;
 		try {
 			repo = gitService.cloneIfNotExists(
-			        "tmp/desproject1-with-metadata",
-			        "https://LalehEshkevari@bitbucket.org/desmaintenance/desproject1-with-metadata.git");	
-			DetectedRefactoring	refHandler= new DetectedRefactoring("desproject1");
+			        "tmp/desproject5-with-metadata",
+			        "https://LalehEshkevari@bitbucket.org/desmaintenance/desproject5-with-metadata.git");	
+			DetectedRefactoring	refHandler= new DetectedRefactoring("/Users/Laleh/Documents/work/Refactoring/Aiko/commitGuruResults/bugInducingCommitAndRefactorings/desproject5");
 			miner.detectAll(repo, "master",refHandler);
 			
 			// 2- load the results of Commit Guru 
-			BugInducingCommitLoader bugInducingCommits= new BugInducingCommitLoader("/Users/Laleh/Documents/work/Refactoring/Aiko/commitGuruResults/desproject-1-modified.csv");
+			BugInducingCommitLoader bugInducingCommits= new BugInducingCommitLoader("/Users/Laleh/Documents/work/Refactoring/Aiko/commitGuruResults/desproject-5-modified.csv");
 			bugInducingCommits.load(refHandler.getAnalyzer().getAllCommits());
 			
 			// 3- find the overlap between the fixes and refactorings in bug inducing commits 
-			refHandler.getAnalyzer().findLineOverlapsBetweenRefsAndFixes(repo);
+			//refHandler.getAnalyzer().findLineOverlapsBetweenRefsAndFixes(repo);
+			refHandler.getAnalyzer().kim(repo);
+			
+			
 			
 			System.out.println("================================================");
 			System.out.println("================================================");
 			refHandler.getAnalyzer().summarize();
+			
+			refHandler.getAnalyzer().analyzeEntityHistoryBeforeRefactoring(repo);
+			
+			//RefactoringGranularityAnalysis.analyze();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

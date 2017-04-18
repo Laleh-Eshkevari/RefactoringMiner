@@ -5,9 +5,12 @@ import gr.uom.java.xmi.diff.UMLModelDiff;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+
+import org.refactoringminer.api.Refactoring;
 
 public class UMLModel {
     private List<UMLClass> classList;
@@ -145,8 +148,9 @@ public class UMLModel {
     	for(UMLClass umlClass : classList) {
     		if(umlModel.classList.contains(umlClass)) {
     			UMLClassDiff classDiff = umlClass.diff(umlModel.getClass(umlClass));
-    			if(!classDiff.isEmpty())
+    			if(!classDiff.isEmpty()){
     				modelDiff.addUMLClassDiff(classDiff);
+    			}
     			else {
 //    				modelDiff.addUnchangedClass(umlClass);
     			}
