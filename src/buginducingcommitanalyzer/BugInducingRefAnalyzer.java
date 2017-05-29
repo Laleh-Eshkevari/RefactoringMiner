@@ -17,13 +17,13 @@ public class BugInducingRefAnalyzer {
         Repository repo;
 		try {
 			repo = gitService.cloneIfNotExists(
-			        "tmp/desproject5-with-metadata",
-			        "https://LalehEshkevari@bitbucket.org/desmaintenance/desproject5-with-metadata.git");	
-			DetectedRefactoring	refHandler= new DetectedRefactoring("/Users/Laleh/Documents/work/Refactoring/Aiko/commitGuruResults/bugInducingCommitAndRefactorings/desproject5");
+			        "tmp/desproject1-with-metadata",
+			        "https://LalehEshkevari@bitbucket.org/desmaintenance/desproject1-with-metadata.git");	
+			DetectedRefactoring	refHandler= new DetectedRefactoring("/Users/Laleh/Documents/work/Refactoring/Aiko/commitGuruResults/bugInducingCommitAndRefactorings/desproject1");
 			miner.detectAll(repo, "master",refHandler);
 			
 			// 2- load the results of Commit Guru 
-			BugInducingCommitLoader bugInducingCommits= new BugInducingCommitLoader("/Users/Laleh/Documents/work/Refactoring/Aiko/commitGuruResults/desproject-5-modified.csv");
+			BugInducingCommitLoader bugInducingCommits= new BugInducingCommitLoader("/Users/Laleh/Documents/work/Refactoring/Aiko/commitGuruResults/desproject-1-modified.csv");
 			bugInducingCommits.load(refHandler.getAnalyzer().getAllCommits());
 			
 			// 3- find the overlap between the fixes and refactorings in bug inducing commits 

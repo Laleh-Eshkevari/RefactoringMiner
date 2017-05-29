@@ -966,8 +966,8 @@ public class RepositoryAnalyzer {
 		
 		sortHashMapByValues();
 		System.out.println("===============================================");
-		for(String hashId:this.sortedCommits.keySet() ){
-			Commit c= this.sortedCommits.get(hashId);
+		for(String hashId:sortedCommits.keySet() ){
+			Commit c= sortedCommits.get(hashId);
 			if(c.isBugInducingCommit() && c.getRefactorings().size()>0 && c.hasFix()){
 				System.out.println("Processing commit: "+ c.getCommitHash());
 				HashMap<String, List<Refactoring>> afterRefFilePathsToRefactoringMap =this.ExtractAfterRefactroingFiles(c.getRefactorings());
