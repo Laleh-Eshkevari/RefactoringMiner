@@ -21,7 +21,6 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	private boolean isAbstract;
 	private List<UMLParameter> parameters;
 	private String className;
-	private Set<AccessedMember> accessedMembers;
 	private boolean isConstructor;
 	private boolean isFinal;
 	private boolean isStatic;
@@ -31,7 +30,6 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	public UMLOperation(String name) {
         this.name = name;
         this.parameters = new ArrayList<UMLParameter>();
-        this.accessedMembers = new LinkedHashSet<AccessedMember>();
     }
 
 	public String getName() {
@@ -90,6 +88,18 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 		return operationBody;
 	}
 
+	public Set<OperationInvocation> getAllOperationInvocations() {
+		if(operationBody != null)
+			return operationBody.getAllOperationInvocations();
+		return new LinkedHashSet<OperationInvocation>();
+	}
+
+	public int statementCount() {
+		if(operationBody != null)
+			return operationBody.statementCount();
+		return 0;
+	}
+
 	public void setBody(OperationBody body) {
 		this.operationBody = body;
 	}
@@ -108,18 +118,6 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 
 	public List<UMLParameter> getParameters() {
 		return parameters;
-	}
-
-	public void addAccessedMember(AccessedMember member) {
-		this.accessedMembers.add(member);
-	}
-
-	public Set<AccessedMember> getAccessedMembers() {
-		return accessedMembers;
-	}
-
-	public void setAccessedMembers(Set<AccessedMember> accessedMembers) {
-		this.accessedMembers = accessedMembers;
 	}
 
 	public UMLParameter getReturnParameter() {
@@ -167,12 +165,8 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 		int i=0;
 		for(UMLParameter thisParameter : this.parameters) {
 			UMLParameter otherParameter = operation.parameters.get(i);
-			//String thisParameterType = thisParameter.getType().getClassType();
-			//String otherParameterType = otherParameter.getType().getClassType();
-			//if(!thisParameterType.equals(this.className) && !otherParameterType.equals(operation.className)) {
 			if(!thisParameter.equals(otherParameter) && !thisParameter.equalsExcludingType(otherParameter))
 				return false;
-			//}
 			i++;
 		}
 		return true;
@@ -203,6 +197,16 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 				parameterNameList.add(parameter.getName());
 		}
 		return parameterNameList;
+	}
+
+	public int getNumberOfNonVarargsParameters() {
+		int counter = 0;
+		for(UMLParameter parameter : parameters) {
+			if(!parameter.getKind().equals("return") && !parameter.isVarargs()) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
 	public OperationInvocation isDelegate() {
@@ -346,7 +350,7 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 					differentParameterTypes++;
 				}
 			}
-			return commonParameterTypes >= differentParameterTypes;
+			return commonParameterTypes >= differentParameterTypes && commonParameterTypes > 0;
 		}
 		else if(thisParameterTypes.size() > otherParameterTypes.size() && thisParameterTypes.size() > 0) {
 			int commonParameterTypes = 0;
@@ -361,7 +365,7 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 					differentParameterTypes++;
 				}
 			}
-			return commonParameterTypes >= differentParameterTypes /*+ Math.abs(thisParameterTypes.size() - otherParameterTypes.size())*/;
+			return commonParameterTypes >= differentParameterTypes && commonParameterTypes > 0/*+ Math.abs(thisParameterTypes.size() - otherParameterTypes.size())*/;
 		}
 		else if(otherParameterTypes.size() > thisParameterTypes.size() && thisParameterTypes.size() > 0) {
 			int commonParameterTypes = 0;
@@ -376,8 +380,30 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 					differentParameterTypes++;
 				}
 			}
-			return commonParameterTypes >= differentParameterTypes /*+ Math.abs(thisParameterTypes.size() - otherParameterTypes.size())*/;
+			return commonParameterTypes >= differentParameterTypes && commonParameterTypes > 0/*+ Math.abs(thisParameterTypes.size() - otherParameterTypes.size())*/;
 		}
 		return false;
+	}
+
+	public List<UMLOperation> getOperationsInsideAnonymousClass(List<UMLAnonymousClass> allAddedAnonymousClasses) {
+		List<UMLOperation> operationsInsideAnonymousClass = new ArrayList<UMLOperation>();
+		if(this.operationBody != null) {
+			List<String> anonymousClassDeclarations = this.operationBody.getAllAnonymousClassDeclarations();
+			for(String anonymousClassDeclaration : anonymousClassDeclarations) {
+				for(UMLAnonymousClass anonymousClass : allAddedAnonymousClasses) {
+					int foundOperations = 0;
+					List<UMLOperation> operations = anonymousClass.getOperations();
+					for(UMLOperation operation : operations) {
+						if(anonymousClassDeclaration.contains(operation.getName())) {
+							foundOperations++;
+						}
+					}
+					if(foundOperations == operations.size()) {
+						operationsInsideAnonymousClass.addAll(operations);
+					}
+				}
+			}
+		}
+		return operationsInsideAnonymousClass;
 	}
 }

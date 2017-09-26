@@ -10,16 +10,16 @@ import java.util.ListIterator;
 import java.util.Map;
 
 public class UMLModel {
+	private String projectRoot;
     private List<UMLClass> classList;
     private List<UMLGeneralization> generalizationList;
     private List<UMLRealization> realizationList;
-    private List<UMLAnonymousClass> anonymousClassList;
 
-    public UMLModel() {
+    public UMLModel(String projectRoot) {
+    	this.projectRoot = projectRoot;
         classList = new ArrayList<UMLClass>();
         generalizationList = new ArrayList<UMLGeneralization>();
         realizationList = new ArrayList<UMLRealization>();
-        anonymousClassList = new ArrayList<UMLAnonymousClass>();
     }
 
 	public void addClass(UMLClass umlClass) {
@@ -32,10 +32,6 @@ public class UMLModel {
 
     public void addRealization(UMLRealization umlRealization) {
     	realizationList.add(umlRealization);
-    }
-
-    public void addAnonymousClass(UMLAnonymousClass anonymousClass) {
-    	anonymousClassList.add(anonymousClass);
     }
 
     public UMLClass getClass(UMLClass umlClassFromOtherModel) {
@@ -108,10 +104,6 @@ public class UMLModel {
     	return null;
     }
 
-    public UMLModelDiff diff(UMLModel umlModel) {
-    	return this.diff(umlModel, Collections.<String, String>emptyMap());
-    }
-
 	public UMLModelDiff diff(UMLModel umlModel, Map<String, String> renamedFileHints) {
     	UMLModelDiff modelDiff = new UMLModelDiff();
     	for(UMLClass umlClass : classList) {
@@ -122,7 +114,7 @@ public class UMLModel {
     		if(!this.classList.contains(umlClass))
     			modelDiff.reportAddedClass(umlClass);
     	}
-    	modelDiff.checkForMovedClasses(renamedFileHints);
+    	modelDiff.checkForMovedClasses(renamedFileHints, umlModel.projectRoot);
     	modelDiff.checkForRenamedClasses(renamedFileHints);
     	for(UMLGeneralization umlGeneralization : generalizationList) {
     		if(!umlModel.generalizationList.contains(umlGeneralization))
@@ -152,17 +144,6 @@ public class UMLModel {
     			}
     		}
     	}
-    	
-    	for(UMLAnonymousClass umlClass : anonymousClassList) {
-    		if(!umlModel.anonymousClassList.contains(umlClass))
-    			modelDiff.reportRemovedAnonymousClass(umlClass);
-    	}
-//    	for(UMLAnonymousClass umlClass : umlModel.anonymousClassList) {
-//    		if(!this.anonymousClassList.contains(umlClass))
-//    			modelDiff.reportAddedAnonymousClass(umlClass);
-//    	}
-    	modelDiff.checkForOperationMoves();
-    	modelDiff.checkForExtractedAndMovedOperations();
     	return modelDiff;
     }
 }

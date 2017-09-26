@@ -24,6 +24,7 @@ import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.FileASTRequestor;
 import org.eclipse.jdt.core.dom.IDocElement;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.Javadoc;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
@@ -38,18 +39,18 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import gr.uom.java.xmi.decomposition.OperationBody;
 
 public class UMLModelASTReader {
-	private static final String systemFileSeparator = Matcher.quoteReplacement(File.separator);
+	public static final String systemFileSeparator = Matcher.quoteReplacement(File.separator);
 	
 	private UMLModel umlModel;
 	private String projectRoot;
 	private ASTParser parser;
 
-	public UMLModelASTReader(File rootFolder, List<String> javaFiles2) {
-		this(rootFolder, buildAstParser(rootFolder), javaFiles2);
+	public UMLModelASTReader(File rootFolder, List<String> javaFiles) {
+		this(rootFolder, buildAstParser(rootFolder), javaFiles);
 	}
 
 	public UMLModelASTReader(File rootFolder, ASTParser parser, List<String> javaFiles) {
-		this.umlModel = new UMLModel();
+		this.umlModel = new UMLModel(rootFolder.getPath());
 		this.projectRoot = rootFolder.getPath();
 		this.parser = parser;
 		final String[] emptyArray = new String[0];
@@ -92,11 +93,16 @@ public class UMLModelASTReader {
 		else
 			packageName = "";
 		
+		List<ImportDeclaration> imports = compilationUnit.imports();
+		List<String> importedTypes = new ArrayList<String>();
+		for(ImportDeclaration importDeclaration : imports) {
+			importedTypes.add(importDeclaration.getName().getFullyQualifiedName());
+		}
 		List<AbstractTypeDeclaration> topLevelTypeDeclarations = compilationUnit.types();
         for(AbstractTypeDeclaration abstractTypeDeclaration : topLevelTypeDeclarations) {
         	if(abstractTypeDeclaration instanceof TypeDeclaration) {
         		TypeDeclaration topLevelTypeDeclaration = (TypeDeclaration)abstractTypeDeclaration;
-        		processTypeDeclaration(topLevelTypeDeclaration, packageName, sourceFilePath);
+        		processTypeDeclaration(topLevelTypeDeclaration, packageName, sourceFilePath, importedTypes);
         	}
         }
 	}
@@ -113,7 +119,8 @@ public class UMLModelASTReader {
 		return typeToString;
 	}
 
-	private void processTypeDeclaration(TypeDeclaration typeDeclaration, String packageName, String sourceFile) {
+	private void processTypeDeclaration(TypeDeclaration typeDeclaration, String packageName, String sourceFile,
+			List<String> importedTypes) {
 		Javadoc javaDoc = typeDeclaration.getJavadoc();
 		if(javaDoc != null) {
 			List<TagElement> tags = javaDoc.tags();
@@ -130,7 +137,7 @@ public class UMLModelASTReader {
 			}
 		}
 		String className = typeDeclaration.getName().getFullyQualifiedName();
-		UMLClass umlClass = new UMLClass(packageName, className, sourceFile, typeDeclaration.isPackageMemberTypeDeclaration());
+		UMLClass umlClass = new UMLClass(packageName, className, sourceFile, typeDeclaration.isPackageMemberTypeDeclaration(), importedTypes);
 		
 		if(typeDeclaration.isInterface()) {
 			umlClass.setInterface(true);
@@ -159,7 +166,9 @@ public class UMLModelASTReader {
     	
     	List<Type> superInterfaceTypes = typeDeclaration.superInterfaceTypes();
     	for(Type interfaceType : superInterfaceTypes) {
-    		UMLRealization umlRealization = new UMLRealization(umlClass, this.getTypeName(interfaceType, 0));
+    		UMLType umlType = UMLType.extractTypeObject(this.getTypeName(interfaceType, 0));
+    		UMLRealization umlRealization = new UMLRealization(umlClass, umlType.getClassType());
+    		umlClass.addImplementedInterface(umlType);
     		getUmlModel().addRealization(umlRealization);
     	}
     	
@@ -194,7 +203,8 @@ public class UMLModelASTReader {
     		if(node.getUserObject() != null) {
     			AnonymousClassDeclaration anonymous = (AnonymousClassDeclaration)node.getUserObject();
     			String anonymousName = getAnonymousName(node);
-    			processAnonymousClassDeclaration(anonymous, packageName + "." + className, anonymousName, sourceFile);
+    			UMLAnonymousClass anonymousClass = processAnonymousClassDeclaration(anonymous, packageName + "." + className, anonymousName, sourceFile);
+    			umlClass.addAnonymousClass(anonymousClass);
     		}
     	}
     	
@@ -202,7 +212,7 @@ public class UMLModelASTReader {
 		
 		TypeDeclaration[] types = typeDeclaration.getTypes();
 		for(TypeDeclaration type : types) {
-			processTypeDeclaration(type, umlClass.getName(), sourceFile);
+			processTypeDeclaration(type, umlClass.getName(), sourceFile, importedTypes);
 		}
 	}
 
@@ -247,7 +257,7 @@ public class UMLModelASTReader {
 		Type returnType = methodDeclaration.getReturnType2();
 		if(returnType != null) {
 			UMLType type = UMLType.extractTypeObject(getTypeName(returnType, 0));
-			UMLParameter returnParameter = new UMLParameter("return", type, "return");
+			UMLParameter returnParameter = new UMLParameter("return", type, "return", false);
 			umlOperation.addParameter(returnParameter);
 		}
 		List<SingleVariableDeclaration> parameters = methodDeclaration.parameters();
@@ -259,7 +269,7 @@ public class UMLModelASTReader {
 				typeName = typeName + "[]";
 			}
 			UMLType type = UMLType.extractTypeObject(typeName);
-			UMLParameter umlParameter = new UMLParameter(parameterName, type, "in");
+			UMLParameter umlParameter = new UMLParameter(parameterName, type, "in", parameter.isVarargs());
 			umlOperation.addParameter(umlParameter);
 		}
 		return umlOperation;
@@ -297,7 +307,7 @@ public class UMLModelASTReader {
 		return attributes;
 	}
 	
-	private void processAnonymousClassDeclaration(AnonymousClassDeclaration anonymous, String packageName, String className, String sourceFile) {
+	private UMLAnonymousClass processAnonymousClassDeclaration(AnonymousClassDeclaration anonymous, String packageName, String className, String sourceFile) {
 		List<BodyDeclaration> bodyDeclarations = anonymous.bodyDeclarations();
 		
 		UMLAnonymousClass anonymousClass = new UMLAnonymousClass(packageName, className, sourceFile);
@@ -319,7 +329,7 @@ public class UMLModelASTReader {
 			}
 		}
 		
-		this.getUmlModel().addAnonymousClass(anonymousClass);
+		return anonymousClass;
 	}
 	
 	private void insertNode(AnonymousClassDeclaration childAnonymous, DefaultMutableTreeNode root) {

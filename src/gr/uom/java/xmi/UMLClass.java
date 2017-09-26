@@ -22,12 +22,15 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     private List<UMLOperation> operations;
     private List<UMLAttribute> attributes;
     private UMLType superclass;
+    private List<UMLType> implementedInterfaces;
+    private List<UMLAnonymousClass> anonymousClassList;
+    private List<String> importedTypes;
 
-    public UMLClass(String packageName, String name, boolean topLevel) {
-    	this(packageName, name, packageName.replace('.', '/') + '/' + name + ".java", topLevel);
+    public UMLClass(String packageName, String name, boolean topLevel, List<String> importedTypes) {
+    	this(packageName, name, packageName.replace('.', '/') + '/' + name + ".java", topLevel, importedTypes);
     }
     
-    public UMLClass(String packageName, String name, String sourceFile, boolean topLevel) {
+    public UMLClass(String packageName, String name, String sourceFile, boolean topLevel, List<String> importedTypes) {
     	this.packageName = packageName;
         this.name = name;
         if(packageName.equals(""))
@@ -70,6 +73,13 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
         this.operations = new ArrayList<UMLOperation>();
         this.attributes = new ArrayList<UMLAttribute>();
         this.superclass = null;
+        this.implementedInterfaces = new ArrayList<UMLType>();
+        this.anonymousClassList = new ArrayList<UMLAnonymousClass>();
+        this.importedTypes = importedTypes;
+    }
+
+    public void addAnonymousClass(UMLAnonymousClass anonymousClass) {
+    	anonymousClassList.add(anonymousClass);
     }
 
     public String getPackageName() {
@@ -131,6 +141,10 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
 		this.superclass = superclass;
 	}
 
+	public void addImplementedInterface(UMLType implementedInterface) {
+		this.implementedInterfaces.add(implementedInterface);
+	}
+
 	public void addOperation(UMLOperation operation) {
     	this.operations.add(operation);
     }
@@ -145,6 +159,14 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
 
 	public List<UMLAttribute> getAttributes() {
 		return attributes;
+	}
+
+	public List<UMLType> getImplementedInterfaces() {
+		return implementedInterfaces;
+	}
+
+	public List<String> getImportedTypes() {
+		return importedTypes;
 	}
 
 	public boolean containsOperationWithTheSameSignature(UMLOperation operation) {
@@ -314,6 +336,14 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     		classDiff.setOldSuperclass(this.superclass);
     		classDiff.setNewSuperclass(umlClass.superclass);
     	}
+    	for(UMLType implementedInterface : this.implementedInterfaces) {
+    		if(!umlClass.implementedInterfaces.contains(implementedInterface))
+    			classDiff.reportRemovedImplementedInterface(implementedInterface);
+    	}
+    	for(UMLType implementedInterface : umlClass.implementedInterfaces) {
+    		if(!this.implementedInterfaces.contains(implementedInterface))
+    			classDiff.reportAddedImplementedInterface(implementedInterface);
+    	}
     	for(UMLOperation operation : this.operations) {
     		if(!umlClass.operations.contains(operation))
     			classDiff.reportRemovedOperation(operation);
@@ -338,11 +368,18 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
     			classDiff.addOperationBodyMapper(operationBodyMapper);
     		}
     	}
+    	
+    	for(UMLAnonymousClass umlAnonymousClass : this.anonymousClassList) {
+    		if(!umlClass.anonymousClassList.contains(umlAnonymousClass))
+    			classDiff.reportRemovedAnonymousClass(umlAnonymousClass);
+    	}
+    	for(UMLAnonymousClass umlAnonymousClass : umlClass.anonymousClassList) {
+    		if(!this.anonymousClassList.contains(umlAnonymousClass))
+    			classDiff.reportAddedAnonymousClass(umlAnonymousClass);
+    	}
     	classDiff.checkForOperationSignatureChanges();
     	classDiff.checkForInlinedOperations();
     	classDiff.checkForExtractedOperations();
-    	classDiff.checkForRenameLocalVariable();
-//    	classDiff.checkForRenameLocalVariable2();
     	//classDiff.checkForAttributeRenames();
     	//classDiff.checkForOperationRenames();
     	return classDiff;
@@ -392,4 +429,23 @@ public class UMLClass implements Comparable<UMLClass>, Serializable {
 		return normalized;
 	}
 
+	public boolean importsType(String targetClass) {
+		for(String importedType : getImportedTypes()) {
+			//importedType.startsWith(targetClass) -> special handling for import static
+			if(importedType.equals(targetClass) || importedType.startsWith(targetClass) || targetClass.startsWith(getPackageName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public List<UMLAttribute> attributesOfType(String targetClass) {
+		List<UMLAttribute> attributesOfType = new ArrayList<UMLAttribute>();
+		for(UMLAttribute attribute : attributes) {
+			if(targetClass.endsWith("." + attribute.getType().getClassType())) {
+				attributesOfType.add(attribute);
+			}
+		}
+		return attributesOfType;
+	}
 }

@@ -139,6 +139,15 @@ public class CompositeStatementObject extends AbstractStatement {
 	}
 
 	@Override
+	public List<String> getInfixOperators() {
+		List<String> infixOperators = new ArrayList<String>();
+		for(AbstractExpression expression : expressionList) {
+			infixOperators.addAll(expression.getInfixOperators());
+		}
+		return infixOperators;
+	}
+
+	@Override
 	public Map<String, ObjectCreation> getCreationMap() {
 		Map<String, ObjectCreation> creationMap = new LinkedHashMap<String, ObjectCreation>();
 		for(AbstractExpression expression : expressionList) {
@@ -161,5 +170,32 @@ public class CompositeStatementObject extends AbstractStatement {
 			}
 		}
 		return map;
+	}
+
+	public List<String> getAllAnonymousClassDeclarations() {
+		List<String> anonymousClassDeclarations = new ArrayList<String>();
+		anonymousClassDeclarations.addAll(getAnonymousClassDeclarations());
+		for(AbstractStatement statement : statementList) {
+			if(statement instanceof CompositeStatementObject) {
+				CompositeStatementObject composite = (CompositeStatementObject)statement;
+				anonymousClassDeclarations.addAll(composite.getAllAnonymousClassDeclarations());
+			}
+			else if(statement instanceof StatementObject) {
+				StatementObject statementObject = (StatementObject)statement;
+				anonymousClassDeclarations.addAll(statementObject.getAnonymousClassDeclarations());
+			}
+		}
+		return anonymousClassDeclarations;
+	}
+
+	@Override
+	public int statementCount() {
+		int count = 0;
+		if(!this.getString().equals("{"))
+			count++;
+		for(AbstractStatement statement : statementList) {
+			count += statement.statementCount();
+		}
+		return count;
 	}
 }
