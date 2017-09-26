@@ -2762,7 +2762,7 @@ public class RefactoringPopulator {
     public static List<Root> getFSERefactorings(int flag) throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
 
-        String jsonFile = System.getProperty("user.dir") + "/src-test/Data/RLV.json";
+        String jsonFile ="/Users/matin/Repos/RefactoringMiner/src-test/Data/data.json"; //System.getProperty("user.dir") + "/src-test/Data/data.json";
 
         List<Root> roots = mapper.readValue(new File(jsonFile),
                 mapper.getTypeFactory().constructCollectionType(List.class, Root.class));
