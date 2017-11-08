@@ -26,11 +26,20 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	private boolean isStatic;
 	private boolean emptyBody;
 	private OperationBody operationBody;
-	
+	private UMLClass containerClass;
+
 	public UMLOperation(String name) {
-        this.name = name;
-        this.parameters = new ArrayList<UMLParameter>();
-    }
+		this.name = name;
+		this.parameters = new ArrayList<UMLParameter>();
+	}
+
+	public UMLClass getContainerClass() {
+		return containerClass;
+	}
+
+	public void setContainerClass(UMLClass containerClass) {
+		this.containerClass = containerClass;
+	}
 
 	public String getName() {
 		return name;
@@ -89,13 +98,13 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	}
 
 	public Set<OperationInvocation> getAllOperationInvocations() {
-		if(operationBody != null)
+		if (operationBody != null)
 			return operationBody.getAllOperationInvocations();
 		return new LinkedHashSet<OperationInvocation>();
 	}
 
 	public int statementCount() {
-		if(operationBody != null)
+		if (operationBody != null)
 			return operationBody.statementCount();
 		return 0;
 	}
@@ -121,8 +130,8 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	}
 
 	public UMLParameter getReturnParameter() {
-		for(UMLParameter parameter : parameters) {
-			if(parameter.getKind().equals("return"))
+		for (UMLParameter parameter : parameters) {
+			if (parameter.getKind().equals("return"))
 				return parameter;
 		}
 		return null;
@@ -131,41 +140,39 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	public boolean equalReturnParameter(UMLOperation operation) {
 		UMLParameter thisReturnParameter = this.getReturnParameter();
 		UMLParameter otherReturnParameter = operation.getReturnParameter();
-		if(thisReturnParameter != null && otherReturnParameter != null)
+		if (thisReturnParameter != null && otherReturnParameter != null)
 			return thisReturnParameter.equals(otherReturnParameter);
-		else if(thisReturnParameter == null && otherReturnParameter == null)
+		else if (thisReturnParameter == null && otherReturnParameter == null)
 			return true;
 		else
 			return false;
 	}
 
 	public boolean equalSignature(UMLOperation operation) {
-		return this.name.equals(operation.name) &&	this.parameters.equals(operation.parameters);
+		return this.name.equals(operation.name) && this.parameters.equals(operation.parameters);
 	}
 
 	public boolean equalSignatureIgnoringOperationName(UMLOperation operation) {
-		return this.visibility.equals(operation.visibility) &&
-				this.isAbstract == operation.isAbstract &&
-				this.isFinal == operation.isFinal &&
-				this.isStatic == operation.isStatic &&
-				this.parameters.equals(operation.parameters);
+		return this.visibility.equals(operation.visibility) && this.isAbstract == operation.isAbstract
+				&& this.isFinal == operation.isFinal && this.isStatic == operation.isStatic
+				&& this.parameters.equals(operation.parameters);
 	}
 
 	public boolean equalSignatureIgnoringChangedTypes(UMLOperation operation) {
-		if(!(this.isConstructor && operation.isConstructor || this.name.equals(operation.name)))
+		if (!(this.isConstructor && operation.isConstructor || this.name.equals(operation.name)))
 			return false;
-		if(this.isAbstract != operation.isAbstract)
+		if (this.isAbstract != operation.isAbstract)
 			return false;
-		if(this.isStatic != operation.isStatic)
+		if (this.isStatic != operation.isStatic)
 			return false;
-		if(this.isFinal != operation.isFinal)
+		if (this.isFinal != operation.isFinal)
 			return false;
-		if(this.parameters.size() != operation.parameters.size())
+		if (this.parameters.size() != operation.parameters.size())
 			return false;
-		int i=0;
-		for(UMLParameter thisParameter : this.parameters) {
+		int i = 0;
+		for (UMLParameter thisParameter : this.parameters) {
 			UMLParameter otherParameter = operation.parameters.get(i);
-			if(!thisParameter.equals(otherParameter) && !thisParameter.equalsExcludingType(otherParameter))
+			if (!thisParameter.equals(otherParameter) && !thisParameter.equalsExcludingType(otherParameter))
 				return false;
 			i++;
 		}
@@ -174,8 +181,8 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 
 	public List<UMLParameter> getParametersWithoutReturnType() {
 		List<UMLParameter> params = new ArrayList<UMLParameter>();
-		for(UMLParameter parameter : parameters) {
-			if(!parameter.getKind().equals("return"))
+		for (UMLParameter parameter : parameters) {
+			if (!parameter.getKind().equals("return"))
 				params.add(parameter);
 		}
 		return params;
@@ -183,8 +190,8 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 
 	public List<UMLType> getParameterTypeList() {
 		List<UMLType> parameterTypeList = new ArrayList<UMLType>();
-		for(UMLParameter parameter : parameters) {
-			if(!parameter.getKind().equals("return"))
+		for (UMLParameter parameter : parameters) {
+			if (!parameter.getKind().equals("return"))
 				parameterTypeList.add(parameter.getType());
 		}
 		return parameterTypeList;
@@ -192,8 +199,8 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 
 	public List<String> getParameterNameList() {
 		List<String> parameterNameList = new ArrayList<String>();
-		for(UMLParameter parameter : parameters) {
-			if(!parameter.getKind().equals("return"))
+		for (UMLParameter parameter : parameters) {
+			if (!parameter.getKind().equals("return"))
 				parameterNameList.add(parameter.getName());
 		}
 		return parameterNameList;
@@ -201,8 +208,8 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 
 	public int getNumberOfNonVarargsParameters() {
 		int counter = 0;
-		for(UMLParameter parameter : parameters) {
-			if(!parameter.getKind().equals("return") && !parameter.isVarargs()) {
+		for (UMLParameter parameter : parameters) {
+			if (!parameter.getKind().equals("return") && !parameter.isVarargs()) {
 				counter++;
 			}
 		}
@@ -210,14 +217,15 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	}
 
 	public OperationInvocation isDelegate() {
-		if(getBody() != null) {
+		if (getBody() != null) {
 			List<AbstractStatement> statements = getBody().getCompositeStatement().getStatements();
-			if(statements.size() == 1 && statements.get(0) instanceof StatementObject) {
-				StatementObject statement = (StatementObject)statements.get(0);
+			if (statements.size() == 1 && statements.get(0) instanceof StatementObject) {
+				StatementObject statement = (StatementObject) statements.get(0);
 				Map<String, OperationInvocation> operationInvocationMap = statement.getMethodInvocationMap();
-				for(String key : operationInvocationMap.keySet()) {
+				for (String key : operationInvocationMap.keySet()) {
 					OperationInvocation operationInvocation = operationInvocationMap.get(key);
-					if(operationInvocation.matchesOperation(this) || operationInvocation.getMethodName().equals(this.getName())) {
+					if (operationInvocation.matchesOperation(this)
+							|| operationInvocation.getMethodName().equals(this.getName())) {
 						return operationInvocation;
 					}
 				}
@@ -227,17 +235,15 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	}
 
 	public boolean equals(Object o) {
-		if(this == o) {
-            return true;
-        }
-		
-		if(o instanceof UMLOperation) {
-			UMLOperation operation = (UMLOperation)o;
-			return this.className.equals(operation.className) &&
-				this.name.equals(operation.name) &&
-				this.visibility.equals(operation.visibility) &&
-				this.isAbstract == operation.isAbstract &&
-				this.parameters.equals(operation.parameters);
+		if (this == o) {
+			return true;
+		}
+
+		if (o instanceof UMLOperation) {
+			UMLOperation operation = (UMLOperation) o;
+			return this.className.equals(operation.className) && this.name.equals(operation.name)
+					&& this.visibility.equals(operation.visibility) && this.isAbstract == operation.isAbstract
+					&& this.parameters.equals(operation.parameters);
 		}
 		return false;
 	}
@@ -257,7 +263,7 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 		StringBuilder sb = new StringBuilder();
 		sb.append(visibility);
 		sb.append(" ");
-		if(isAbstract) {
+		if (isAbstract) {
 			sb.append("abstract");
 			sb.append(" ");
 		}
@@ -266,16 +272,16 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 		List<UMLParameter> parameters = new ArrayList<UMLParameter>(this.parameters);
 		parameters.remove(returnParameter);
 		sb.append("(");
-		for(int i=0; i<parameters.size(); i++) {
+		for (int i = 0; i < parameters.size(); i++) {
 			UMLParameter parameter = parameters.get(i);
-			if(parameter.getKind().equals("in")) {
+			if (parameter.getKind().equals("in")) {
 				sb.append(parameter);
-				if(i < parameters.size()-1)
+				if (i < parameters.size() - 1)
 					sb.append(", ");
 			}
 		}
 		sb.append(")");
-		if(returnParameter != null) {
+		if (returnParameter != null) {
 			sb.append(" : ");
 			sb.append(returnParameter.toString());
 		}
@@ -293,16 +299,16 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 		sb.append("(");
 		for (int i = 0; i < parameters.size(); i++) {
 			UMLParameter parameter = parameters.get(i);
-			if(parameter.getKind().equals("in")) {
+			if (parameter.getKind().equals("in")) {
 				sb.append(AstUtils.stripTypeParamsFromTypeName(parameter.getType().toString()));
-				if(i < parameters.size() - 1)
+				if (i < parameters.size() - 1)
 					sb.append(", ");
 			}
 		}
 		sb.append(")");
 		return sb.toString();
 	}
-	
+
 	public int compareTo(UMLOperation operation) {
 		return this.toString().compareTo(operation.toString());
 	}
@@ -311,7 +317,7 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 		String s1 = getName().toLowerCase();
 		String s2 = operation.getName().toLowerCase();
 		int distance = StringDistance.editDistance(s1, s2);
-		double normalized = (double)distance/(double)Math.max(s1.length(), s2.length());
+		double normalized = (double) distance / (double) Math.max(s1.length(), s2.length());
 		return normalized;
 	}
 
@@ -320,85 +326,98 @@ public class UMLOperation implements Comparable<UMLOperation>, Serializable {
 	}
 
 	public boolean equalParameterTypes(UMLOperation operation) {
-		return this.equalReturnParameter(operation) && this.getParameterTypeList().equals(operation.getParameterTypeList());
+		return this.equalReturnParameter(operation)
+				&& this.getParameterTypeList().equals(operation.getParameterTypeList());
 	}
 
 	public boolean overloadedParameters(UMLOperation operation) {
-		return this.equalReturnParameter(operation) &&
-				(this.getParameters().containsAll(operation.getParameters()) || operation.getParameters().containsAll(this.getParameters()));
+		return this.equalReturnParameter(operation) && (this.getParameters().containsAll(operation.getParameters())
+				|| operation.getParameters().containsAll(this.getParameters()));
 	}
 
 	public boolean overloadedParameterTypes(UMLOperation operation) {
-		return this.equalReturnParameter(operation) &&
-				(this.getParameterTypeList().containsAll(operation.getParameterTypeList()) || operation.getParameterTypeList().containsAll(this.getParameterTypeList()));
+		return this.equalReturnParameter(operation)
+				&& (this.getParameterTypeList().containsAll(operation.getParameterTypeList())
+						|| operation.getParameterTypeList().containsAll(this.getParameterTypeList()));
 	}
-	
+
 	public boolean replacedParameterTypes(UMLOperation operation) {
 		List<UMLType> thisParameterTypes = this.getParameterTypeList();
 		List<UMLType> otherParameterTypes = operation.getParameterTypeList();
-		
-		if(thisParameterTypes.size() == otherParameterTypes.size() && thisParameterTypes.size() > 0) {
+
+		if (thisParameterTypes.size() == otherParameterTypes.size() && thisParameterTypes.size() > 0) {
 			int commonParameterTypes = 0;
 			int differentParameterTypes = 0;
-			for(int i=0; i<thisParameterTypes.size(); i++) {
+			for (int i = 0; i < thisParameterTypes.size(); i++) {
 				UMLType thisParameterType = thisParameterTypes.get(i);
 				UMLType otherParameterType = otherParameterTypes.get(i);
-				if(thisParameterType.equals(otherParameterType) || (thisParameterType.getClassType().equals(otherParameterType.getClassType()) && thisParameterType.getArrayDimension() == otherParameterType.getArrayDimension())) {
+				if (thisParameterType.equals(otherParameterType)
+						|| (thisParameterType.getClassType().equals(otherParameterType.getClassType())
+								&& thisParameterType.getArrayDimension() == otherParameterType.getArrayDimension())) {
 					commonParameterTypes++;
-				}
-				else {
+				} else {
 					differentParameterTypes++;
 				}
 			}
 			return commonParameterTypes >= differentParameterTypes && commonParameterTypes > 0;
-		}
-		else if(thisParameterTypes.size() > otherParameterTypes.size() && thisParameterTypes.size() > 0) {
+		} else if (thisParameterTypes.size() > otherParameterTypes.size() && thisParameterTypes.size() > 0) {
 			int commonParameterTypes = 0;
 			int differentParameterTypes = 0;
-			for(int i=0; i<otherParameterTypes.size(); i++) {
+			for (int i = 0; i < otherParameterTypes.size(); i++) {
 				UMLType thisParameterType = thisParameterTypes.get(i);
 				UMLType otherParameterType = otherParameterTypes.get(i);
-				if(thisParameterType.equals(otherParameterType) || (thisParameterType.getClassType().equals(otherParameterType.getClassType()) && thisParameterType.getArrayDimension() == otherParameterType.getArrayDimension())) {
+				if (thisParameterType.equals(otherParameterType)
+						|| (thisParameterType.getClassType().equals(otherParameterType.getClassType())
+								&& thisParameterType.getArrayDimension() == otherParameterType.getArrayDimension())) {
 					commonParameterTypes++;
-				}
-				else {
+				} else {
 					differentParameterTypes++;
 				}
 			}
-			return commonParameterTypes >= differentParameterTypes && commonParameterTypes > 0/*+ Math.abs(thisParameterTypes.size() - otherParameterTypes.size())*/;
-		}
-		else if(otherParameterTypes.size() > thisParameterTypes.size() && thisParameterTypes.size() > 0) {
+			return commonParameterTypes >= differentParameterTypes
+					&& commonParameterTypes > 0/*
+												 * + Math.abs(thisParameterTypes.
+												 * size() -
+												 * otherParameterTypes.size())
+												 */;
+		} else if (otherParameterTypes.size() > thisParameterTypes.size() && thisParameterTypes.size() > 0) {
 			int commonParameterTypes = 0;
 			int differentParameterTypes = 0;
-			for(int i=0; i<thisParameterTypes.size(); i++) {
+			for (int i = 0; i < thisParameterTypes.size(); i++) {
 				UMLType thisParameterType = thisParameterTypes.get(i);
 				UMLType otherParameterType = otherParameterTypes.get(i);
-				if(thisParameterType.equals(otherParameterType) || (thisParameterType.getClassType().equals(otherParameterType.getClassType()) && thisParameterType.getArrayDimension() == otherParameterType.getArrayDimension())) {
+				if (thisParameterType.equals(otherParameterType)
+						|| (thisParameterType.getClassType().equals(otherParameterType.getClassType())
+								&& thisParameterType.getArrayDimension() == otherParameterType.getArrayDimension())) {
 					commonParameterTypes++;
-				}
-				else {
+				} else {
 					differentParameterTypes++;
 				}
 			}
-			return commonParameterTypes >= differentParameterTypes && commonParameterTypes > 0/*+ Math.abs(thisParameterTypes.size() - otherParameterTypes.size())*/;
+			return commonParameterTypes >= differentParameterTypes
+					&& commonParameterTypes > 0/*
+												 * + Math.abs(thisParameterTypes.
+												 * size() -
+												 * otherParameterTypes.size())
+												 */;
 		}
 		return false;
 	}
 
 	public List<UMLOperation> getOperationsInsideAnonymousClass(List<UMLAnonymousClass> allAddedAnonymousClasses) {
 		List<UMLOperation> operationsInsideAnonymousClass = new ArrayList<UMLOperation>();
-		if(this.operationBody != null) {
+		if (this.operationBody != null) {
 			List<String> anonymousClassDeclarations = this.operationBody.getAllAnonymousClassDeclarations();
-			for(String anonymousClassDeclaration : anonymousClassDeclarations) {
-				for(UMLAnonymousClass anonymousClass : allAddedAnonymousClasses) {
+			for (String anonymousClassDeclaration : anonymousClassDeclarations) {
+				for (UMLAnonymousClass anonymousClass : allAddedAnonymousClasses) {
 					int foundOperations = 0;
 					List<UMLOperation> operations = anonymousClass.getOperations();
-					for(UMLOperation operation : operations) {
-						if(anonymousClassDeclaration.contains(operation.getName())) {
+					for (UMLOperation operation : operations) {
+						if (anonymousClassDeclaration.contains(operation.getName())) {
 							foundOperations++;
 						}
 					}
-					if(foundOperations == operations.size()) {
+					if (foundOperations == operations.size()) {
 						operationsInsideAnonymousClass.addAll(operations);
 					}
 				}

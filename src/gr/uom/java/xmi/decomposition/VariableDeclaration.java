@@ -8,19 +8,34 @@ public class VariableDeclaration {
 	private String variableName;
 	private String initializer;
 	private String variableType;
-	
+	private AbstractStatement container;
 	public VariableDeclaration(VariableDeclarationFragment fragment) {
 
-		if(fragment.getParent() instanceof VariableDeclarationExpression)
-			variableType=((VariableDeclarationExpression)fragment.getParent()).getType().toString();
-		else
-			variableType = ((VariableDeclarationStatement)fragment.getParent()).getType().toString();
+		try {
+			 
+			if(fragment.getParent() instanceof VariableDeclarationExpression)
+				variableType=((VariableDeclarationExpression)fragment.getParent()).getType().toString();
+			else if(fragment.getParent() instanceof VariableDeclarationStatement)
+				variableType = ((VariableDeclarationStatement)fragment.getParent()).getType().toString();
 
-			this.variableName = fragment.getName().getIdentifier();
-		this.initializer = fragment.getInitializer() != null ? fragment.getInitializer().toString() : null;
+				this.variableName = fragment.getName().getIdentifier();
+			this.initializer = fragment.getInitializer() != null ? fragment.getInitializer().toString() : null;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println();
+		}
+	
 
 	}
-
+	
+	public void setContainer(AbstractStatement container){
+		this.container = container;
+	}
+	
+	public AbstractStatement getContainer(){
+		return this.container;
+	}
+	
 	public String getVariableName() {
 		return variableName;
 	}

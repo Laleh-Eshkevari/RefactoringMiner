@@ -6,6 +6,7 @@ import gr.uom.java.xmi.UMLClass;
 import gr.uom.java.xmi.UMLOperation;
 import gr.uom.java.xmi.UMLParameter;
 import gr.uom.java.xmi.UMLType;
+import gr.uom.java.xmi.decomposition.AbstractCodeFragment;
 import gr.uom.java.xmi.decomposition.AbstractCodeMapping;
 import gr.uom.java.xmi.decomposition.CompositeStatementObject;
 import gr.uom.java.xmi.decomposition.OperationInvocation;
@@ -864,7 +865,8 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 	}
 
 	public void checkForRenameLocalVariable() {
-
+		long startTime = System.currentTimeMillis();
+//		System.out.println("startTime:" + startTime);
 		ArrayList<UMLOperationBodyMapper> bodyMapperList = new ArrayList<>(getOperationBodyMapperList());
 
 		for (int index = 0; index < bodyMapperList.size(); index++) {
@@ -880,45 +882,52 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 			// System.out.println("class name: "+
 			// umlOperationBodyMapper.getOperation1().getClassName()+"\tmethod1:
 			// "+ umlOperationBodyMapper.getOperation1().getName()+ "\tmethod2:
-			// "+umlOperationBodyMapper .getOperation2().getName()); 
+			// "+umlOperationBodyMapper .getOperation2().getName());
 			if (umlOperationBodyMapper.getOperation1().getBody() != null
-					&& umlOperationBodyMapper.getOperation2().getBody() != null){
-			Set<VariableDeclaration> variableDeclarationInOperation1 = new HashSet<>(
-					umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations());
-			Set<VariableDeclaration> variableDeclarationInOperation2 = new HashSet<>(
-					umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariableDeclarations());
-			detectRename(umlOperationBodyMapper, potentialLVDrenamings);
-			for (UMLOperationBodyMapper additionalMapper : umlOperationBodyMapper.getAdditionalMappers()) {
-				variableDeclarationInOperation1.addAll(new HashSet<>(additionalMapper.getOperation1().getBody()
-						.getCompositeStatement().getVariableDeclarations()));
-				variableDeclarationInOperation2.addAll(new HashSet<>(additionalMapper.getOperation2().getBody()
-						.getCompositeStatement().getVariableDeclarations()));
-				detectRename(additionalMapper, potentialLVDrenamings);
-			}
-			
+					&& umlOperationBodyMapper.getOperation2().getBody() != null) {
+				Set<VariableDeclaration> variableDeclarationInOperation1 = new HashSet<>(umlOperationBodyMapper
+						.getOperation1().getBody().getCompositeStatement().getVariableDeclarations());
+				Set<VariableDeclaration> variableDeclarationInOperation2 = new HashSet<>(umlOperationBodyMapper
+						.getOperation2().getBody().getCompositeStatement().getVariableDeclarations());
+				
+				
 
-			for (String key : potentialLVDrenamings.keySet()) {
-				// this might be changed to the results of the rename method
-				// since the local variable can only happend in the same
-				// method and the only way that the method name can be
-				// different is method renaming!
-				if (potentialLVDrenamings.get(key) != null) {
-					Replacement replacement = potentialLVDrenamings.get(key);
-					String refVar = null;
-					if ((replacement.getAfter().contains(".") && replacement.getBefore().contains("."))) {
-						refVar = replacement.getAfter().substring(0, replacement.getAfter().indexOf("."));
-					} else
-						refVar = replacement.getAfter();
-					RenameLocalVariable lvr = new RenameLocalVariable(
-							getVariable(key.replace("#", ""), variableDeclarationInOperation1),
-							getVariable(refVar, variableDeclarationInOperation2),
-							umlOperationBodyMapper.getOperation1());
-					refactorings.add(lvr);
-					// System.out.println("=============== " + lvr);
+				
+				
+				detectRename(umlOperationBodyMapper, potentialLVDrenamings);
+				for (UMLOperationBodyMapper additionalMapper : umlOperationBodyMapper.getAdditionalMappers()) {
+					variableDeclarationInOperation1.addAll(new HashSet<>(additionalMapper.getOperation1().getBody()
+							.getCompositeStatement().getVariableDeclarations()));
+					variableDeclarationInOperation2.addAll(new HashSet<>(additionalMapper.getOperation2().getBody()
+							.getCompositeStatement().getVariableDeclarations()));
+					detectRename(additionalMapper, potentialLVDrenamings);
 				}
 
-			}}
+				for (String key : potentialLVDrenamings.keySet()) {
+					// this might be changed to the results of the rename method
+					// since the local variable can only happend in the same
+					// method and the only way that the method name can be
+					// different is method renaming!
+					if (potentialLVDrenamings.get(key) != null) {
+						Replacement replacement = potentialLVDrenamings.get(key);
+						String refVar = null;
+						if ((replacement.getAfter().contains("."))) {
+							refVar = replacement.getAfter().substring(0, replacement.getAfter().indexOf("."));
+						} else
+							refVar = replacement.getAfter();
+						RenameLocalVariable lvr = new RenameLocalVariable(
+								getVariable(key.replace("#", ""), variableDeclarationInOperation1),
+								getVariable(refVar, variableDeclarationInOperation2),
+								umlOperationBodyMapper.getOperation1());
+						refactorings.add(lvr);
+						System.out.println("=============== " + lvr);
+					}
+
+				}
+			}
 		}
+
+//		System.out.println("took: " + (System.currentTimeMillis() - startTime));
 	}
 
 	private void detectRename(UMLOperationBodyMapper umlOperationBodyMapper,
@@ -927,6 +936,8 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 				&& umlOperationBodyMapper.getOperation2().getBody() != null) {
 			List<AbstractCodeMapping> mappings = umlOperationBodyMapper.getMappings();
 
+			Set<String>  variables = new  HashSet<>(); //new HashSet<>(umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariables());
+			
 			Set<VariableDeclaration> variableDeclarationInOperation1 = new HashSet<>(
 					umlOperationBodyMapper.getOperation1().getBody().getCompositeStatement().getVariableDeclarations());
 			Set<VariableDeclaration> variableDeclarationInOperation2 = new HashSet<>(
@@ -937,14 +948,17 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 			// umlOperationBodyMapper.getOperation2().getBody().getCompositeStatement().getVariableDeclarations();
 			ArrayList<Replacement> replacements = new ArrayList<>(umlOperationBodyMapper.getReplacements());
 
+			for (VariableDeclaration variableDeclaration : variableDeclarationInOperation1) {
+				// I should avoid adding revoved cases to this list
+				if (!potentialLVDrenamings.containsKey(variableDeclaration.getVariableName()) )
+					potentialLVDrenamings.put(variableDeclaration.getVariableName(), null);
+			}
+			 
 			ArrayList<Replacement> removedCase = new ArrayList<>();
- 			if (replacements.size() == 0 || variableDeclarationInOperation1.size() == 0)
+			if (replacements.size() == 0 || variableDeclarationInOperation1.size() == 0)
 				return;
 
-			for (VariableDeclaration variableDeclaration : variableDeclarationInOperation1) {
-				potentialLVDrenamings.put(variableDeclaration.getVariableName(), null);
-			}
-
+			
 			for (int i = 0; i < replacements.size(); i++) {
 				Replacement replacement = replacements.get(i);
 				boolean existInAdditionalMapper = false;
@@ -956,31 +970,35 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 					if (potentialLVDrenamings.containsKey(replacement.getBefore())) {
 						Replacement candidate = potentialLVDrenamings.get(replacement.getBefore());
 
-						boolean variableExistInBoth = isVariableExistInBoth(replacement.getBefore(),
+						int varInMethod =  isVariableExistInBoth(replacement.getBefore(),
 								replacement.getAfter(), variableDeclarationInOperation1,
-								variableDeclarationInOperation2);
+								variableDeclarationInOperation2, variables);
+						boolean variableExistInBoth = varInMethod!=0;
 						if (!variableExistInBoth)
 							variableExistInBoth |= isVariableExistsInDepenantMapper(replacement.getBefore(),
-									umlOperationBodyMapper.getAdditionalMappers());
-
-						//this might be destruptive
-//						if(variableExistInBoth)
-//							continue;
+									umlOperationBodyMapper.getAdditionalMappers()) | isVarInTargetParams(replacement.getBefore(), umlOperationBodyMapper);
 						
+
+						// this might be destruptive
+						// if(variableExistInBoth)
+						// continue;
+
 						if (candidate == null && !variableExistInBoth
-								&& getVariable(replacement.getAfter(), variableDeclarationInOperation2) != null 
+								&& getVariable(replacement.getAfter(), variableDeclarationInOperation2) != null
 								&& !isInRemovedCandidates(removedCase, replacement)) {
 							potentialLVDrenamings.put(replacement.getBefore(), replacement);
 						} else if (variableExistInBoth) {
+//							if(varInMethod==-1 && !inSameScope(replacement.getBefore())){
+//								
+//							}
 							potentialLVDrenamings.remove(replacement.getBefore());
 							removedCase.add(replacement);
-							
-						}
-						else if(isInRemovedCandidates(removedCase, replacement)){
+
+						} else if (isInRemovedCandidates(removedCase, replacement)) {
 							potentialLVDrenamings.remove(replacement.getBefore());
 							removedCase.add(replacement);
-						}
-						else if ( getVariable(replacement.getAfter(), variableDeclarationInOperation2) != null&&!candidate.getAfter().equals(replacement.getAfter())) {
+						} else if (getVariable(replacement.getAfter(), variableDeclarationInOperation2) != null
+								&& !compareReplacements(replacement, candidate)) {
 							if (inSameScope(candidate, replacement)) {
 								potentialLVDrenamings.remove(replacement.getBefore());
 								removedCase.add(replacement);
@@ -991,7 +1009,39 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 
 					}
 				} else if (replacement instanceof VariableReplacementWithMethodInvocation) {
-					potentialLVDrenamings.remove(replacement.getBefore());
+					String baseVar;
+					String refVar;
+					if (replacement.getBefore().contains("."))
+						baseVar = replacement.getBefore().substring(0, replacement.getBefore().indexOf("."));
+					else
+						baseVar = replacement.getBefore();
+
+					if (replacement.getAfter().contains("."))
+						refVar = replacement.getAfter().substring(0, replacement.getAfter().indexOf("."));
+					else
+						refVar = replacement.getAfter();
+
+					if (!findVariableByName(baseVar, variableDeclarationInOperation1)
+							|| !findVariableByName(refVar, variableDeclarationInOperation2) || baseVar.equals(refVar))
+						continue;
+
+					boolean variableExistInBoth = (isVariableExistInBoth(baseVar, refVar,
+							variableDeclarationInOperation1, variableDeclarationInOperation2 , variables)!=0 )
+							| isVarInTargetParams(baseVar, umlOperationBodyMapper);;
+					
+					
+ 					if (!baseVar.contains("(") && !refVar.contains("(")) {
+						if (potentialLVDrenamings.containsKey(baseVar)) {
+							Replacement candidate = potentialLVDrenamings.get(baseVar);
+							if (candidate == null && !variableExistInBoth
+									&& getVariable(refVar, variableDeclarationInOperation2) != null)
+								potentialLVDrenamings.put(baseVar, replacement);
+							else if (variableExistInBoth || !compareReplacements(replacement, candidate))
+								potentialLVDrenamings.remove(baseVar);
+						}
+					}
+
+					// potentialLVDrenamings.remove(replacement.getBefore());
 
 				} else if (replacement instanceof MethodInvocationReplacement) {
 					if (!replacement.getAfter().contains(".") || !replacement.getBefore().contains("."))
@@ -1006,7 +1056,7 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 						continue;
 
 					boolean variableExistInBoth = isVariableExistInBoth(baseVar, refVar,
-							variableDeclarationInOperation1, variableDeclarationInOperation2);
+							variableDeclarationInOperation1, variableDeclarationInOperation2, variables)!=0;
 
 					if (!baseVar.contains("(") && !refVar.contains("(")) {
 						if (potentialLVDrenamings.containsKey(baseVar)) {
@@ -1026,43 +1076,110 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 		}
 	}
 
-	private boolean isInRemovedCandidates(List<Replacement> removeCandidate,Replacement currentCandidate){
+	private boolean isVarInTargetParams(String before, UMLOperationBodyMapper umlOperationBodyMapper) {
+		return umlOperationBodyMapper.getOperation2().getParameterNameList().contains(before);
+		 
+	}
+
+	private boolean compareReplacements(Replacement replacement, Replacement candidate) {
+		String oldCandidate;
+		String newCandidate;
+
+		if (replacement.getAfter().contains("."))
+			oldCandidate = replacement.getAfter().substring(0, replacement.getAfter().indexOf("."));
+		else
+			oldCandidate = replacement.getAfter();
+
+		if (candidate.getAfter().contains("."))
+			newCandidate = candidate.getAfter().substring(0, candidate.getAfter().indexOf("."));
+		else
+			newCandidate = candidate.getAfter();
+
+		return newCandidate.equals(oldCandidate);
+	}
+
+	private boolean isInRemovedCandidates(List<Replacement> removeCandidate, Replacement currentCandidate) {
 		for (Replacement replacement : removeCandidate) {
-			if(replacement.getAfter().equals(currentCandidate.getAfter())){
-				System.out.println("removed due to isInRemovedCandidates	"+replacement);
+			if (compareReplacements(currentCandidate, replacement)) {
+				System.out.println("removed due to isInRemovedCandidates	" + replacement);
 				return true;
 			}
-			
+
 		}
 		return false;
 	}
+
+	private boolean inSameScope(VariableDeclaration var1 , VariableDeclaration var2) {
+		int firstDepth = var1.getContainer().getDepth() - 1;
+		int secondDepth = var2.getContainer().getDepth() - 1;
+		CompositeStatementObject firstParent = var1.getContainer().getParent();
+		CompositeStatementObject secondParent = var2.getContainer().getParent();
+ 
+		 
+		while (firstDepth != 0) {
+			
+			
+			if (!firstParent.getString().equals("{")
+					&& findVariableByName(var1.getVariableName(), new HashSet<>(firstParent.getVariableDeclarations()))) {
+				break;
+			}
+			firstParent = firstParent.getParent();
+			firstDepth--;
+		}
+		while (secondDepth != 0) {
+			
+			if (!secondParent.getString().equals("{")
+					&& findVariableByName(var2.getVariableName(), new HashSet<>(secondParent.getVariableDeclarations()))) {
+				break;
+			}
+			secondParent = secondParent.getParent();
+			secondDepth--;
+		}
+		return firstParent != null && secondParent != null && firstParent.getString().equals(secondParent.getString());
+	}
+
 	private boolean inSameScope(Replacement first, Replacement second) {
 		// we have to check up to the same level to see they do not belong to
 		// the same parent
 		int depthDiff = Math.abs(
 				first.getCodeMapping().getFragment1().getDepth() - second.getCodeMapping().getFragment1().getDepth());
-		int firstDepth = first.getCodeMapping().getFragment1().getDepth()-1;
-		int secondDepth = second.getCodeMapping().getFragment1().getDepth()-1;
+		int firstDepth = first.getCodeMapping().getFragment1().getDepth() - 1;
+		int secondDepth = second.getCodeMapping().getFragment1().getDepth() - 1;
 		CompositeStatementObject firstParent = first.getCodeMapping().getFragment1().getParent();
-		CompositeStatementObject secondParent =second.getCodeMapping().getFragment1().getParent();
+		CompositeStatementObject secondParent = second.getCodeMapping().getFragment1().getParent();
 
 		while (firstDepth != 0) {
-			firstParent = firstParent.getParent();
-			if (!firstParent.getString().equals("{")&&findVariableByName(first.getBefore(), new HashSet<>(firstParent.getVariableDeclarations()))) {
+			
+			if (!firstParent.getString().equals("{")
+					&& findVariableByName(first.getBefore(), new HashSet<>(firstParent.getVariableDeclarations()))) {
 				break;
 			}
+			firstParent = firstParent.getParent();
 			firstDepth--;
 		}
 
 		while (secondDepth != 0) {
-			secondParent = secondParent.getParent();
-			if (!secondParent.getString().equals("{")&& findVariableByName(second.getBefore(), new HashSet<>(secondParent.getVariableDeclarations()))) {
+			
+			if (!secondParent.getString().equals("{")
+					&& findVariableByName(second.getBefore(), new HashSet<>(secondParent.getVariableDeclarations()))) {
 				break;
 			}
+			secondParent = secondParent.getParent();
 			secondDepth--;
 		}
+		
+		//is first inside the second? 
+//		if(secondDepth<firstDepth)
+//			while (firstDepth != 0||firstDepth!=secondDepth) {
+//				firstParent = firstParent.getParent();
+//				if (!firstParent.getString().equals("{")
+//						&& findVariableByName(first.getBefore(), new HashSet<>(firstParent.getVariableDeclarations()))) {
+//					break;
+//				}
+//				firstDepth--;
+//			}
 
- 		return firstParent != null && secondParent != null && firstParent.getString().equals(secondParent.getString());
+		return firstParent != null && secondParent != null && firstParent.getString().equals(secondParent.getString());
 
 		// if(depthDiff>1){
 		//
@@ -1106,28 +1223,35 @@ public class UMLClassDiff implements Comparable<UMLClassDiff> {
 		return false;
 	}
 
-	private boolean isVariableExistInBoth(String baseVar, String refVar, Set<VariableDeclaration> baseVars,
-			Set<VariableDeclaration> refVars) {
+	private int isVariableExistInBoth(String baseVar, String refVar, Set<VariableDeclaration> baseVars,
+			Set<VariableDeclaration> refVars ,   Set<String>  usedVarsIn2 ){
 		boolean variableExistInBoth = findVariableByName(baseVar, refVars);
 		boolean secondVarExistInBoth = findVariableByName(refVar, baseVars);
 
+		if (usedVarsIn2.contains( baseVar))
+			return -1;
+		
 		if (!findVariableByName(refVar, refVars) && variableExistInBoth)
-			return true;
+			return -1;
 
 		if (variableExistInBoth) {
 			VariableDeclaration selected = compareCandidates(refVar, baseVar, baseVars, refVars);
-			if (selected.getVariableName().equals(baseVar))
-				return true;
+			if (selected.getVariableName().equals(baseVar)){
+//				if(inSameScope(getVariable(baseVar, refVars),getVariable(refVar, refVars))){
+					return -1;
+//				}
+			}
+				
 
 		}
 
 		if (secondVarExistInBoth) {
 			VariableDeclaration selected = compareCandidates(baseVar, refVar, refVars, baseVars);
 			if (selected.getVariableName().equals(refVar))
-				return true;
+				return 1;
 		}
 
-		return false;
+		return 0;
 	}
 
 	// we can get the variable name in the first place

@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import org.hibernate.internal.jaxb.cfg.JaxbHibernateConfiguration.JaxbSessionFactory;
+import org.refactoringminer.test.RefactoringPopulator.Root;
 import org.refactoringminer.test.TestBuilder.ProjectMatcher.CommitMatcher;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -31,8 +32,8 @@ public class RefactoringPopulator {
 	public enum Refactorings {
 		MoveMethod(1), MoveAttribute(2), InlineMethod(4), ExtractMethod(8), PushDownMethod(16), PushDownAttribute(
 				32), PullUpMethod(64), PullUpAttribute(128), ExtractInterface(256), ExtractSuperclass(512), MoveClass(
-						1024), RenamePackage(2048), RenameMethod(4096), ExtractAndMoveMethod(
-								8192), RenameClass(16384), MoveSourceFolder(32768), All(65535);
+						1024), RenamePackage(2048), RenameMethod(4096), ExtractAndMoveMethod(8192), RenameClass(
+								16384), MoveSourceFolder(32768), RenameLocalVariable(65536), All(131071);
 		private int value;
 
 		private Refactorings(int value) {
@@ -2737,17 +2738,109 @@ public class RefactoringPopulator {
 
 	private static List<Root> refactoringsMem;
 
-	private static void prepareFSERefactorings(TestBuilder test, int flag)
+	public static List<Root> prepareFSERefactorings(TestBuilder test, int flag)
 			throws JsonParseException, JsonMappingException, IOException {
 		List<Root> refactorings = getFSERefactorings(flag);
-
+		int count = 0;
+		int take = 30;
+		int skip = 0;
 		for (Root root : refactorings) {
-			test.project(root.repository, "master").atCommit(root.sha1)
-					.containsOnly(extractRefactorings(root.refactorings));
+			// if (count < take)
+			if (root.sha1.equals("1b37699d3a9b225f95b9747e1f1ee351d4f0e965")
+				 ||root.sha1.equals("7c560638b01e52d0a8ea3d041c9776e73b4b15e8")
+		)
+				test.project(root.repository, "master").atCommit(root.sha1)
+						.containsOnly(extractRefactorings(root.refactorings));
 
 		}
 
 		refactoringsMem = refactorings;
+
+		return refactorings;
+	}
+
+	public static void addRefactoring(String commitHash, String refactoring, String fileName) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		for (Root root : refactoringsMem) {
+			if (root.sha1.equals(commitHash)) {
+				Refactoring ref = new Refactoring();
+				ref.description = refactoring;
+				ref.fileName = fileName;
+				ref.type = "Rename Local Variable";
+				ref.detectionTools = "RefactoringMiner";
+				ref.validation = "UKN";
+				ref.ignored = true;
+
+				root.refactorings.add(ref);
+			}
+		}
+
+	}
+
+	public static String getCommentIfExists(String commitHash, String refactoring) {
+		StringBuilder sb = new StringBuilder();
+
+		for (Root root : refactoringsMem) {
+			if (root.sha1.equals(commitHash)) {
+				for (Refactoring ref : root.refactorings) {
+					if (ref.description.contentEquals(refactoring.replace("\t", " "))) {
+						sb.append(ref.validation).append("\t").append(ref.comment);
+					}
+				}
+			}
+		}
+		return sb.toString();
+	}
+
+	public static boolean updateIfExistRefactoring(String commitHash, String refactoring, String fileName) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		for (Root root : refactoringsMem) {
+			if (root.sha1.equals(commitHash)) {
+				for (Refactoring ref : root.refactorings) {
+					if (ref.description.contentEquals(refactoring.replace("\t", " "))) {
+						ref.detectionTools = "RefactoringMiner";
+						ref.fileName = fileName;
+						// if (!ref.detectionTools.contains("RefactoringMiner"))
+						// {
+						// ref.detectionTools = "RefactoringMiner, " +
+						// ref.detectionTools;
+						// //if(ref.validation.equals("UKN"))
+						// ref.validation+="---";
+						// }
+						//
+						// return true;
+						// } else {
+						// RefactoringMinerProvider minerProvider = new
+						// RefactoringMinerProvider("MinerProvider");
+						// RefDiffProvider refDiffProvider = new
+						// RefDiffProvider("refDiff");
+						//
+						// RefactoringModel minerModer =
+						// minerProvider.getRefactoringModel(refactoring);
+						// RefactoringModel diffMode =
+						// refDiffProvider.getRefactoringModel(ref.description);
+						//
+						// if (minerModer.equals(diffMode)) {
+						// if (!ref.detectionTools.contains("RefactoringMiner"))
+						// {
+						// ref.detectionTools = "RefactoringMiner, " +
+						// ref.detectionTools;
+						// ref.description = refactoring;
+						// //if(ref.validation.equals("UKN"))
+						// ref.validation+="---";
+						// }
+						// return true;
+						// }
+					}
+
+				}
+			}
+
+		}
+
+		return false;
 	}
 
 	public static String[] extractRefactorings(List<Refactoring> refactoring) {
@@ -2773,7 +2866,7 @@ public class RefactoringPopulator {
 	public static List<Root> getFSERefactorings(int flag) throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 
-		String jsonFile = System.getProperty("user.dir") + "/src-test/Data/data.json";
+		String jsonFile = System.getProperty("user.dir") + "/src-test/Data/RLV-DNS.json";
 
 		List<Root> roots = mapper.readValue(new File(jsonFile),
 				mapper.getTypeFactory().constructCollectionType(List.class, Root.class));
@@ -2800,6 +2893,16 @@ public class RefactoringPopulator {
 		return filtered;
 	}
 
+	public static void save() {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			mapper.writeValue(new File("/Users/matin/Documents/newJson.json"), refactoringsMem);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private static boolean isAdded(Refactoring refactoring, int flag) {
 		try {
 			return ((Enum.valueOf(Refactorings.class, refactoring.type.replace(" ", "")).getValue() & flag) > 0);
@@ -2821,11 +2924,13 @@ public class RefactoringPopulator {
 			}
 			for (Root root : roots) {
 				for (Refactoring ref : root.refactorings) {
+					if (ref.detectionTools == null || ref.ignored)
+						continue;
 					Tuple tuple = result.get(ref.type.replace(" ", ""));
 					tuple.totalTruePositives += ref.validation.contains("TP") ? 1 : 0;
 					tuple.unknown += ref.validation.equals("UKN") ? 1 : 0;
 
-					if (ref.detectionTools.contains("RefDiff")) {
+					if (ref.detectionTools.contains("Repent")) {
 						tuple.refDiffTruePositives += ref.validation.contains("TP") ? 1 : 0;
 						tuple.refDiffFalsePositives += ref.validation.equals("FP") ? 1 : 0;
 					}
@@ -2903,6 +3008,8 @@ public class RefactoringPopulator {
 		public String time;
 		public List<Refactoring> refactorings;
 		public long refDiffExecutionTime;
+		public List<Comment> comment;
+		public String svnVersionMappings;
 
 	}
 
@@ -2910,10 +3017,37 @@ public class RefactoringPopulator {
 		public String type;
 		public String description;
 		public String comment;
-		public String validation;
-		public String detectionTools; 
-		public String validators;
 
+		public String validation;
+		public String detectionTools;
+		public String validators;
+		public boolean ignored;
+		public String fileName;
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((description == null) ? 0 : description.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Refactoring other = (Refactoring) obj;
+			if (description == null) {
+				if (other.description != null)
+					return false;
+			} else if (!description.equals(other.description))
+				return false;
+			return true;
+		}
 	}
 
 	public static class Comment {
@@ -2923,5 +3057,5 @@ public class RefactoringPopulator {
 		public String type;
 		public String reportedCase;
 	}
- 
+
 }

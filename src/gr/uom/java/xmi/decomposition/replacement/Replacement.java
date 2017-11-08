@@ -1,16 +1,26 @@
 package gr.uom.java.xmi.decomposition.replacement;
 
+import gr.uom.java.xmi.decomposition.AbstractCodeMapping;
 import gr.uom.java.xmi.diff.StringDistance;
 
 public class Replacement {
 	private String before;
 	private String after;
+	private AbstractCodeMapping codeMapping;
 	
 	public Replacement(String before, String after) {
 		this.before = before;
 		this.after = after;
 	}
 
+	public void setCodeMapping(AbstractCodeMapping mapping){
+		codeMapping = mapping;
+	}
+	
+	public AbstractCodeMapping getCodeMapping(){
+		return codeMapping;
+	}
+	
 	public String getBefore() {
 		return before;
 	}

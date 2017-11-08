@@ -25,7 +25,7 @@ public class StatementObject extends AbstractStatement {
 	private List<String> stringLiterals;
 	private Map<String, ObjectCreation> creationMap;
 	private List<String> infixOperators;
-	
+	private List<String> numericLiterals;
 	public StatementObject(Statement statement, int depth) {
 		super();
 		Visitor visitor = new Visitor();
@@ -38,6 +38,9 @@ public class StatementObject extends AbstractStatement {
 		this.stringLiterals = visitor.getStringLiterals();
 		this.creationMap = visitor.getCreationMap();
 		this.infixOperators = visitor.getInfixOperators();
+		this.numericLiterals = visitor.getNumericLiterals();
+		
+		processVariables();
 		setDepth(depth);
 		if(statement.toString().matches("!(\\w|\\.)*@\\w*")) {
 			if(statement instanceof VariableDeclarationStatement) {
@@ -103,6 +106,12 @@ public class StatementObject extends AbstractStatement {
 			this.statement = statement.toString();
 		}
 	}
+	
+	private void processVariables(){
+		for (VariableDeclaration var : variableDeclarations) {
+			var.setContainer(this);
+		}
+	}
 
 	public List<String> stringRepresentation() {
 		List<String> stringRepresentation = new ArrayList<String>();
@@ -126,6 +135,11 @@ public class StatementObject extends AbstractStatement {
 		return variables;
 	}
 
+	@Override
+	public List<String> getNumericLiterals(){
+		return this.numericLiterals;
+	}
+	
 	@Override
 	public List<String> getTypes() {
 		return types;

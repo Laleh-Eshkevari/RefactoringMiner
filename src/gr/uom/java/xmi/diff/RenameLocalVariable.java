@@ -30,6 +30,9 @@ public class RenameLocalVariable implements Refactoring {
         return RefactoringType.RENAME_LOCAL_VARIABLE;
     }
 
+    public UMLOperation getOperation(){
+    	return originalVariableOperation;
+    }
     @Override
     public String getName() {
 

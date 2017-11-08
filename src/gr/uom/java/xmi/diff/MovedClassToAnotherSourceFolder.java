@@ -10,18 +10,27 @@ public class MovedClassToAnotherSourceFolder {
 		this.originalPath = originalPath;
 		this.movedPath = movedPath;
 	}
-	
+
 	public RenamePattern getRenamePattern() {
-		int separatorPos = separatorPosOfCommonSuffix('/', originalPath, movedPath);
-		String original = originalPath.substring(0, originalPath.length() - separatorPos);
-		String moved = movedPath.substring(0, movedPath.length() - separatorPos);
-		return new RenamePattern(original, moved);
+		try {
+			int separatorPos = separatorPosOfCommonSuffix('/', originalPath, movedPath);
+			String original = originalPath.substring(0, originalPath.length() - 0);
+			String moved = movedPath.substring(0, movedPath.length() - 0);
+			return new RenamePattern(original, moved);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			int separatorPos = 0;
+			String original = originalPath.substring(0, originalPath.length() - separatorPos);
+			String moved = movedPath.substring(0, movedPath.length() - separatorPos);
+			return new RenamePattern(original, moved);
+		}
+		
 	}
-	
+
 	private int separatorPosOfCommonSuffix(char separator, String s1, String s2) {
 		int l1 = s1.length();
 		int l2 = s2.length();
-		int separatorPos = -1; 
+		int separatorPos = -1;
 		int lmin = Math.min(s1.length(), s2.length());
 		boolean equal = true;
 		for (int i = 0; i < lmin; i++) {

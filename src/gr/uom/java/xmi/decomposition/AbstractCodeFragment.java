@@ -30,6 +30,7 @@ public abstract class AbstractCodeFragment {
 		this.index = index;
 	}
 	
+	public abstract CompositeStatementObject getParent();
 	public abstract String getString();
 	public abstract List<String> getVariables();
 	public abstract List<String> getTypes();
@@ -37,6 +38,7 @@ public abstract class AbstractCodeFragment {
 	public abstract Map<String, OperationInvocation> getMethodInvocationMap();
 	public abstract List<String> getAnonymousClassDeclarations();
 	public abstract List<String> getStringLiterals();
+	public abstract List<String> getNumericLiterals();
 	public abstract Map<String, ObjectCreation> getCreationMap();
 	public abstract List<String> getInfixOperators();
 	

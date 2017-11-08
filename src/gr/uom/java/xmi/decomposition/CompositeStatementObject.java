@@ -86,7 +86,7 @@ public class CompositeStatementObject extends AbstractStatement {
 	@Override
 	public List<String> getVariables() {
 		List<String> variables = new ArrayList<String>();
-		for(AbstractExpression expression : expressionList) {
+		for(AbstractStatement expression : getStatements()) {
 			variables.addAll(expression.getVariables());
 		}
 		return variables;
@@ -110,6 +110,15 @@ public class CompositeStatementObject extends AbstractStatement {
 		variableDeclarations.addAll(this.variableDeclaration);
 		return variableDeclarations;
 	}
+	
+//	public List<String> getUsedVariables() {
+//		List<String> variables= new ArrayList<String>();
+//		for(AbstractStatement expression : getStatements()) {
+//			variableDeclarations.addAll(expression.getVariables());
+//		}
+//		 
+//		return variableDeclarations;
+//	}
 
 	@Override
 	public Map<String, OperationInvocation> getMethodInvocationMap() {
@@ -138,6 +147,11 @@ public class CompositeStatementObject extends AbstractStatement {
 		return stringLiterals;
 	}
 
+	@Override
+	public List<String> getNumericLiterals(){
+		return null;
+	}
+	
 	@Override
 	public List<String> getInfixOperators() {
 		List<String> infixOperators = new ArrayList<String>();

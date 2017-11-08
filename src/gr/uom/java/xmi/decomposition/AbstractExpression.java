@@ -92,4 +92,16 @@ public class AbstractExpression extends AbstractCodeFragment {
 	public List<String> getInfixOperators() {
 		return infixOperators;
 	}
+
+	@Override
+	public CompositeStatementObject getParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getNumericLiterals() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
