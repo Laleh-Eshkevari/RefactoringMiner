@@ -31,7 +31,14 @@ public class AbstractExpression extends AbstractCodeFragment {
 		this.infixOperators = visitor.getInfixOperators();
     	this.expression = expression.toString();
     	this.owner = null;
+    	processVariables();
     }
+    
+	private void processVariables(){
+		for (VariableDeclaration var : variableDeclarations) {
+			var.setContainer(this);
+		}
+	}
 
     public void setOwner(CompositeStatementObject owner) {
     	this.owner = owner;

@@ -130,8 +130,8 @@
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable answerType : short renamed to type : short in method public addMessage(in Message) : void in class org.xbill.DNS.Cache",
 		"comment": "we need to check for scope because we have type variable in two scope",
-		"validation": "FP",
-		"detectionTools": "Repent",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": null
@@ -160,6 +160,15 @@
 		"validation": "FP",
 		"detectionTools": "Repent",
 		"validators": null,
+		"ignored": false,
+		"fileName": "trunk/org/xbill/DNS/Cache.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable r : Record renamed to auth : Record[] in method public addMessage(in Message) : void in class org.xbill.DNS.Cache",
+		"comment": "",
+		"validation": "CND",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
 		"ignored": false,
 		"fileName": "trunk/org/xbill/DNS/Cache.java"
 	}],
@@ -342,6 +351,15 @@
 	}, {
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable e : Enumeration renamed to it : Iterator in method public update(in InputStream) in class update",
+		"comment": "#Verified - Matin",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": null,
+		"ignored": true,
+		"fileName": "trunk/update.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable r : Record renamed to recs : Record[] in method package sendUpdate() : void in class update",
 		"comment": "#Verified - Matin",
 		"validation": "TP",
 		"detectionTools": "RefactoringMiner",
@@ -976,6 +994,15 @@
 		"validators": null,
 		"ignored": true,
 		"fileName": "trunk/org/xbill/DNS/Cache.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable token : String renamed to b : byte in method public Name(s String, origin Name) in class org.xbill.DNS.Name",
+		"comment": "",
+		"validation": "",
+		"detectionTools": "RefactoringMiner",
+		"validators": null,
+		"ignored": true,
+		"fileName": ""
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -1557,7 +1584,7 @@
 		"description": "Rename Local Variable bs : ByteArrayOutputStream renamed to dbs : DataByteOutputStream in method protected verify(m Message, b byte[], old TSIGRecord) : boolean in class org.xbill.DNS.TSIG",
 		"comment": "Two variable merged to dbs",
 		"validation": "FP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": null,
 		"ignored": false,
 		"fileName": "/DnsJava/trunk/org/xbill/DNS/TSIG.java"
@@ -2027,6 +2054,15 @@
 		"validators": "Laleh",
 		"ignored": false,
 		"fileName": "/DnsJava/trunk/update.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable s : String renamed to name : Name in method package doRequire(st MyStringTokenizer) : void in class update",
+		"comment": "",
+		"validation": "FP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": "/DnsJava/trunk/update.java"
 	}, {
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable s : String renamed to line : String in method public update(in InputStream) in class update",
@@ -2301,6 +2337,15 @@
 		"validators": null,
 		"ignored": true,
 		"fileName": "trunk/org/xbill/DNS/NameSet.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable token : String renamed to b : byte in method public Name(s String, origin Name) in class org.xbill.DNS.Name",
+		"comment": "",
+		"validation": "",
+		"detectionTools": "RefactoringMiner",
+		"validators": null,
+		"ignored": true,
+		"fileName": "trunk/org/xbill/DNS/NameSet.java"
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -2345,6 +2390,24 @@
 		"comment": null,
 		"validation": "TP",
 		"detectionTools": "RefactoringMiner, Repent",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": "trunk/org/xbill/DNS/Cache.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable rrtype : short renamed to type : short in method public addMessage(in Message) : void in class org.xbill.DNS.Cache",
+		"comment": null,
+		"validation": "FP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": "trunk/org/xbill/DNS/Cache.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable ttl : long renamed to soarec : SOARecord in method public addMessage(in Message) : void in class org.xbill.DNS.Cache",
+		"comment": null,
+		"validation": "FP",
+		"detectionTools": "RefactoringMiner",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "trunk/org/xbill/DNS/Cache.java"
@@ -3437,7 +3500,16 @@
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable qualifier : String renamed to s : String in method package doGlue(st MyStringTokenizer) : void in class update",
 		"comment": null,
-		"validation": "TBD",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": null,
+		"ignored": false,
+		"fileName": "trunk/update.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable qualifier : String renamed to s : String in method package doDelete(st MyStringTokenizer) : void in class update",
+		"comment": null,
+		"validation": "TP",
 		"detectionTools": "RefactoringMiner",
 		"validators": null,
 		"ignored": false,
@@ -3732,6 +3804,15 @@
 		"fileName": "trunk/update.java"
 	}, {
 		"type": "Rename Local Variable",
+		"description": "Rename Local Variable r : Record renamed to recs : Record[] in method package sendUpdate() : void in class update",
+		"comment": "#Verified - Matin",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": null,
+		"ignored": false,
+		"fileName": "trunk/update.java"
+	}, {
+		"type": "Rename Local Variable",
 		"description": "Rename Local Variable updates : Enumeration renamed to recs : Record[] in method package sendUpdate() : void in class update",
 		"comment": "#Verified - Matin",
 		"validation": "TP",
@@ -3804,10 +3885,10 @@
 		"fileName": "trunk/jnamed.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable r : Record renamed to recs : Record[] in method protected sendUpdate) : void in class update",
+		"description": "Rename Local Variable r : Record renamed to recs : Record[] in method package sendUpdate() : void in class update",
 		"comment": null,
-		"validation": "TBD",
-		"detectionTools": "Repent",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": null,
 		"ignored": false,
 		"fileName": null
@@ -5030,6 +5111,15 @@
 		"validators": null,
 		"ignored": true,
 		"fileName": ""
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable r : Record renamed to recs : Record[] in method package sendUpdate() : void in class update",
+		"comment": "#Verified - Matin",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": null,
+		"ignored": true,
+		"fileName": ""
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -5243,7 +5333,7 @@
 		"description": "Rename Local Variable nameInfo : TypeMap renamed to typelist : Object in method protected findSets(name Name, type short) : Object in class org.xbill.DNS.NameSet",
 		"comment": "#verified Laleh Matin Davood. though there are lots of changes, if we see the method declarations TypeMap.getAll() and lookupAll also  TypeMap.get(..) with lookupType() we can conclude it is a renaming ",
 		"validation": "TP",
-		"detectionTools": "RefactoringMiner",
+		"detectionTools": "",
 		"validators": null,
 		"ignored": true,
 		"fileName": "trunk/org/xbill/DNS/NameSet.java"

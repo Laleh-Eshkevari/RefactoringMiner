@@ -8,7 +8,7 @@ public class VariableDeclaration {
 	private String variableName;
 	private String initializer;
 	private String variableType;
-	private AbstractStatement container;
+	private AbstractCodeFragment container;
 	public VariableDeclaration(VariableDeclarationFragment fragment) {
 
 		try {
@@ -28,11 +28,11 @@ public class VariableDeclaration {
 
 	}
 	
-	public void setContainer(AbstractStatement container){
+	public void setContainer(AbstractCodeFragment container){
 		this.container = container;
 	}
 	
-	public AbstractStatement getContainer(){
+	public AbstractCodeFragment getContainer(){
 		return this.container;
 	}
 	

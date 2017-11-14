@@ -22,8 +22,16 @@ public class CompositeStatementObject extends AbstractStatement {
 		this.expressionList = new ArrayList<AbstractExpression>();
 		Visitor visitor = new Visitor();
 		statement.accept(visitor);
+		processVariables();
 
 		variableDeclaration =visitor.getVariableDeclarations();
+	}
+	
+	private void processVariables(){
+		if(variableDeclaration !=null)
+		for (VariableDeclaration var : variableDeclaration) {
+			var.setContainer(this);
+		}
 	}
 
 	public void addStatement(AbstractStatement statement) {
@@ -42,6 +50,7 @@ public class CompositeStatementObject extends AbstractStatement {
 		expression.setIndex(this.getIndex());
 		expressionList.add(expression);
 		expression.setOwner(this);
+		processVariables();
 	}
 
 	public List<AbstractExpression> getExpressions() {
@@ -86,7 +95,7 @@ public class CompositeStatementObject extends AbstractStatement {
 	@Override
 	public List<String> getVariables() {
 		List<String> variables = new ArrayList<String>();
-		for(AbstractStatement expression : getStatements()) {
+		for(AbstractExpression expression : expressionList) {
 			variables.addAll(expression.getVariables());
 		}
 		return variables;

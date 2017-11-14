@@ -489,16 +489,16 @@
 		"fileName": "/tomcat/watchdog-4.0/trunk/src/server/servlet-tests/WEB-INF/classes/tests/javax_servlet_http/HttpServletRequest/GetCookiesTestServlet.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable expectedValue : String renamed to expectedResult : String in method public service(request HttpServletRequest, response HttpServletResponse) : void in class tomcat.watchdog-4.0.trunk.src.server.servlet-tests.WEB-INF.classes.tests",
+		"description": "Rename Local Variable expectedValue : String renamed to expectedResult : String in method public service(request HttpServletRequest, response HttpServletResponse) : void in class tests.javax_servlet_http.HttpServletRequest.GetCookiesTestServlet",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/watchdog-4.0/trunk/src/server/servlet-tests/WEB-INF/classes/tests/javax_servlet_http/HttpServletRequest/GetCookiesTestServlet.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable expectedName : String renamed to expectedResult : String in method public service(request HttpServletRequest, response HttpServletResponse) : void in class tests.javax_servlet_http.HttpServletRequest.GetCookiesTestServlet",
+		"description": "Rename Local Variable gotValue : String renamed to expectedResult : String in method public service(request HttpServletRequest, response HttpServletResponse) : void in class tests.javax_servlet_http.HttpServletRequest.GetCookiesTestServlet",
 		"comment": "null",
 		"validation": "FP",
 		"detectionTools": "RefactoringMiner",
@@ -554,6 +554,15 @@
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/mbeans/StandardServerMBean.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable i : int renamed to j : int in method private storeGlobalNamingResources(writer PrintWriter, indent int, globalNamingResources NamingResources) : void in class org.apache.catalina.mbeans.StandardServerMBean",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "null",
+		"ignored": false,
+		"fileName": ""
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -746,19 +755,28 @@
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/mbeans/MBeanFactory.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable oname : ObjectName renamed to coname : ObjectName in method public createHttpConnector(parent String, address String, port int) : String in class tomcat.container.catalina.trunk.catalina.src.share.org.apache.catalina.mbeans.MBeanFactory",
+		"description": "Rename Local Variable oname : ObjectName renamed to coname : ObjectName in method public createHttpConnector(parent String, address String, port int) : String in class org.apache.catalina.mbeans.MBeanFactory",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/mbeans/MBeanFactory.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable oname : ObjectName renamed to coname : ObjectName in method public createAjpConnector(parent String, address String, port int) : String in class tomcat.container.catalina.trunk.catalina.src.share.org.apache.catalina.mbeans.MBeanFactory",
+		"description": "Rename Local Variable oname : ObjectName renamed to coname : ObjectName in method public createAjpConnector(parent String, address String, port int) : String in class org.apache.catalina.mbeans.MBeanFactory",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
+		"validators": "null",
+		"ignored": false,
+		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/mbeans/MBeanFactory.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable oname : ObjectName renamed to coname : ObjectName in method public createHttpsConnector(parent String, address String, port int) : String in class org.apache.catalina.mbeans.MBeanFactory",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/mbeans/MBeanFactory.java"
@@ -826,8 +844,8 @@
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable arg : StringBuffer renamed to param : String in method protected run() : void in class tomcat.tc6.0.x.trunk",
 		"comment": "null",
-		"validation": "FP",
-		"detectionTools": "Repent",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/tc6.0.x/trunk/java/org/apache/catalina/servlets/CGIServlet.java"
@@ -891,13 +909,22 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable requestPath : String renamed to requestPathMB : MessageBytes in method public invoke(request Request, response Response, valveContext ValveContext) : void in class tomcat.container.catalina.trunk.catalina.src.share.org.apache.catalina.core.StandardWrapperValve",
+		"description": "Rename Local Variable requestPath : String renamed to requestPathMB : MessageBytes in method public invoke(request Request, response Response, valveContext ValveContext) : void in class org.apache.catalina.core.StandardWrapperValve",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/core/StandardWrapperValve.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable requestURI : String renamed to hrequest : HttpRequest in method public invoke(request Request, response Response, valveContext ValveContext) : void in class org.apache.catalina.core.StandardWrapperValve",
+		"comment": "null",
+		"validation": "FP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": ""
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -1395,8 +1422,8 @@
 	}, {
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable arg2 : String renamed to hval : String in method public process(type int, buffer byte) : boolean in class tomcat.container.tc4.x.trunk.catalina.src.share.org.apache.catalina.connector.warp.WarpRequestHandler",
-		"comment": "null",
-		"validation": "TP",
+		"comment": "#LALEH, The source method is removed",
+		"validation": "FP",
 		"detectionTools": "Repent",
 		"validators": "Matin",
 		"ignored": false,
@@ -1422,6 +1449,15 @@
 	}, {
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable s : Socket renamed to sock : Socket in method public run() : void in class org.apache.catalina.connector.warp.WarpConnector",
+		"comment": "Repent cannot find this due to method postion change in the code",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": ""
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable k : byte renamed to temp : byte in method public writeString(s String) : void in class org.apache.catalina.connector.warp.WarpPacket",
 		"comment": "Repent cannot find this due to method postion change in the code",
 		"validation": "TP",
 		"detectionTools": "RefactoringMiner",
@@ -1462,7 +1498,7 @@
 	"refactorings": [{
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable hostName : String renamed to name : String in method public perform(mapping ActionMapping, form ActionForm, request HttpServletRequest, response HttpServletResponse) : ActionForward in class tomcat.container.tc4.x.trunk.webapps.admin.WEB-INF.classes.org.apache.webapp.admin.service.EditServiceAction",
-		"comment": "null",
+		"comment": "Mapper does not mapped this case",
 		"validation": "TP",
 		"detectionTools": "Repent",
 		"validators": "Matin",
@@ -1490,7 +1526,7 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable stream : InputStream renamed to inputStream : InputStream in method private tldConfigTld(resourcePath String, digester Digester) : boolean in class tomcat.container.tc4.x.trunk.catalina.src.share.org.apache.catalina.startup.ContextConfig",
+		"description": "Rename Local Variable stream : InputStream renamed to inputStream : InputStream in method private tldConfigTld(resourcePath String, digester Digester) : boolean in class org.apache.catalina.startup.ContextConfig",
 		"comment": "We cannot find it due to method renaming we cannot detect",
 		"validation": "TP",
 		"detectionTools": "Repent",
@@ -1617,7 +1653,7 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable docBaseWar : File renamed to xml : File in method protected undeploy(writer PrintWriter, path String) : void in class tomcat.container.catalina.trunk.webapps.manager.WEB-INF.classes.org.apache.catalina.manager.ManagerServlet",
+		"description": "Rename Local Variable docBaseXml : File renamed to xml : File in method protected undeploy(writer PrintWriter, path String) : void in class org.apache.catalina.manager.ManagerServlet",
 		"comment": "null",
 		"validation": "FP",
 		"detectionTools": "Repent",
@@ -1685,15 +1721,6 @@
 	}, {
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable portInt : Integer renamed to connPort : String in method public removeConnector(name String, serviceName String) : void in class tomcat.container.tc4.x.trunk.catalina.src.share.org.apache.catalina.mbeans.MBeanFactory",
-		"comment": "null",
-		"validation": "TP",
-		"detectionTools": "Repent",
-		"validators": "null",
-		"ignored": false,
-		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/mbeans/MBeanFactory.java"
-	}, {
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable addr : String renamed to connAddress : String in method public removeConnector(name String, serviceName String) : void in class tomcat.container.tc4.x.trunk.catalina.src.share.org.apache.catalina.mbeans.MBeanFactory",
 		"comment": "null",
 		"validation": "TP",
 		"detectionTools": "Repent",
@@ -2114,7 +2141,16 @@
 		"comment": "null",
 		"validation": "TP",
 		"detectionTools": "RefactoringMiner",
-		"validators": "null",
+		"validators": "nuMatinll",
+		"ignored": false,
+		"fileName": ""
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable mimeType : String renamed to result : String in method public service(request HttpServletRequest, response HttpServletResponse) : void in class tests.javax_servlet.ServletContext.GetMimeTypeTestServlet",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
 		"ignored": false,
 		"fileName": ""
 	}],
@@ -2177,10 +2213,10 @@
 		"fileName": "/tomcat/watchdog-4.0/trunk/src/tools/org/apache/tomcat/task/GTest.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable reqHeaderEnum : Enumeration renamed to iter : Iterator in method private dispatch(request String, requestHeaders Hashtable) : void in class tomcat.watchdog-4.0.trunk.src.tools.org.apache.tomcat.task.GTest",
+		"description": "Rename Local Variable reqHeaderEnum : Enumeration renamed to iter : Iterator in method private dispatch(request String, requestHeaders Hashtable) : void in class org.apache.tomcat.task.GTest",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/watchdog-4.0/trunk/src/tools/org/apache/tomcat/task/GTest.java"
@@ -2332,8 +2368,8 @@
 	"refactorings": [{
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable con : Ajp14 renamed to ajp14 : Ajp14 in method public processConnection(connection TcpConnection, thData Object[]) : void in class org.apache.ajp.tomcat33.Ajp14Interceptor",
-		"comment": "#A",
-		"validation": "TP",
+		"comment": "few vars renamed to one",
+		"validation": "FP",
 		"detectionTools": "Repent",
 		"validators": "Matin",
 		"ignored": false,
@@ -2489,7 +2525,7 @@
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Generator.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable varReader : String renamed to varReaderAttr : String in method public visit(n Node.DoBodyAction) : void in class org.apache.jasper.compiler.Generator.GenerateVisitor",
+		"description": "Rename Local Variable varReader : String renamed to varReaderAttr : String in method public visit(n Node.InvokeAction) : void in class org.apache.jasper.compiler.Generator.GenerateVisitor",
 		"comment": "null",
 		"validation": "TP",
 		"detectionTools": "RefactoringMiner, Repent",
@@ -2900,8 +2936,8 @@
 	}, {
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable errorPath : String renamed to ri : BaseInterceptor in method package handleError(req Request, res Response, t Throwable) : void in class org.apache.tomcat.core.ContextManager",
-		"comment": "null",
-		"validation": "TBD",
+		"comment": "#LALEH",
+		"validation": "FP",
 		"detectionTools": "RefactoringMiner",
 		"validators": "Matin",
 		"ignored": false,
@@ -2939,10 +2975,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable valve : Valve renamed to valves : Valve in method private start() : void in class tomcat.container.tc4.x.trunk.catalina.src.share.org.apache.catalina.startup.ContextConfig",
+		"description": "Rename Local Variable valve : Valve renamed to valves : Valve in method private start() : void in class org.apache.catalina.startup.ContextConfig",
 		"comment": "Improve BodyMapper",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/startup/ContextConfig.java"
@@ -2988,10 +3024,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable i : int renamed to j : int in method public hasResourcePermission(request HttpRequest, response HttpResponse, constraint SecurityConstraint, context Context) : boolean in class tomcat.container.catalina.trunk.catalina.src.share.org.apache.catalina.realm.RealmBase",
+		"description": "Rename Local Variable i : int renamed to j : int in method public hasResourcePermission(request HttpRequest, response HttpResponse, constraint SecurityConstraint, context Context) : boolean in class org.apache.catalina.realm.RealmBase",
 		"comment": "blocking issue",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/realm/RealmBase.java"
@@ -3028,10 +3064,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable j : int renamed to i : int in method private validateXmlView(xmlView PageData, compiler Compiler) : void in class tomcat.jasper.trunk.jasper2.src.share.org.apache.jasper.compiler.Validator",
+		"description": "Rename Local Variable j : int renamed to i : int in method private validateXmlView(xmlView PageData, compiler Compiler) : void in class org.apache.jasper.compiler.Validator",
 		"comment": "blocking issue",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Validator.java"
@@ -3041,6 +3077,15 @@
 		"comment": "null",
 		"validation": "FP",
 		"detectionTools": "Repent",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Validator.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable objs : Object[] renamed to errors : ValidationMessage[] in method private validateXmlView(xmlView PageData, compiler Compiler) : void in class org.apache.jasper.compiler.Validator",
+		"comment": "#LALEH",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Validator.java"
@@ -3311,10 +3356,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable name : String renamed to varName : String in method private declareNestedScriptingVariables(n Node.CustomTag) : void in class tomcat.jasper.trunk.jasper2.src.share.org.apache.jasper.compiler.Generator",
+		"description": "Rename Local Variable name : String renamed to varName : String in method private declareNestedScriptingVariables(n Node.CustomTag) : void in class org.apache.jasper.compiler.Generator.GenerateVisitor",
 		"comment": "Matin: TP",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Generator.java"
@@ -3842,10 +3887,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable arg : StringBuffer renamed to param : String in method protected run() : void in class tomcat.container.tc5.5.x.catalina.src.share.org.apache.catalina.servlets.CGIServlet",
+		"description": "Rename Local Variable arg : StringBuffer renamed to param : String in method protected run() : void in class org.apache.catalina.servlets.CGIServlet.CGIRunner",
 		"comment": "null",
-		"validation": "TBD",
-		"detectionTools": "Repent",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc5.5.x/catalina/src/share/org/apache/catalina/servlets/CGIServlet.java"
@@ -4119,6 +4164,24 @@
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/JspDocumentParser.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable jspAttr : Node.NamedAttribute renamed to na : Node.NamedAttribute in method public visit(n Node.CustomTag) : void in class org.apache.jasper.compiler.Validator.ValidateVisitor",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner, Repent",
+		"validators": "null",
+		"ignored": false,
+		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Validator.java"
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable namedAttributeNodes : Node.Nodes renamed to naNodes : Node.Nodes in method public visit(n Node.CustomTag) : void in class org.apache.jasper.compiler.Validator.ValidateVisitor",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner, Repent",
+		"validators": "null",
+		"ignored": false,
+		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Validator.java"
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -4337,10 +4400,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable className : String renamed to handlerClassName : String in method public perform(mapping ActionMapping, form ActionForm, request HttpServletRequest, response HttpServletResponse) : ActionForward in class tomcat.container.tc4.x.trunk.webapps.admin.WEB-INF.classes.org.apache.webapp.admin.connector.EditConnectorAction",
+		"description": "Rename Local Variable className : String renamed to handlerClassName : String in method public perform(mapping ActionMapping, form ActionForm, request HttpServletRequest, response HttpServletResponse) : ActionForward in class org.apache.webapp.admin.connector.EditConnectorAction",
 		"comment": "We should check the second best match too for this case",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/webapps/admin/WEB-INF/classes/org/apache/webapp/admin/connector/EditConnectorAction.java"
@@ -4359,7 +4422,7 @@
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable newSession : HttpSession renamed to sS : ServerSession in method public reload(req Request, ctx Context) : void in class org.apache.tomcat.session.StandardSessionInterceptor",
 		"comment": "#A",
-		"validation": "TP",
+		"validation": "TBD",
 		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
@@ -4533,10 +4596,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable toAppend : String renamed to href : String in method private parseProperties(req HttpServletRequest, resources Resources, generatedXML XMLWriter, path String, type int, propertiesVector Vector) : void in class tomcat.container.tc4.x.trunk.catalina.src.share.org.apache.catalina.servlets.WebdavServlet",
+		"description": "Rename Local Variable toAppend : String renamed to href : String in method private parseProperties(req HttpServletRequest, resources Resources, generatedXML XMLWriter, path String, type int, propertiesVector Vector) : void in class org.apache.catalina.servlets.WebdavServlet",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/servlets/WebdavServlet.java"
@@ -4698,10 +4761,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable jspMonitorON : ObjectName renamed to jspMonitorONs : Set in method protected writeContext(writer PrintWriter, objectName ObjectName, mBeanServer MBeanServer, mode int) : void in class tomcat.container.catalina.trunk.webapps.manager.WEB-INF.classes.org.apache.catalina.manager.StatusTransformer",
+		"description": "Rename Local Variable jspMonitorsON : Set renamed to jspMonitorONs : Set in method protected writeContext(writer PrintWriter, objectName ObjectName, mBeanServer MBeanServer, mode int) : void in class org.apache.catalina.manager.StatusTransformer",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/webapps/manager/WEB-INF/classes/org/apache/catalina/manager/StatusTransformer.java"
@@ -4915,7 +4978,7 @@
 		"description": "Rename Local Variable systemLoader : ClassLoader renamed to commonLoader : ClassLoader in method public main(args String[]) : void in class org.apache.catalina.startup.Bootstrap",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/startup/Bootstrap.java"
@@ -4932,10 +4995,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable errorWrapper : ServletWrapper renamed to errorWrapper1 : ServletWrapper in method public contextInit(ctx Context) : void in class tomcat.container.tc3.x.trunk.src.share.org.apache.tomcat.context.DefaultCMSetter",
+		"description": "Rename Local Variable errorWrapper : ServletWrapper renamed to errorWrapper1 : ServletWrapper in method public contextInit(ctx Context) : void in class org.apache.tomcat.context.DefaultCMSetter",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc3.x/trunk/src/share/org/apache/tomcat/context/DefaultCMSetter.java"
@@ -4988,6 +5051,15 @@
 		"validators": "Matin",
 		"ignored": false,
 		"fileName": ""
+	}, {
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable tagLibInfo : TagLibraryInfo renamed to uri : String in method private 53bf185ca66b235f09dff5ed62f63b1edb7a3ccb(attrs AttributesImpl) : boolean in class org.apache.jasper.compiler.Parser",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": ""
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -5024,7 +5096,7 @@
 		"description": "Rename Local Variable result : boolean renamed to previous : Mark in method private popFile() : boolean in class org.apache.jasper.compiler.JspReader",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/JspReader.java"
@@ -5042,10 +5114,10 @@
 	"refactorings": [{
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable taskName : String renamed to targetName : String in method private configureTaskDefs(project Project, root Element) : void in class tomcat.archive.tools.trunk.ant.src.main.org.apache.tools.ant.ProjectHelper",
-		"comment": "null",
-		"validation": "TP",
+		"comment": "#ChangedValidation! configureTaskDefs is removed thus Repent detected wrong",
+		"validation": "FP",
 		"detectionTools": "Repent",
-		"validators": "null",
+		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/archive/tools/trunk/ant/src/main/org/apache/tools/ant/ProjectHelper.java"
 	}],
@@ -5061,19 +5133,19 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable resourceInfo : ResourceInfo renamed to cacheEntry : CacheEntry in method protected serveResource(request HttpServletRequest, response HttpServletResponse, content boolean) : void in class tomcat.container.catalina.trunk.catalina.src.share.org.apache.catalina.servlets.DefaultServlet",
+		"description": "Rename Local Variable resourceInfo : ResourceInfo renamed to cacheEntry : CacheEntry in method protected serveResource(request HttpServletRequest, response HttpServletResponse, content boolean) : void in class org.apache.catalina.servlets.DefaultServlet",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/servlets/DefaultServlet.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable resourceInfo : ResourceInfo renamed to cacheEntry : CacheEntry in method private parseProperties(req HttpServletRequest, resources DirContext, generatedXML XMLWriter, path String, type int, propertiesVector Vector) : void in class tomcat.container.catalina.trunk.catalina.src.share.org.apache.catalina.servlets.WebdavServlet",
+		"description": "Rename Local Variable resourceInfo : ResourceInfo renamed to cacheEntry : CacheEntry in method private parseProperties(req HttpServletRequest, resources DirContext, generatedXML XMLWriter, path String, type int, propertiesVector Vector) : void in class org.apache.catalina.servlets.WebdavServlet",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/servlets/WebdavServlet.java"
@@ -5119,10 +5191,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable entries : Map.Entry[] renamed to entry : Map.Entry in method public keepalive() : boolean in class tomcat.container.tc5.5.x.modules.groupcom.src.share.org.apache.catalina.tribes.tcp.nio.ParallelNioSender",
+		"description": "Rename Local Variable entries : Map.Entry[] renamed to entry : Map.Entry in method public keepalive() : boolean in class org.apache.catalina.tribes.tcp.nio.ParallelNioSender",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc5.5.x/modules/groupcom/src/share/org/apache/catalina/tribes/tcp/nio/ParallelNioSender.java"
@@ -5146,6 +5218,15 @@
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/realm/JDBCRealm.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable dbCredentials : String renamed to dbConnection : Connection in method private authenticate(dbConnection Connection, username String, credentials String) : Principal in class org.apache.catalina.realm.DataSourceRealm",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "Repent",
+		"validators": "null",
+		"ignored": false,
+		"fileName": ""
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -5384,20 +5465,11 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable classN : String renamed to className : String in method public start(ctx SaxContext) : void in class tomcat.container.tc3.x.trunk.src.share.org.apache.tomcat.util.xml.XmlMapper",
+		"description": "Rename Local Variable classN : String renamed to className : String in method public start(ctx SaxContext) : void in class org.apache.tomcat.util.xml.ObjectCreate",
 		"comment": "null",
 		"validation": "TP",
 		"detectionTools": "Repent",
 		"validators": "null",
-		"ignored": false,
-		"fileName": "/tomcat/container/tc3.x/trunk/src/share/org/apache/tomcat/util/xml/XmlMapper.java"
-	}, {
-		"type": "Rename Local Variable",
-		"description": "Rename Local Variable classN : String renamed to className : String in method public start(ctx SaxContext) : void in class org.apache.tomcat.util.xml.ObjectCreate",
-		"comment": "null",
-		"validation": "TP",
-		"detectionTools": "RefactoringMiner",
-		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc3.x/trunk/src/share/org/apache/tomcat/util/xml/XmlMapper.java"
 	}],
@@ -5425,7 +5497,7 @@
 		"description": "Rename Local Variable r : int renamed to rid : int in method public process(type int, buffer byte[]) : boolean in class org.apache.catalina.connector.warp.WarpConnectionHandler",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "RefactoringMiner, Repent",
+		"detectionTools": "RefactoringMiner",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/connector/warp/WarpConnectionHandler.java"
@@ -5779,7 +5851,7 @@
 			"type": "Rename Local Variable",
 			"description": "Rename Local Variable type : String renamed to name : String in method public getLoggers(mbserver MBeanServer, container ObjectName) : List in class org.apache.webapp.admin.Lists",
 			"comment": "null",
-			"validation": "TP",
+			"validation": "FP",
 			"detectionTools": "RefactoringMiner",
 			"validators": "Matin",
 			"ignored": false,
@@ -5789,7 +5861,7 @@
 			"type": "Rename Local Variable",
 			"description": "Rename Local Variable type : String renamed to name : String in method public getRealms(mbserver MBeanServer, container ObjectName) : List in class org.apache.webapp.admin.Lists",
 			"comment": "null",
-			"validation": "TP",
+			"validation": "FP",
 			"detectionTools": "RefactoringMiner",
 			"validators": "Matin",
 			"ignored": false,
@@ -5951,6 +6023,15 @@
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc3.x/trunk/src/share/org/apache/tomcat/servlets/InvokerServlet.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable savedServletPath : String renamed to servletPath : String in method public service(request HttpServletRequest, response HttpServletResponse) : void in class org.apache.tomcat.servlets.InvokerServlet",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "null",
+		"ignored": false,
+		"fileName": "/tomcat/container/tc3.x/trunk/src/share/org/apache/tomcat/servlets/InvokerServlet.java"
 	}],
 	"refDiffExecutionTime": 0,
 	"comment": null,
@@ -6004,10 +6085,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable object : Object renamed to value : Object in method public removeAttribute(name String) : void in class tomcat.container.tc4.x.trunk.catalina.src.share.org.apache.catalina.session.StandardSession",
+		"description": "Rename Local Variable object : Object renamed to value : Object in method public removeAttribute(name String) : void in class org.apache.catalina.session.StandardSession",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RfactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc4.x/trunk/catalina/src/share/org/apache/catalina/session/StandardSession.java"
@@ -6173,10 +6254,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable def : Vector renamed to v : Vector in method public getLocales(req HttpServletRequest) : Enumeration in class tomcat.container.tc3.x.trunk.src.share.org.apache.tomcat.util.RequestUtil",
+		"description": "Rename Local Variable def : Vector renamed to v : Vector in method public getLocales(req HttpServletRequest) : Enumeration in class org.apache.tomcat.util.RequestUtil",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc3.x/trunk/src/share/org/apache/tomcat/util/RequestUtil.java"
@@ -6281,8 +6362,8 @@
 	"refactorings": [{
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable roleList : ArrayList renamed to roles : ArrayList in method public authenticate(dbConnection Connection, username String, credentials String) : Principal in class tomcat.container.catalina.trunk.catalina.src.share.org.apache.catalina.realm.JDBCRealm",
-		"comment": "null",
-		"validation": "TP",
+		"comment": "#ChangedValidation, it extracted from the method",
+		"validation": "FP",
 		"detectionTools": "Repent",
 		"validators": "null",
 		"ignored": false,
@@ -6330,8 +6411,8 @@
 	"refactorings": [{
 		"type": "Rename Local Variable",
 		"description": "Rename Local Variable tagPluginFactory : TagPluginFactory renamed to tagPlugin : TagPlugin in method public getPlugInClass(n Node.CustomTag, out ServletWriter) : TagPlugin in class tomcat.jasper.trunk.jasper2.src.share.org.apache.jasper.compiler.TagPluginManager",
-		"comment": "null",
-		"validation": "TP",
+		"comment": "#ChangedValidation",
+		"validation": "TBD",
 		"detectionTools": "Repent",
 		"validators": "null",
 		"ignored": false,
@@ -6443,6 +6524,24 @@
 		"validation": "TP",
 		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
+		"ignored": false,
+		"fileName": "/tomcat/watchdog-4.0/trunk/src/server/servlet-tests/WEB-INF/classes/tests/javax_servlet/ServletRequest/GetContentLengthTestServlet.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable contentLen : int renamed to contentLength : int in method public service(request ServletRequest, response ServletResponse) : void in class tests.javax_servlet.ServletRequest.GetContentLengthTestServlet",
+		"comment": "LALEH",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": "/tomcat/watchdog-4.0/trunk/src/server/servlet-tests/WEB-INF/classes/tests/javax_servlet/ServletRequest/GetContentLengthTestServlet.java"
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable actualLen : int renamed to len : int in method public service(request ServletRequest, response ServletResponse) : void in class tests.javax_servlet.ServletRequest.GetContentLengthTestServlet",
+		"comment": "LALEH",
+		"validation": "TBD",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
 		"ignored": false,
 		"fileName": "/tomcat/watchdog-4.0/trunk/src/server/servlet-tests/WEB-INF/classes/tests/javax_servlet/ServletRequest/GetContentLengthTestServlet.java"
 	}],
@@ -6574,19 +6673,19 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable jspAttr : Node.NamedAttribute renamed to na : Node.NamedAttribute in method public visit(n Node.CustomTag) : void in class tomcat.jasper.trunk.jasper2.src.share.org.apache.jasper.compiler.Validator",
+		"description": "Rename Local Variable jspAttr : Node.NamedAttribute renamed to na : Node.NamedAttribute in method public visit(n Node.CustomTag) : void in class org.apache.jasper.compiler.Validator.ValidateVisitor",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Validator.java"
 	}, {
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable namedAttributeNodes : Node.Nodes renamed to naNodes : Node.Nodes in method public visit(n Node.CustomTag) : void in class tomcat.jasper.trunk.jasper2.src.share.org.apache.jasper.compiler.Validator",
+		"description": "Rename Local Variable namedAttributeNodes : Node.Nodes renamed to naNodes : Node.Nodes in method public visit(n Node.CustomTag) : void in class org.apache.jasper.compiler.Validator.ValidateVisitor",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/jasper/trunk/jasper2/src/share/org/apache/jasper/compiler/Validator.java"
@@ -6621,7 +6720,25 @@
 		"fileName": "/tomcat/container/catalina/trunk/webapps/admin/WEB-INF/classes/org/apache/webapp/admin/context/DeleteContextAction.java"
 	},{
 		"type": "Rename Local Variable",
+		"description": "Rename Local Variable coname : ObjectName renamed to soname : ObjectName in method public perform(mapping ActionMapping, form ActionForm, request HttpServletRequest, response HttpServletResponse) : ActionForward in class org.apache.webapp.admin.connector.SaveConnectorAction",
+		"comment": "null",
+		"validation": "FP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": ""
+	},{
+		"type": "Rename Local Variable",
 		"description": "Rename Local Variable domain : String renamed to engineName : String in method public perform(mapping ActionMapping, form ActionForm, request HttpServletRequest, response HttpServletResponse) : ActionForward in class org.apache.webapp.admin.service.SaveServiceAction",
+		"comment": "null",
+		"validation": "TP",
+		"detectionTools": "RefactoringMiner",
+		"validators": "Matin",
+		"ignored": false,
+		"fileName": ""
+	},{
+		"type": "Rename Local Variable",
+		"description": "Rename Local Variable sform : ServiceForm renamed to engineName : String in method public perform(mapping ActionMapping, form ActionForm, request HttpServletRequest, response HttpServletResponse) : ActionForward in class org.apache.webapp.admin.service.SaveServiceAction",
 		"comment": "null",
 		"validation": "TP",
 		"detectionTools": "RefactoringMiner",
@@ -6760,7 +6877,7 @@
 		"description": "Rename Local Variable globalJarPaths : Map renamed to jarPaths : Map in method public execute() : void in class org.apache.catalina.startup.TldConfig",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/catalina/trunk/catalina/src/share/org/apache/catalina/startup/TldConfig.java"
@@ -7307,9 +7424,9 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable uriCC : CharChunk renamed to uriBC : ByteChunk in method protected parseSessionId(req org.apache.coyote.Request, request Request) : void in class tomcat.container.tc5.5.x.catalina.src.share.org.apache.catalina.connector.CoyoteAdapter",
-		"comment": "null",
-		"validation": "TP",
+		"description": "Rename Local Variable uriCC : CharChunk renamed to uriBC : ByteChunk in method protected parseSessionId(req Request, request Request) : void in class org.apache.catalina.connector.CoyoteAdapter",
+		"comment": "#ChangedValidation",
+		"validation": "FP",
 		"detectionTools": "Repent",
 		"validators": "null",
 		"ignored": false,
@@ -7510,10 +7627,10 @@
 	"time": "0/0/00 0:00 PM",
 	"refactorings": [{
 		"type": "Rename Local Variable",
-		"description": "Rename Local Variable em : Element renamed to uriElem : Element in method TagLibraryInfoImpl(ctxt JspCompilationContext, prefix String, uriIn String) : protected in class tomcat.container.tc3.x.trunk.src.share.org.apache.jasper.compiler.TagLibraryInfoImpl",
+		"description": "Rename Local Variable em : Element renamed to uriElem : Element in method package TagLibraryInfoImpl(ctxt JspCompilationContext, prefix String, uriIn String) in class org.apache.jasper.compiler.TagLibraryInfoImpl",
 		"comment": "null",
 		"validation": "TP",
-		"detectionTools": "Repent",
+		"detectionTools": "RefactoringMiner, Repent",
 		"validators": "null",
 		"ignored": false,
 		"fileName": "/tomcat/container/tc3.x/trunk/src/share/org/apache/jasper/compiler/TagLibraryInfoImpl.java"
